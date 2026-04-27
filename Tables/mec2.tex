@@ -1,0 +1,27 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Imported-input dependence heterogeneity}
+\begin{tabular}{l*{6}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_rev}&\multicolumn{1}{c}{dln\_rev}&\multicolumn{1}{c}{dln\_dom\_sales}&\multicolumn{1}{c}{dln\_dom\_sales}\\
+\hline
+change\_IP   &      -0.454\sym{**} &      -1.216\sym{*}  &      -1.632\sym{***}&      -1.974         &      -1.629\sym{**} &      -3.227         \\
+            &     (0.190)         &     (0.681)         &     (0.535)         &     (2.056)         &     (0.631)         &     (3.209)         \\
+[1em]
+Z\_input     &      -2.041\sym{*}  &       0.285         &       0.996         &       2.651         &      -1.721         &       0.325         \\
+            &     (1.098)         &     (0.412)         &     (3.526)         &     (1.598)         &     (3.388)         &     (1.977)         \\
+[1em]
+input\_china &       125.8\sym{**} &                     &       87.06         &                     &       124.7         &                     \\
+            &     (53.42)         &                     &     (205.2)         &                     &     (159.2)         &                     \\
+[1em]
+ip\_china    &                     &       16.84         &                     &       7.252         &                     &       35.52         \\
+            &                     &     (11.23)         &                     &     (33.32)         &                     &     (56.91)         \\
+\hline
+Observations&       30551         &       30551         &       24345         &       24345         &       30551         &       30551         \\
+KP rk Wald F&       27.71         &       2.743         &       32.03         &       2.845         &       27.71         &       2.743         \\
+\hline\hline
+\multicolumn{7}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{7}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

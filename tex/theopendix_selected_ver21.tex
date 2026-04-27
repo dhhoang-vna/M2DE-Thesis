@@ -1,0 +1,170 @@
+This appendix records the derivations that are useful for interpreting the empirical results but too mechanical for the main text. It selectively condenses the longer algebra in \texttt{theopendix.tex} into three objects used in Section 2: the perceived elasticity under nested CES demand, the corresponding Cournot markup and sectoral aggregation formulas, and the dynamic exit cutoff.
+
+\subsection{Perceived elasticity under nested CES demand}
+
+Let $\tilde{s}_{ij}$ denote firm $i$'s expenditure share within the domestic segment of sector $j$, and let $s_{ij}$ denote its share in total sectoral expenditure. Under the nested CES structure in Section 2, two derivative identities are central:
+\begin{equation}
+\frac{\partial \ln Q_j^D}{\partial \ln q_{ij}} = \tilde{s}_{ij},
+\qquad
+\frac{\partial \ln Q_j}{\partial \ln q_{ij}} = s_{ij}.
+\label{eq:appsel_quantity_links}
+\end{equation}
+The first identity says that a firm's output matters more for the domestic composite when that firm is large inside the domestic segment. The second says that the effect on the entire sectoral composite is the firm's total sectoral expenditure share.
+
+Using the inverse demand for a domestic variety,
+\[
+\ln p_{ij}
+=
+\ln P_j^D
+- \frac{1}{\rho_j}\ln q_{ij}
++ \frac{1}{\rho_j}\ln Q_j^D
++ \frac{1}{\rho_j}\ln \xi_i,
+\]
+and differentiating with respect to $\ln q_{ij}$ yields
+\begin{equation}
+\frac{d \ln p_{ij}}{d \ln q_{ij}}
+=
+\frac{d \ln P_j^D}{d \ln q_{ij}}
+- \frac{1-\tilde{s}_{ij}}{\rho_j}.
+\label{eq:appsel_step1}
+\end{equation}
+The middle nest implies
+\begin{equation}
+\frac{d \ln P_j^D}{d \ln q_{ij}}
+=
+\frac{d \ln P_j}{d \ln q_{ij}}
+- \frac{\tilde{s}_{ij}-s_{ij}}{\nu_j},
+\label{eq:appsel_step2}
+\end{equation}
+while the top nest implies
+\begin{equation}
+\frac{d \ln P_j}{d \ln q_{ij}} = -\frac{s_{ij}}{\eta}.
+\label{eq:appsel_step3}
+\end{equation}
+Combining \eqref{eq:appsel_step1}--\eqref{eq:appsel_step3} gives the inverse-demand elasticity
+\begin{equation}
+-\frac{d \ln p_{ij}}{d \ln q_{ij}}
+=
+\frac{1-\tilde{s}_{ij}}{\rho_j}
++
+\frac{\tilde{s}_{ij}-s_{ij}}{\nu_j}
++
+\frac{s_{ij}}{\eta}.
+\label{eq:appsel_inv_elast}
+\end{equation}
+Define the perceived elasticity under Cournot competition by
+\[
+\frac{1}{\sigma_{ij}^C} \equiv -\frac{d \ln p_{ij}}{d \ln q_{ij}}.
+\]
+Then
+\begin{equation}
+\sigma_{ij}^C
+=
+\left(
+\frac{1-\tilde{s}_{ij}}{\rho_j}
++
+\frac{\tilde{s}_{ij}-s_{ij}}{\nu_j}
++
+\frac{s_{ij}}{\eta}
+\right)^{-1}.
+\label{eq:appsel_sigma}
+\end{equation}
+Equation \eqref{eq:appsel_sigma} is the key theoretical object behind Prediction 2: when a firm is more important inside broader and broader aggregates, the residual demand it faces becomes less elastic.
+
+\subsection{Cournot markup and sectoral aggregation}
+
+Firm $i$ solves
+\[
+\max_{q_{ij}} \ \pi_{ij}
+=
+\bigl(p_{ij}(q_{ij},q_{-ij})-\text{mc}_{ij}\bigr)q_{ij}-f_{ij}.
+\]
+The first-order condition is
+\begin{equation}
+p_{ij}
++ q_{ij}\frac{\partial p_{ij}}{\partial q_{ij}}
+- \text{mc}_{ij}
+= 0.
+\label{eq:appsel_foc}
+\end{equation}
+Divide \eqref{eq:appsel_foc} by $p_{ij}$ and use the definition of $\sigma_{ij}^C$:
+\[
+1 - \frac{1}{\sigma_{ij}^C} = \frac{\text{mc}_{ij}}{p_{ij}}.
+\]
+Defining the markup $\mu_{ij} \equiv p_{ij}/\text{mc}_{ij}$ gives
+\begin{equation}
+\frac{1}{\mu_{ij}} = 1 - \frac{1}{\sigma_{ij}^C},
+\qquad
+\mu_{ij} = \frac{\sigma_{ij}^C}{\sigma_{ij}^C-1}.
+\label{eq:appsel_mu_sigma}
+\end{equation}
+Substituting \eqref{eq:appsel_sigma} yields the inverse-markup condition used in the main text:
+\begin{equation}
+\frac{1}{\mu_{ij}}
+=
+\left(1-\frac{1}{\rho_j}\right)
+-
+\left[
+\frac{1}{\lambda_j^D}\left(\frac{1}{\nu_j}-\frac{1}{\rho_j}\right)
++
+\left(\frac{1}{\eta}-\frac{1}{\nu_j}\right)
+\right] s_{ij},
+\label{eq:appsel_inv_mu}
+\end{equation}
+where $\lambda_j^D$ is the realized domestic expenditure share. The main text writes this object with $\Lambda_j^D$ for expositional simplicity. The important point is that the expression is linear in \emph{inverse markups}, not in markups themselves.
+
+Sectoral markup is the market-share-weighted harmonic mean,
+\[
+\mu_j
+\equiv
+\left(\sum_{i=1}^{N_j} \frac{s_{ij}}{\mu_{ij}}\right)^{-1}.
+\]
+Taking inverses and substituting \eqref{eq:appsel_inv_mu} gives
+\begin{equation}
+\frac{1}{\mu_j}
+=
+\left(1-\frac{1}{\rho_j}\right)
+-
+\left[
+\frac{1}{\lambda_j^D}\left(\frac{1}{\nu_j}-\frac{1}{\rho_j}\right)
++
+\left(\frac{1}{\eta}-\frac{1}{\nu_j}\right)
+\right]\text{HHI}_j,
+\label{eq:appsel_sector_mu}
+\end{equation}
+where $\text{HHI}_j = \sum_i s_{ij}^2$. Under $\rho_j > \nu_j > \eta$, the bracketed term is positive, so sectoral markups rise with concentration. This is the theoretical basis for the concentration interaction in the grouped-IV quantile evidence.
+
+\subsection{Dynamic exit cutoff}
+
+Let $x_{ijt}$ denote the firm's state, including productivity, lagged market share, and the output- and input-trade shocks. If the firm stays active, its value is
+\begin{equation}
+V(x_{ijt})
+=
+\max
+\left\{
+0,\;
+\pi(x_{ijt}) + \beta \mathbb{E}\left[V(x_{ij,t+1}) \mid x_{ijt}\right]
+\right\}.
+\label{eq:appsel_bellman}
+\end{equation}
+Define the continuation surplus
+\[
+W(x_{ijt})
+\equiv
+\pi(x_{ijt}) + \beta \mathbb{E}\left[V(x_{ij,t+1}) \mid x_{ijt}\right].
+\]
+Then the optimal exit rule is
+\begin{equation}
+\text{Exit}_{ijt}=1
+\quad \Longleftrightarrow \quad
+W(x_{ijt})<0.
+\label{eq:appsel_exit_rule}
+\end{equation}
+Equivalently, if profitability can be summarized by a latent scalar index $\theta_{ijt}$, there exists a cutoff $\theta^*(x_{ijt})$ such that
+\begin{equation}
+\text{Exit}_{ijt}=1
+\quad \Longleftrightarrow \quad
+\theta_{ijt}<\theta^*(x_{ijt}).
+\label{eq:appsel_exit_cutoff}
+\end{equation}
+This is all the main text needs from the dynamic extension. Trade shocks affect both current profits and continuation values, so the sample of surviving firms is not random. The empirical selection correction in Section 4.2 is therefore a reduced-form way to purge the markup equation of selection on unobservables, not a structural estimation of \eqref{eq:appsel_exit_cutoff}.

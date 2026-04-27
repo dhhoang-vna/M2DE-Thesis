@@ -1,0 +1,24 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{FE and functional-form variants}
+\begin{tabular}{l*{9}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}&\multicolumn{1}{c}{(8)}&\multicolumn{1}{c}{(9)}\\
+            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}\\
+\hline
+change\_IP   &      -0.462\sym{**} &      -0.101         &      -0.462\sym{**} &      -0.462\sym{**} &      -0.461\sym{**} &      -0.441\sym{*}  &      -0.442\sym{*}  &      -0.409\sym{*}  &      -0.396\sym{*}  \\
+            &     (0.226)         &     (0.485)         &     (0.226)         &     (0.227)         &     (0.226)         &     (0.225)         &     (0.225)         &     (0.226)         &     (0.230)         \\
+[1em]
+Z\_input     &       0.517         &       0.578         &       0.518         &       0.519         &       0.521         &       0.497         &       0.495         &                     &                     \\
+            &     (0.470)         &     (0.391)         &     (0.471)         &     (0.471)         &     (0.470)         &     (0.463)         &     (0.463)         &                     &                     \\
+[1em]
+change\_IP\_sq&                     &       7.783         &                     &                     &                     &                     &                     &                     &                     \\
+            &                     &     (6.489)         &                     &                     &                     &                     &                     &                     &                     \\
+\hline
+Observations&       30551         &       30551         &       30551         &       30551         &       30551         &       30566         &       30566         &       30655         &       31496         \\
+Wild-cluster p-value (baseline)&                     &           .         &           .         &           .         &           .         &           .         &           .         &           .         &           .         \\
+\hline\hline
+\multicolumn{10}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{10}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

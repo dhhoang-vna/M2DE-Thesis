@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage[backend=biber, style=apa, natbib=true, hyperref=true]{biblatex}
+\addbibresource{export.bib}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+
+
+\title{Green Industrial Policy and Innovation: Quasi-Experimental Evidence from Developing Countries}
+\author{Master 2 Thesis Proposal - Duc Hung Hoang} 
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Background and Literature Review}
+
+The global climate crisis has intensified the urgency for economies to transition to low-carbon growth models. 
+Developing countries face a dual challenge and mission: mitigating climate risks while pursuing structural transformation to escape poverty and underdevelopment, which require new modes of industrial policies, focused on a new strategic priority: promoting the growth of new industries for green transition \parencite{rodrik2024}. By fostering renewable energy adoption, green innovation, and climate-resilient infrastructure, green industrial policies (GIPs) aim to align economic growth with decarbonization. However, their design and effectiveness in developing contexts remain problematic, particularly amid competing pressures from geopolitical tensions and the surge in green investment from major economies like China, the United States, and the European Union. These recent 'big pushes' are urging developing countries to adopt GIPs to attract foreign capital or avoid exclusion from green markets. Nevertheless, without careful design, such policies may risk increasing dependency on foreign technologies or prioritizing export-led sectors over domestic needs. 
+
+Industrial policy has been a long-standing topic in development economics, with debates on its effectiveness in promoting innovation. Research suggests that industrial policies can foster innovation by providing financial support \parencite{Aghion2015}, such as subsidies, more favorable regulatory environments \parencite{rodrik2004}, and encouraging collaboration between industry and academia. Drawing on innovation economics and previous studies, five key green industrial policies - feed-in tariffs (FITs), auctions, R\&D support, tax incentives, and renewable energy certificates (RECs) - affect innovation in distinct ways. 
+However, this varies greatly in the developing contexts. Weak institutional capacity, limited access to finance, and fragmented markets often impede the translation of policies into tangible outcomes. For example, while feed-in tariffs (FITs) successfully spurred solar adoption in countries like Vietnam, similar policies exert limited impact in nations with unstable grids or corruption. 
+
+Despite growing interest in GIPs, rigorous empirical studies on their effects in developing countries remain scarce. This study aims to address these gaps by employing quasi-experimental approaches (staggered difference-in-differences framework and synthetic controls) to evaluate the causal effects of five GIPs - feed-in tariffs, auction, R\&D support, tax incentives, and renewable certificates - in 20-30 developing nations in Asia, Africa, and Latin America from the time between the year 2000 and 2023, depending on data availability. These countries with diverse socio-economic, institutional, and policy environments could allow for a comprehensive analysis of the effectiveness of GIPs. By focusing on heterogeneous timelines of policy adoption and regional structural dynamics, the analysis aims to uncover how GIPs can be tailored to foster equitable and climate-resilient development.
+
+\section{Methodology and Data}
+
+Traditional DiD relies on the assumption of homogeneous treatment effects and struggles to address biases arising from staggered policy adoption, where countries (units) adopt treatments at different times. This approach, often implemented through two-way fixed effects (TWFE), can produce biased estimates when treatment effects vary between cohorts or over time \parencite{Baker2022}. In contrast, the staggered DiD framework proposed by \textcite{Callaway2021} explicitly accounts for heterogeneous treatment effects by estimating group-time average treatment effects (ATT) for each adoption cohort. This method avoids biased comparisons by using untreated units as controls and aggregates effects into interpretable parameters (e.g., dynamic ATT, overall ATT), making it robust to staggered adoption and time-varying effect heterogeneity.
+
+Moreover, the TWFE assumes that trends in green innovation between treated and control groups would align in the case of treatment absences. However, these parallel trends might be violated, which prompts the use of synthetic DiD method \parencite{Arkhangelsky2021} to relax this assumption. Synthetic DiD reweights pre-treatment trends to mitigate outliers.
+
+\begin{itemize}
+    \item \textit{Outcome variable:} Green patents per capita.
+    \item \textit{Treatments:} Five binary variables indicating the year of adoption of each policy for each country. Policy interactions terms may be used to address how the simultaneous adoption of multiple policies (e.g., FITs + R\&D grants) might confound results.
+    \item \textit{Covariates:} GDP per capita growth rate (World Bank), financial development depth (World Bank), World Governance Indicators (World Bank), the ratio of renewable energy consumption and total final energy consumption (IEA, World Bank), etc. These covariates are chosen based on their theoretical relevance to both policy adoption and green innovation.
+    \item \textit{Identification assumptions:} (i) Countries do not adjust green innovation behavior before the actual adoption of a policy; (ii) For each policy, there should be sufficient adoption cohorts of country and control groups (not-yet-treated countries); (iii) Conditional parallel trends: For not-yet-treated countries (by one policy), the trend in green innovation would have been parallel to the trend in countries treated by policy, after accounting for differences in the covariates; (iv) Policies in one country do not affect outcomes in others (no technological spillovers, no cross-border carbon leakage, etc.).
+    \item \textit{Robustness checks} include placebo tests, alternative control groups (compare not-yet-treated vs. never-treated units), heterogeneity analysis by high/low GDP and fossil fuel dependence, and testing covariate inclusion.
+\end{itemize}
+
+\section{Timeline}
+
+\begin{table}[h]
+    \centering
+    \caption{Timeline of Thesis Phases and Tasks}
+    \label{tab:thesis_timeline}
+    \vspace{0.5cm}
+    \begin{tabularx}{\textwidth}{|c|X|c|}
+        \hline
+        \textbf{Phase} & \textbf{Key Tasks} & \textbf{Timeline} \\
+        \hline
+        Finalizing Literature Review & Refine hypotheses, address feedback, finalize theoretical framework. & Sep - Oct 2025 \\
+        \hline
+        Data Collection \& Cleaning & Compile patent, policy data and other covariates; address missing values. & Nov - Dec 2025 \\
+        \hline
+        Empirical Analysis & Run quasi-experimental specifications (TWFE baseline, staggered DiD, synthetic controls), robustness checks (placebo tests, alternative controls). & Jan - Feb 2026 \\
+        \hline
+        Interpretation \& Drafting & Analyze results (policy-specific effects, heterogeneity), draft methodology and results sections. & Mar 2026 \\
+        \hline
+        Full Thesis Writing & Complete introduction, literature review, discussion, and conclusion chapters. & Apr 2026 \\
+        \hline
+        Revisions \& Finalization & Incorporate supervisor feedback, finalize references, appendices, and formatting. & May 2026 \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+\newpage
+
+\printbibliography
+\end{document}

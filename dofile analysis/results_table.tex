@@ -1,0 +1,43 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{2}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}\\
+                    &\multicolumn{1}{c}{Main IV}&\multicolumn{1}{c}{Residuals‑based IV}\\
+\midrule
+(mean) change\_IP    &     -0.4538\sym{*}  &                     \\
+                    &    (0.2531)         &                     \\
+(mean) Z\_input      &      0.4770         &                     \\
+                    &    (0.4856)         &                     \\
+(mean) llnsize      &      0.0028\sym{***}&                     \\
+                    &    (0.0007)         &                     \\
+(mean) lleverage    &      0.0101\sym{**} &                     \\
+                    &    (0.0046)         &                     \\
+(mean) lliquidity   &      0.0009         &                     \\
+                    &    (0.0006)         &                     \\
+(mean) l\_age        &      0.0003         &                     \\
+                    &    (0.0003)         &                     \\
+(mean) l\_exporter   &      0.0039\sym{**} &                     \\
+                    &    (0.0018)         &                     \\
+(mean) cl\_ebitm     &     -0.0033\sym{***}&                     \\
+                    &    (0.0003)         &                     \\
+(mean) cl\_ebitm2    &     -0.0001\sym{**} &                     \\
+                    &    (0.0000)         &                     \\
+(mean) cl\_ebitm3    &     -0.0000\sym{*}  &                     \\
+                    &    (0.0000)         &                     \\
+(mean) ls\_pre\_filled&     -0.0263         &                     \\
+                    &    (0.0635)         &                     \\
+(mean) post2016=1   &      0.0130         &                     \\
+                    &    (0.0102)         &                     \\
+(mean) post2016=1 $\times$ (mean) ls\_pre\_filled&     -0.0181         &                     \\
+                    &    (0.0262)         &                     \\
+Residuals           &                     &     -0.4019\sym{*}  \\
+                    &                     &    (0.2372)         \\
+\midrule
+Observations        &       30445         &       30445         \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize Bootstrapped p‑value for change\_IP: .0185018501850185}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+}

@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage[backend=biber, style=apa, natbib=true, hyperref=true]{biblatex}
+\addbibresource{thesis.bib}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+
+
+\title{Import Competition, Selection, and Market Power: \\ Micro Evidence from Turkey}
+\author{Introduction - Duc Hung Hoang} 
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+Over the past decade, Turkey's manufacturing sector has faced a sustained external imbalance and rising exposure to Chinese competition, notably after the upgrading of the bilateral political relation in 2010. The economic relation between two countries becomes structurally asymmetric: Chinese exports to Turkey far exceed Turkish exports to China, and the bilateral deficit has been large and persistent. The economic consequences are straightforward for Turkish firms: import competition and imported intermediate inputs jointly shape domestic firms' costs, pricing power, survival, and sector structure. 
+
+This paper is motivated by a microeconomic question that follow naturally from this macro-trade backdrop: how Chinese import penetration affects firm markups, selection, and sector-level markup dynamics in Turkish manufacturing. Markups are the central object because they summarize market power and therefore connect trade shocks to consumer prices, allocative efficiency, rent distribution, and industrial dynamics. The Turkish setting during 2011-2019 is informative because of the heavy reliance of manufacturing sectors on imported intermediates and the hike of minimum wage in 2016, which plausibly strengthened selection forces.
+
+A central issue is that Chinese import penetration is not one shock, but it changes both the demand faced by Turkish producers and the input costs they pay, and these channels can push markups in opposite directions. \textcite{aghionOpposingFirmLevelResponses2024} points out that an increase in Chinese competition in final goods tends to compress domestic firms' output and margins, while expanded access to Chinese intermediates can lower marginal costs and relax input constraints, potentially raising profitability and markups for input-using firms. These two sides of import exposure is particularly relevant for Turkey because China is not only a source of competing manufactured goods but also a major supplier of intermediate inputs used in domestic production and exports.
+
+Standard trade models with variable markups imply a pro-competitive discipline effect: tougher import competition increases the elasticity of residual demand and compresses markups \parencite{melitzMarketSizeTrade2008}. In contrast, once survival is endogenous, observed average markups can be stable or rise if low-markup firms disproportionately exit and the surviving set is tilted toward high-markup incumbents \parencite{arkolakisElusiveProCompetitiveEffects2019}. Empirically, these forces are easy to confound. A regression of markup changes on import penetration can mix between within-firm pricing responses to competitive pressure (treatment effect), and compositional changes in the observed sample caused by endogenous exit (selection effect). In fact, attrition can remain correlated with unobservables that also drive firms' adjustment of markups. These ambiguities map directly into an identification problem, which was already tackled for the competition-productivity relationships \parencite{backusWhyProductivityCorrelated2020}, but yet in my specific context with import exposure and firm pricing power. Furthermore, import shocks can have distributional effects within the firm population. Even if the average markup response is negative, that average can conceal firm heterogeneity. For instance, it may concentrate pressure on high-margin firms in the most concentrated sectors. Identifying which pattern holds, within-firm discipline or selection-driven, matters for interpretation.
+
+To answer these questions, I use the Turkish manufacturing firm-level dataset from ORBIS/AMADEUS database. The database is compiled by the Bureau van Dijk Electronic Publishing (BvD). ORBIS is an umbrella product that provides firm-level data for many countries worldwide. The data set has financial accounting information from de tailed harmonized balance sheets, income statements, and profit and loss accounts of firms. I follow the production approach for markups \parencite{deloeckerMarkupsFirmLevelExport2012, hallRelationPriceMarginal1988} while remaining explicit about data limitation that arise when only revenue data, not quantities, are observed. Instead of relying on revenue-based markup levels, I use markup adjustments over time for more credible estimation, following \autocite{deridderHitchhikersGuideMarkup2026}. In the paper, I combine three empirical components:
+
+First, I identify the causal effect of Chinese import penetration on firm-level markup adjustments using a shift-share IV design in the spirit of \autocite{autorChinaSyndromeLocal2013}. The instrument leverages plausibly exogenous growth in Chinese exports of final goods to a set of high-income destination markets and maps it into Turkish sectoral exposure using predetermined sectoral shares. To isolate the input supply channel, I construct this control mechanism based on the shift-share output IV weighted by the input-output linkage intensity between sectors. I follow the guidance of \autocite{borusyakQuasiExperimentalShiftShareResearch2022} and \autocite{goldsmith-pinkhamBartikInstrumentsWhat2020} on how to construct, interpret and diagnose these instruments.
+
+Second, I address endogenous firm exit using a semiparametric selection-correction approach motivated by dynamic firm models \parencite{ericsonMarkovPerfectIndustryDynamics1995,backusWhyProductivityCorrelated2020}. The core assumption is Markov persistence in a latent firm state that governs survival, so that the predictable component of unobservables affecting markup changes can be controlled for by an unknown function of lagged observables that proxy for the latent state. This approach is designed to recover a within-firm treatment effect net of selection bias without imposing strong parametric restrictions on the selection process. The coexistence of strong within-firm markup adjustment and reallocation toward high-markup survivors may suggest a competitive environment closer to oligopolistic interaction than monopolistic competition.
+
+Third, I study distributional heterogeneity using grouped IV quantile regression methods tailored to group-level treatments, with appropriate bias corrections. Standard quantile regression is not valid in this setting because the endogenous regressor varies at the group level in the presence of of group-level unobservables. Applying this framework allows me to test whether trade-induced discipline is concentrated in particular parts of the conditional distribution of markup adjustments. Heterogeneity is also tested using interaction terms in the baseline regression, for instance by firm size, initial markup level, or sector concentration.
+
+To connect micro responses to sectoral outcomes, I also decompose changes in sectoral markups into within-firm and reallocation components using a harmonic-mean aggregation framework that is well-suited to environments where markups co-vary with market shares and concentration. This decomposition is essential because sector-level regressions can look weak or unstable even when firm-level responses are strong, if within-firm markup adjustments are offset by reallocation toward high-markup survivors.
+
+Preliminary results reveal three key findings. First, Chinese import competition reduces firm markups on average, but this effect concentrates among high-markup firms (upper tail of the distribution). Second, selection is quantitatively important: low-markup firms exit disproportionately, so the surviving firm population shifts toward higher markups, offsetting within-firm discipline at the sector level. Third, the two channels, output and input shocks, operate through different mechanisms. Import competition in final goods disciplines pricing directly (within-firm effect), while expanded access to cheap Chinese intermediates reallocates market share toward more efficient producers (between-firm effect).
+
+Together, these patterns suggest that import shocks work simultaneously on two dimensions: they compress the pricing power of firms with market advantage, while simultaneously selecting in favor of the most productive survivors. This dual mechanism has important welfare implications. Consumer prices may not fall as much as trade models predict if selection toward high-markup firms offsets within-firm discipline. More broadly, the results indicate that trade liberalization and domestic antitrust policy are partial substitutes for controlling market power. Both compress markups, but through different mechanisms and with different distributional consequences across the firm size and productivity distribution.
+
+The paper contributes to four literature strands.
+
+The first literature is China shock and trade adjustment. A large literature, beginning with \autocite{autorChinaSyndromeLocal2013}, uses shift-share designs to estimate the causal effects of rising Chinese import competition. Much of this work focuses on labor markets, employment, and local outcomes \parencite{acemogluImportCompetitionGreat2016,pierceSurprisinglySwiftDecline2016}, some focus on innovation and productivity outcomes \parencite{aghionOpposingFirmLevelResponses2024,autorFallLaborShare2020, bloomTradeInducedTechnical2016}; comparative less is known about markups and pricing power, particularly in emerging markets where selection and informality can be more pronounced. The paper adds firm-level evidence from a major emerging manufacturing economy and emphasizes markup adjustment as a core outcome linking trade shocks to welfare and industrial dynamics.
+
+Another literature that are related to my analysis studies is how trade and trade policy affect markups, often combining production-function-based markup estimation with quasi-experimental designs \parencite{deloeckerPricesMarkupsTrade2016}. Evidence from developed economies shows that markups can respond to trade reforms through both price and marginal-cost channels. Beyond trade reforms, quantitative trade models with strategic pricing emphasize that trade costs and foreign competition can shift markups through market-share movements and variable pass-through \parencite{edmondCompetitionMarkupsGains2015,atkesonPricingtoMarketTradeCosts2008}.
+
+The empirical question in this paper is inherently about industry dynamics \parencite{melitzImpactTradeIntraIndustry2003,ericsonMarkovPerfectIndustryDynamics1995,hopenhaynEntryExitFirm1992}: competition affects both behavior and survival. Turkey's documented decline in business dynamism make this especially relevant \parencite{akcigitFactsBusinessDynamism2020}. By explicitly correcting for endogenous exit, the paper contributes a flexible solution to a broader class of problems in which observed firm outcomes are selected by survival, and where separating within-firm effects from compositional change is necessary for interpretation. 
+
+On the distributional treatment effects and aggregation, the grouped IV quantile approach \parencite{chetverikovIVQuantileRegression2016} allows to move beyond averages and identify where in the distribution competition affects the most. The sectoral decomposition complements this by showing how within-firm markup adjustments and reallocation jointly shape sector-level markups. This aggregation problem, which is suggested by the recent "bottom-up" evidence \parencite{bursteinBottomUpMarkupFluctuations2025} is nontrivial in oligopolistic environments. Related work on concentration and import competition \parencite{autorFallLaborShare2020,baqaeeProductivityMisallocationGeneral2020} underscores that reallocation and exit can be first-order for market structure, even when foreign competition rises \parencite{amitiUSMarketConcentration2025}. The paper therefore contributes to a more nuanced understanding of how trade shocks affect market power and industry structure, with implications for competition policy and trade adjustment assistance in emerging markets.
+
+The rest of the paper proceeds as follows. Section 2 presents data and measurement, including the construction of output- and input-exposure variables, markup estimation, and market-share-weighted harmonic means of firm markups. Section 3 develops the empirical strategy and its results, including shift-share IV baseline, selection correction, grouped-IV quantile estimates and sectoral decomposition. Section 4 provides the robustness checks, sensitivity analysis, and other considerations, including relevant mechanisms. Section 5 concludes with implications how competition policy in emerging markets should interpret trade shocks in environments with declining dynamism and strong selection.
+
+
+
+\printbibliography
+\end{document}
+
+
+
+proposal phd
+- writing like writing to a general economist, not specialist in the field, explain the concepts clearly but specialized enough to show that I understand the literature and the methods
+- a signal for the fact that I can formulate a compelling research questions, methodology, and aim for meaningful contributions
+- short summary at the beginning
+- saying what's different from the others
+- equations and timelines, not mandatory 
+- not be too ambitious, but show that I can execute the project and make meaningful contributions
+- no map, graph, or table
+- for the interview, try to anticipate the limitations and challenges of the project, and how to address them
+- ask other economists in my field, not in my field, and non-economist to clarify
+- use chatgpt for english editing, but not for writing the content
+
+
+Section 2 describes the institutional and documents key stylized facts on China-Turkey exposure in the data.

@@ -1,0 +1,27 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Markup response: original vs residualized output IV}
+\label{tab:rob_resid_main}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{fittabular}{L{0.39\textwidth}cc}
+\toprule
+ & \multicolumn{1}{c}{(1) Main IV} & \multicolumn{1}{c}{(2) Residualized IV} \\
+\midrule
+Import penetration change ($\Delta IP$) & -0.462\sym{**} & -0.462\sym{**} \\
+ & (0.226) & (0.226) \\
+\addlinespace
+Input-supply shock ($Z^{\text{Input}}$) & 0.517 & 0.517 \\
+ & (0.470) & (0.470) \\
+\midrule
+Observations & 30551 & 30551 \\
+KP rk Wald F & 24.81 & 24.81 \\
+Wild-cluster bootstrap $p$-value & -- & -- \\
+Instrument & Original output IV & Residualized output IV \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses.}\\
+\multicolumn{3}{l}{\footnotesize Wild-cluster bootstrap $p$-values are not reported for this auxiliary appendix table.}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}\\
+\end{fittabular}
+\end{table}

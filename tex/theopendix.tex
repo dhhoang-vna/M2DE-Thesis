@@ -1,0 +1,1143 @@
+% !TeX root = ./theopendix_check.tex
+% Detailed derivations for the theoretical framework in M2Thesis.tex.
+% This file is intended to be included with \input{theopendix}.
+
+\section{Theoretical Appendix}
+\label{app:theory}
+
+This appendix solves the model in Section 2 step by step. I write the algebra in a way that should be readable for a good undergraduate student who is already comfortable with constrained optimization, CES demand systems, and the idea of a markup as price over marginal cost.
+
+The main goals are:
+\begin{enumerate}
+    \item derive the demand system at each CES nest from first principles;
+    \item derive the inverse-demand system because firms compete in quantities;
+    \item show carefully how the perceived elasticity is built from the three substitution margins in the model;
+    \item derive the Cournot markup formula and the sectoral markup aggregator;
+    \item clarify one notation point: the linear expression in market shares is the \emph{inverse markup} $1/\mu_{ij}$, not the markup $\mu_{ij}$ itself.
+\end{enumerate}
+
+\subsection{A useful CES template}
+
+Before solving each layer separately, it is useful to record one generic CES result that we will reuse.
+
+Suppose a composite $X$ is built from a collection of goods $\{x_n\}_{n \in \mathcal{N}}$:
+\[
+X =
+\left(
+\sum_{n \in \mathcal{N}}
+a_n^{\frac{1}{\sigma}} x_n^{\frac{\sigma-1}{\sigma}}
+\right)^{\frac{\sigma}{\sigma-1}},
+\qquad \sigma > 1.
+\]
+Given prices $\{p_n\}$, the dual expenditure-minimization problem is
+\[
+\min_{\{x_n\}} \sum_{n \in \mathcal{N}} p_n x_n
+\qquad \text{s.t.} \qquad
+X \geq \bar{X}.
+\]
+The Lagrangian is
+\[
+\mathcal{L}
+=
+\sum_{n \in \mathcal{N}} p_n x_n
++
+\lambda
+\left[
+\bar{X}
+-
+\left(
+\sum_{n \in \mathcal{N}}
+a_n^{\frac{1}{\sigma}} x_n^{\frac{\sigma-1}{\sigma}}
+\right)^{\frac{\sigma}{\sigma-1}}
+\right].
+\]
+
+Let
+\[
+M \equiv \sum_{n \in \mathcal{N}} a_n^{\frac{1}{\sigma}} x_n^{\frac{\sigma-1}{\sigma}},
+\qquad
+X = M^{\frac{\sigma}{\sigma-1}}.
+\]
+Then
+\[
+\frac{\partial X}{\partial x_n}
+=
+\frac{\sigma}{\sigma-1}
+M^{\frac{1}{\sigma-1}}
+\cdot
+a_n^{\frac{1}{\sigma}}
+\cdot
+\frac{\sigma-1}{\sigma} x_n^{-\frac{1}{\sigma}}
+=
+X^{\frac{1}{\sigma}} a_n^{\frac{1}{\sigma}} x_n^{-\frac{1}{\sigma}}.
+\]
+Therefore the first-order condition for each $n$ is
+\begin{equation}
+p_n = \lambda X^{\frac{1}{\sigma}} a_n^{\frac{1}{\sigma}} x_n^{-\frac{1}{\sigma}}.
+\label{eq:app_generic_ces_foc}
+\end{equation}
+
+Take two goods $n$ and $m$. Dividing the two FOCs gives
+\[
+\frac{p_n}{p_m}
+=
+\left( \frac{a_n}{a_m} \right)^{\frac{1}{\sigma}}
+\left( \frac{x_n}{x_m} \right)^{-\frac{1}{\sigma}}
+\Longrightarrow
+\frac{x_n}{x_m}
+=
+\frac{a_n}{a_m}
+\left( \frac{p_n}{p_m} \right)^{-\sigma}.
+\]
+This is the familiar CES relative-demand equation. Solving completely gives
+\begin{equation}
+x_n = a_n \left( \frac{p_n}{P_X} \right)^{-\sigma} X,
+\label{eq:app_generic_hicksian}
+\end{equation}
+where the CES price index is
+\begin{equation}
+P_X =
+\left(
+\sum_{n \in \mathcal{N}}
+a_n p_n^{1-\sigma}
+\right)^{\frac{1}{1-\sigma}}.
+\label{eq:app_generic_price_index}
+\end{equation}
+
+Finally, rearranging \eqref{eq:app_generic_hicksian} gives the inverse-demand form
+\begin{equation}
+p_n
+=
+P_X
+\left( \frac{x_n}{a_n X} \right)^{-\frac{1}{\sigma}}
+=
+a_n^{\frac{1}{\sigma}} P_X \left( \frac{x_n}{X} \right)^{-\frac{1}{\sigma}}.
+\label{eq:app_generic_inverse_demand}
+\end{equation}
+
+We now apply the same steps to each nest in the model.
+
+\subsection{Top nest: allocation across sectors}
+
+The representative household values sectoral composites according to
+\[
+C =
+\left(
+\int_0^1
+\alpha_j^{\frac{1}{\eta}} Q_j^{\frac{\eta-1}{\eta}} dj
+\right)^{\frac{\eta}{\eta-1}},
+\qquad
+\eta > 1,
+\qquad
+\int_0^1 \alpha_j dj = 1.
+\]
+
+\subsubsection{Expenditure minimization problem}
+
+Fix a target final consumption level $\bar{C}$. The household solves
+\[
+\min_{\{Q_j\}_{j \in [0,1]}}
+\int_0^1 P_j Q_j dj
+\qquad \text{s.t.} \qquad
+\left(
+\int_0^1
+\alpha_j^{\frac{1}{\eta}} Q_j^{\frac{\eta-1}{\eta}} dj
+\right)^{\frac{\eta}{\eta-1}}
+\geq \bar{C}.
+\]
+
+The Lagrangian is
+\[
+\mathcal{L}
+=
+\int_0^1 P_j Q_j dj
++
+\lambda
+\left[
+\bar{C}
+-
+\left(
+\int_0^1
+\alpha_j^{\frac{1}{\eta}} Q_j^{\frac{\eta-1}{\eta}} dj
+\right)^{\frac{\eta}{\eta-1}}
+\right].
+\]
+
+Using the generic CES template with a continuum of goods, the FOC for sector $j$ is
+\begin{equation}
+P_j = \lambda C^{\frac{1}{\eta}} \alpha_j^{\frac{1}{\eta}} Q_j^{-\frac{1}{\eta}}.
+\label{eq:app_top_foc}
+\end{equation}
+Take two sectors $j$ and $\ell$. Dividing their FOCs gives
+\[
+\frac{Q_j}{Q_\ell}
+=
+\frac{\alpha_j}{\alpha_\ell}
+\left( \frac{P_j}{P_\ell} \right)^{-\eta}.
+\]
+Hence sectoral demand is
+\begin{equation}
+Q_j = \alpha_j \left( \frac{P_j}{P} \right)^{-\eta} C,
+\label{eq:app_top_demand}
+\end{equation}
+where
+\begin{equation}
+P =
+\left(
+\int_0^1 \alpha_j P_j^{1-\eta} dj
+\right)^{\frac{1}{1-\eta}}
+\label{eq:app_top_price_index}
+\end{equation}
+is the final CES price index.
+
+\subsubsection{Sectoral expenditure}
+
+Multiply \eqref{eq:app_top_demand} by $P_j$:
+\[
+D_j \equiv P_j Q_j = \alpha_j \left( \frac{P_j}{P} \right)^{1-\eta} P C.
+\]
+Using $Y = PC$, we obtain
+\begin{equation}
+D_j = \alpha_j \left( \frac{P_j}{P} \right)^{1-\eta} Y.
+\label{eq:app_sector_expenditure}
+\end{equation}
+This is the sector-level expenditure expression reported in the main text.
+
+\subsubsection{Inverse demand at the sector level}
+
+Rearranging \eqref{eq:app_top_demand} gives
+\begin{equation}
+P_j = P \, \alpha_j^{\frac{1}{\eta}} \left( \frac{Q_j}{C} \right)^{-\frac{1}{\eta}}.
+\label{eq:app_top_inverse}
+\end{equation}
+Taking logs,
+\[
+\ln P_j = \ln P + \frac{1}{\eta} \ln \alpha_j - \frac{1}{\eta} \ln Q_j + \frac{1}{\eta} \ln C.
+\]
+So, holding $P$, $\alpha_j$, and $C$ fixed,
+\begin{equation}
+\frac{d \ln P_j}{d \ln Q_j} = - \frac{1}{\eta}.
+\label{eq:app_top_inverse_elasticity}
+\end{equation}
+This is the inverse-demand elasticity at the top nest.
+
+\subsection{Middle nest: domestic versus foreign supply inside sector}
+
+Within sector $j$, the sectoral composite is
+\[
+Q_j =
+\left[
+(\Lambda_j^D)^{\frac{1}{\nu_j}} (Q_j^D)^{\frac{\nu_j-1}{\nu_j}}
++
+(1-\Lambda_j^D)^{\frac{1}{\nu_j}} (Q_j^F)^{\frac{\nu_j-1}{\nu_j}}
+\right]^{\frac{\nu_j}{\nu_j-1}},
+\qquad \nu_j > 1.
+\]
+
+\subsubsection{Expenditure minimization problem}
+
+For a given target $\bar{Q}_j$, minimize expenditure on the domestic and foreign composites:
+\[
+\min_{Q_j^D,Q_j^F}
+P_j^D Q_j^D + P_j^F Q_j^F
+\qquad \text{s.t.} \qquad
+Q_j \geq \bar{Q}_j.
+\]
+The Lagrangian is
+\[
+\mathcal{L}
+=
+P_j^D Q_j^D + P_j^F Q_j^F
++
+\lambda_j
+\left[
+\bar{Q}_j
+-
+\left[
+(\Lambda_j^D)^{\frac{1}{\nu_j}} (Q_j^D)^{\frac{\nu_j-1}{\nu_j}}
++
+(1-\Lambda_j^D)^{\frac{1}{\nu_j}} (Q_j^F)^{\frac{\nu_j-1}{\nu_j}}
+\right]^{\frac{\nu_j}{\nu_j-1}}
+\right].
+\]
+
+The FOCs are
+\begin{equation}
+P_j^D
+=
+\lambda_j Q_j^{\frac{1}{\nu_j}}
+(\Lambda_j^D)^{\frac{1}{\nu_j}}
+(Q_j^D)^{-\frac{1}{\nu_j}},
+\label{eq:app_middle_foc_D}
+\end{equation}
+\begin{equation}
+P_j^F
+=
+\lambda_j Q_j^{\frac{1}{\nu_j}}
+(1-\Lambda_j^D)^{\frac{1}{\nu_j}}
+(Q_j^F)^{-\frac{1}{\nu_j}}.
+\label{eq:app_middle_foc_F}
+\end{equation}
+
+Dividing \eqref{eq:app_middle_foc_D} by \eqref{eq:app_middle_foc_F} gives
+\[
+\frac{Q_j^D}{Q_j^F}
+=
+\frac{\Lambda_j^D}{1-\Lambda_j^D}
+\left( \frac{P_j^D}{P_j^F} \right)^{-\nu_j}.
+\]
+Therefore the Hicksian demands are
+\begin{equation}
+Q_j^D = \Lambda_j^D \left( \frac{P_j^D}{P_j} \right)^{-\nu_j} Q_j,
+\label{eq:app_middle_demand_D}
+\end{equation}
+\begin{equation}
+Q_j^F = (1-\Lambda_j^D) \left( \frac{P_j^F}{P_j} \right)^{-\nu_j} Q_j,
+\label{eq:app_middle_demand_F}
+\end{equation}
+with price index
+\begin{equation}
+P_j =
+\left[
+\Lambda_j^D (P_j^D)^{1-\nu_j}
++
+(1-\Lambda_j^D) (P_j^F)^{1-\nu_j}
+\right]^{\frac{1}{1-\nu_j}}.
+\label{eq:app_middle_price_index}
+\end{equation}
+
+\subsubsection{A useful notation point}
+
+The CES weight $\Lambda_j^D$ is not, in general, the same thing as the realized domestic expenditure share. The realized share is
+\begin{equation}
+\lambda_j^D
+\equiv
+\frac{P_j^D Q_j^D}{P_j Q_j}
+=
+\Lambda_j^D \left( \frac{P_j^D}{P_j} \right)^{1-\nu_j}.
+\label{eq:app_realized_domestic_share}
+\end{equation}
+In the main text, I often use $\Lambda_j^D$ as reduced-form shorthand for the domestic expenditure share. For the derivations below, it is cleaner to keep the distinction:
+\begin{itemize}
+    \item $\Lambda_j^D$: CES weight in preferences;
+    \item $\lambda_j^D$: realized domestic expenditure share.
+\end{itemize}
+
+\subsubsection{Inverse demand for the domestic composite}
+
+Rearranging \eqref{eq:app_middle_demand_D} gives
+\begin{equation}
+P_j^D
+=
+P_j
+\left( \frac{Q_j^D}{\Lambda_j^D Q_j} \right)^{-\frac{1}{\nu_j}}.
+\label{eq:app_middle_inverse_D}
+\end{equation}
+Taking logs,
+\[
+\ln P_j^D
+=
+\ln P_j
+- \frac{1}{\nu_j} \ln Q_j^D
++ \frac{1}{\nu_j} \ln Q_j
++ \frac{1}{\nu_j} \ln \Lambda_j^D.
+\]
+Hence, when $\Lambda_j^D$ is treated as given,
+\begin{equation}
+d \ln P_j^D
+=
+d \ln P_j
+- \frac{1}{\nu_j} d \ln Q_j^D
++ \frac{1}{\nu_j} d \ln Q_j.
+\label{eq:app_middle_inverse_diff}
+\end{equation}
+
+\subsection{Bottom nest: domestic varieties inside the domestic composite}
+
+Within the domestic nest of sector $j$, the domestic composite is
+\[
+Q_j^D =
+\left(
+\sum_{i=1}^{N_j}
+\xi_i^{\frac{1}{\rho_j}} q_{ij}^{\frac{\rho_j-1}{\rho_j}}
+\right)^{\frac{\rho_j}{\rho_j-1}},
+\qquad \rho_j > 1.
+\]
+
+\subsubsection{Expenditure minimization problem}
+
+For a given target $\bar{Q}_j^D$, minimize spending across domestic varieties:
+\[
+\min_{\{q_{ij}\}_{i=1}^{N_j}}
+\sum_{i=1}^{N_j} p_{ij} q_{ij}
+\qquad \text{s.t.} \qquad
+Q_j^D \geq \bar{Q}_j^D.
+\]
+The Lagrangian is
+\[
+\mathcal{L}
+=
+\sum_{i=1}^{N_j} p_{ij} q_{ij}
++
+\kappa_j
+\left[
+\bar{Q}_j^D
+-
+\left(
+\sum_{i=1}^{N_j}
+\xi_i^{\frac{1}{\rho_j}} q_{ij}^{\frac{\rho_j-1}{\rho_j}}
+\right)^{\frac{\rho_j}{\rho_j-1}}
+\right].
+\]
+
+The FOC for variety $i$ is
+\begin{equation}
+p_{ij}
+=
+\kappa_j (Q_j^D)^{\frac{1}{\rho_j}}
+\xi_i^{\frac{1}{\rho_j}}
+q_{ij}^{-\frac{1}{\rho_j}}.
+\label{eq:app_bottom_foc}
+\end{equation}
+Take two varieties $i$ and $h$ and divide the FOCs:
+\[
+\frac{q_{ij}}{q_{hj}}
+=
+\frac{\xi_i}{\xi_h}
+\left( \frac{p_{ij}}{p_{hj}} \right)^{-\rho_j}.
+\]
+Therefore the Hicksian demands are
+\begin{equation}
+q_{ij}
+=
+\xi_i \left( \frac{p_{ij}}{P_j^D} \right)^{-\rho_j} Q_j^D,
+\label{eq:app_bottom_demand}
+\end{equation}
+where
+\begin{equation}
+P_j^D
+=
+\left(
+\sum_{i=1}^{N_j}
+\xi_i p_{ij}^{1-\rho_j}
+\right)^{\frac{1}{1-\rho_j}}
+\label{eq:app_bottom_price_index}
+\end{equation}
+is the CES price index for the domestic composite.
+
+\subsubsection{Inverse demand for a domestic variety}
+
+Rearranging \eqref{eq:app_bottom_demand},
+\begin{equation}
+p_{ij}
+=
+P_j^D
+\left( \frac{q_{ij}}{\xi_i Q_j^D} \right)^{-\frac{1}{\rho_j}}
+=
+\xi_i^{\frac{1}{\rho_j}} P_j^D \left( \frac{q_{ij}}{Q_j^D} \right)^{-\frac{1}{\rho_j}}.
+\label{eq:app_bottom_inverse}
+\end{equation}
+Taking logs gives
+\begin{equation}
+\ln p_{ij}
+=
+\ln P_j^D
+- \frac{1}{\rho_j} \ln q_{ij}
++ \frac{1}{\rho_j} \ln Q_j^D
++ \frac{1}{\rho_j} \ln \xi_i.
+\label{eq:app_bottom_inverse_logs}
+\end{equation}
+
+\subsubsection{Revenue shares}
+
+Multiply \eqref{eq:app_bottom_demand} by $p_{ij}$ and divide by total domestic expenditure $P_j^D Q_j^D$:
+\begin{equation}
+\tilde{s}_{ij}
+\equiv
+\frac{p_{ij} q_{ij}}{P_j^D Q_j^D}
+=
+\xi_i \left( \frac{p_{ij}}{P_j^D} \right)^{1-\rho_j}.
+\label{eq:app_within_share}
+\end{equation}
+This is firm $i$'s expenditure share within the \emph{domestic} segment of sector $j$.
+
+Its share in \emph{total} sectoral expenditure is
+\begin{equation}
+s_{ij}
+\equiv
+\frac{p_{ij} q_{ij}}{P_j Q_j}
+=
+\frac{P_j^D Q_j^D}{P_j Q_j}
+\cdot
+\frac{p_{ij} q_{ij}}{P_j^D Q_j^D}
+=
+\lambda_j^D \tilde{s}_{ij}.
+\label{eq:app_total_share}
+\end{equation}
+If one uses the reduced-form notation of the main text that absorbs relative-price terms into the domestic share, \eqref{eq:app_total_share} becomes $s_{ij} = \Lambda_j^D \tilde{s}_{ij}$.
+
+\subsection{Useful derivative identities}
+
+The next step is to compute how an increase in firm $i$'s own output $q_{ij}$ affects the relevant aggregates $Q_j^D$ and $Q_j$. These derivatives are what allow the three CES nests to show up inside the perceived elasticity.
+
+\subsubsection{How a change in $q_{ij}$ affects the domestic composite $Q_j^D$}
+
+Differentiate the domestic aggregator with respect to $q_{ij}$:
+\[
+\frac{\partial Q_j^D}{\partial q_{ij}}
+=
+(Q_j^D)^{\frac{1}{\rho_j}}
+\xi_i^{\frac{1}{\rho_j}}
+q_{ij}^{-\frac{1}{\rho_j}}.
+\]
+Multiply by $q_{ij}/Q_j^D$:
+\[
+\frac{\partial \ln Q_j^D}{\partial \ln q_{ij}}
+=
+\frac{q_{ij}}{Q_j^D}
+\frac{\partial Q_j^D}{\partial q_{ij}}
+=
+\xi_i^{\frac{1}{\rho_j}} q_{ij}^{\frac{\rho_j-1}{\rho_j}} (Q_j^D)^{-\frac{\rho_j-1}{\rho_j}}.
+\]
+Now use the inverse-demand equation \eqref{eq:app_bottom_inverse}:
+\[
+\frac{p_{ij} q_{ij}}{P_j^D Q_j^D}
+=
+\xi_i^{\frac{1}{\rho_j}} q_{ij}^{\frac{\rho_j-1}{\rho_j}} (Q_j^D)^{-\frac{\rho_j-1}{\rho_j}}
+=
+\tilde{s}_{ij}.
+\]
+Therefore
+\begin{equation}
+\frac{\partial \ln Q_j^D}{\partial \ln q_{ij}} = \tilde{s}_{ij}.
+\label{eq:app_dlogQD_dlogq}
+\end{equation}
+Intuition: if firm $i$ is large within the domestic segment, increasing its own output has a larger effect on the domestic composite.
+
+\subsubsection{How a change in $Q_j^D$ affects the sectoral composite $Q_j$}
+
+Differentiate the middle CES aggregator with respect to $Q_j^D$:
+\[
+\frac{\partial Q_j}{\partial Q_j^D}
+=
+Q_j^{\frac{1}{\nu_j}}
+(\Lambda_j^D)^{\frac{1}{\nu_j}}
+(Q_j^D)^{-\frac{1}{\nu_j}}.
+\]
+Multiply by $Q_j^D/Q_j$:
+\[
+\frac{\partial \ln Q_j}{\partial \ln Q_j^D}
+=
+(\Lambda_j^D)^{\frac{1}{\nu_j}} (Q_j^D)^{\frac{\nu_j-1}{\nu_j}} Q_j^{-\frac{\nu_j-1}{\nu_j}}.
+\]
+Using \eqref{eq:app_middle_inverse_D}, this expression is exactly the realized domestic expenditure share:
+\begin{equation}
+\frac{\partial \ln Q_j}{\partial \ln Q_j^D}
+=
+\frac{P_j^D Q_j^D}{P_j Q_j}
+=
+\lambda_j^D.
+\label{eq:app_dlogQ_dlogQD}
+\end{equation}
+
+Combine \eqref{eq:app_dlogQD_dlogq} and \eqref{eq:app_dlogQ_dlogQD}:
+\begin{equation}
+\frac{\partial \ln Q_j}{\partial \ln q_{ij}}
+=
+\frac{\partial \ln Q_j}{\partial \ln Q_j^D}
+\cdot
+\frac{\partial \ln Q_j^D}{\partial \ln q_{ij}}
+=
+\lambda_j^D \tilde{s}_{ij}
+=
+s_{ij}.
+\label{eq:app_dlogQ_dlogq}
+\end{equation}
+So the effect of firm $i$'s quantity on the whole sectoral composite is exactly its total sectoral expenditure share.
+
+\subsection{Cost minimization and marginal cost}
+
+Domestic firm $i$ in sector $j$ produces with
+\[
+q_{ij} = \varphi_{ij} L_{ij}^{\beta_j} M_{ij}^{1-\beta_j},
+\qquad 0 < \beta_j < 1.
+\]
+Given factor prices $w$ and $P_j^M$, the cost-minimization problem is
+\[
+\min_{L_{ij},M_{ij}}
+w L_{ij} + P_j^M M_{ij}
+\qquad \text{s.t.} \qquad
+q_{ij} = \varphi_{ij} L_{ij}^{\beta_j} M_{ij}^{1-\beta_j}.
+\]
+The Lagrangian is
+\[
+\mathcal{L}
+=
+w L_{ij} + P_j^M M_{ij}
++
+\lambda_{ij}
+\left[
+q_{ij} - \varphi_{ij} L_{ij}^{\beta_j} M_{ij}^{1-\beta_j}
+\right].
+\]
+
+The FOCs are
+\begin{equation}
+w
+=
+\lambda_{ij} \varphi_{ij} \beta_j L_{ij}^{\beta_j-1} M_{ij}^{1-\beta_j},
+\label{eq:app_cost_foc_L}
+\end{equation}
+\begin{equation}
+P_j^M
+=
+\lambda_{ij} \varphi_{ij} (1-\beta_j) L_{ij}^{\beta_j} M_{ij}^{-\beta_j}.
+\label{eq:app_cost_foc_M}
+\end{equation}
+
+Divide \eqref{eq:app_cost_foc_L} by \eqref{eq:app_cost_foc_M}:
+\[
+\frac{w}{P_j^M}
+=
+\frac{\beta_j}{1-\beta_j}
+\frac{M_{ij}}{L_{ij}}.
+\]
+Hence the cost-minimizing input ratio is
+\begin{equation}
+\frac{M_{ij}}{L_{ij}}
+=
+\frac{1-\beta_j}{\beta_j} \frac{w}{P_j^M}.
+\label{eq:app_input_ratio}
+\end{equation}
+
+Now multiply \eqref{eq:app_cost_foc_L} by $L_{ij}$ and \eqref{eq:app_cost_foc_M} by $M_{ij}$:
+\[
+w L_{ij}
+=
+\lambda_{ij} \beta_j q_{ij},
+\qquad
+P_j^M M_{ij}
+=
+\lambda_{ij} (1-\beta_j) q_{ij}.
+\]
+Adding the two equations gives
+\[
+w L_{ij} + P_j^M M_{ij} = \lambda_{ij} q_{ij}.
+\]
+Because production is constant returns to scale, total cost is proportional to output, so the multiplier $\lambda_{ij}$ is the nominal marginal cost:
+\[
+\lambda_{ij} = \text{mc}_{ij}.
+\]
+
+Solving for the exact unit-cost function yields
+\begin{equation}
+\text{mc}_{ij}
+=
+\frac{1}{\varphi_{ij}}
+\left( \frac{w}{\beta_j} \right)^{\beta_j}
+\left( \frac{P_j^M}{1-\beta_j} \right)^{1-\beta_j}.
+\label{eq:app_exact_mc}
+\end{equation}
+Equivalently,
+\[
+\text{mc}_{ij}
+=
+\frac{w^{\beta_j} (P_j^M)^{1-\beta_j}}
+{\varphi_{ij} \beta_j^{\beta_j} (1-\beta_j)^{1-\beta_j}}.
+\]
+Ignoring the sector-specific constant $\beta_j^{-\beta_j} (1-\beta_j)^{-(1-\beta_j)}$, the simpler proportionality used in the main text is
+\begin{equation}
+\text{mc}_{ij} \propto \varphi_{ij}^{-1} w^{\beta_j} (P_j^M)^{1-\beta_j}.
+\label{eq:app_mc_level}
+\end{equation}
+
+Taking logs of \eqref{eq:app_exact_mc} or \eqref{eq:app_mc_level} gives
+\begin{equation}
+d \ln \text{mc}_{ij}
+=
+- d \ln \varphi_{ij}
++ \beta_j d \ln w
++ (1-\beta_j) d \ln P_j^M.
+\label{eq:app_mc_growth}
+\end{equation}
+
+\subsection{Input-output propagation of Chinese input shocks}
+
+Let $\mathbf{p}^M$ be the vector of sectoral log input prices, and let $A$ denote the domestic input-coefficient matrix. A first-order approximation of the network structure is
+\[
+\mathbf{p}^M = A \mathbf{p}^M + \Omega^{CHN} \mathbf{p}^{CHN},
+\]
+where $\mathbf{p}^{CHN}$ is the vector of Chinese input prices and $\Omega^{CHN}$ collects Chinese sourcing weights.
+
+Rearranging,
+\[
+(I-A)\mathbf{p}^M = \Omega^{CHN} \mathbf{p}^{CHN},
+\qquad
+\mathbf{p}^M = (I-A)^{-1} \Omega^{CHN} \mathbf{p}^{CHN}.
+\]
+Let $L \equiv (I-A)^{-1}$ be the Leontief inverse. For sector $j$,
+\begin{equation}
+d \ln P_j^M
+\approx
+\sum_k l_{jk} \omega_k^{CHN} d \ln P_k^{CHN},
+\label{eq:app_network_pass}
+\end{equation}
+where $l_{jk}$ is the $(j,k)$ entry of $L$ and $\omega_k^{CHN}$ is the relevant Chinese sourcing weight.
+
+Substituting \eqref{eq:app_network_pass} into \eqref{eq:app_mc_growth} gives
+\begin{equation}
+d \ln \text{mc}_{ij}
+\approx
+- d \ln \varphi_{ij}
++ \beta_j d \ln w
++ (1-\beta_j) \sum_k l_{jk} \omega_k^{CHN} d \ln P_k^{CHN}.
+\label{eq:app_mc_reduced}
+\end{equation}
+
+\subsection{Deriving the perceived elasticity step by step}
+
+This is the core of the model. Since firms compete in quantities, the cleanest route is:
+\begin{enumerate}
+    \item write the inverse demand of firm $i$;
+    \item differentiate it with respect to $q_{ij}$;
+    \item track how a change in $q_{ij}$ moves $Q_j^D$, then $Q_j$, then $P_j$.
+\end{enumerate}
+
+\subsubsection{Step 1: inverse demand at the bottom nest}
+
+From \eqref{eq:app_bottom_inverse_logs},
+\[
+\ln p_{ij}
+=
+\ln P_j^D
+- \frac{1}{\rho_j} \ln q_{ij}
++ \frac{1}{\rho_j} \ln Q_j^D
++ \frac{1}{\rho_j} \ln \xi_i.
+\]
+Differentiate with respect to $\ln q_{ij}$:
+\begin{equation}
+\frac{d \ln p_{ij}}{d \ln q_{ij}}
+=
+\frac{d \ln P_j^D}{d \ln q_{ij}}
+- \frac{1}{\rho_j}
++ \frac{1}{\rho_j} \frac{d \ln Q_j^D}{d \ln q_{ij}}.
+\label{eq:app_step1}
+\end{equation}
+Using \eqref{eq:app_dlogQD_dlogq},
+\begin{equation}
+\frac{d \ln p_{ij}}{d \ln q_{ij}}
+=
+\frac{d \ln P_j^D}{d \ln q_{ij}}
+- \frac{1-\tilde{s}_{ij}}{\rho_j}.
+\label{eq:app_step1_simplified}
+\end{equation}
+
+\subsubsection{Step 2: how $P_j^D$ responds to $q_{ij}$}
+
+From \eqref{eq:app_middle_inverse_diff},
+\[
+d \ln P_j^D
+=
+d \ln P_j
+- \frac{1}{\nu_j} d \ln Q_j^D
++ \frac{1}{\nu_j} d \ln Q_j.
+\]
+Divide by $d \ln q_{ij}$:
+\begin{equation}
+\frac{d \ln P_j^D}{d \ln q_{ij}}
+=
+\frac{d \ln P_j}{d \ln q_{ij}}
+- \frac{1}{\nu_j} \frac{d \ln Q_j^D}{d \ln q_{ij}}
++ \frac{1}{\nu_j} \frac{d \ln Q_j}{d \ln q_{ij}}.
+\label{eq:app_step2}
+\end{equation}
+Using \eqref{eq:app_dlogQD_dlogq} and \eqref{eq:app_dlogQ_dlogq},
+\begin{equation}
+\frac{d \ln P_j^D}{d \ln q_{ij}}
+=
+\frac{d \ln P_j}{d \ln q_{ij}}
+- \frac{\tilde{s}_{ij}}{\nu_j}
++ \frac{s_{ij}}{\nu_j}
+=
+\frac{d \ln P_j}{d \ln q_{ij}}
+- \frac{\tilde{s}_{ij} - s_{ij}}{\nu_j}.
+\label{eq:app_step2_simplified}
+\end{equation}
+
+\subsubsection{Step 3: how $P_j$ responds to $q_{ij}$}
+
+From the sector-level inverse demand \eqref{eq:app_top_inverse},
+\[
+\ln P_j
+=
+\ln P
++ \frac{1}{\eta} \ln \alpha_j
+- \frac{1}{\eta} \ln Q_j
++ \frac{1}{\eta} \ln C.
+\]
+Holding the aggregate objects $P$ and $C$ fixed from the viewpoint of an individual firm inside sector $j$,
+\begin{equation}
+\frac{d \ln P_j}{d \ln q_{ij}}
+=
+- \frac{1}{\eta} \frac{d \ln Q_j}{d \ln q_{ij}}
+=
+- \frac{s_{ij}}{\eta},
+\label{eq:app_step3}
+\end{equation}
+where the last equality uses \eqref{eq:app_dlogQ_dlogq}.
+
+\subsubsection{Step 4: combine the three pieces}
+
+Insert \eqref{eq:app_step3} into \eqref{eq:app_step2_simplified}:
+\[
+\frac{d \ln P_j^D}{d \ln q_{ij}}
+=
+- \frac{\tilde{s}_{ij} - s_{ij}}{\nu_j}
+- \frac{s_{ij}}{\eta}.
+\]
+Now plug this into \eqref{eq:app_step1_simplified}:
+\[
+\frac{d \ln p_{ij}}{d \ln q_{ij}}
+=
+- \frac{1-\tilde{s}_{ij}}{\rho_j}
+- \frac{\tilde{s}_{ij} - s_{ij}}{\nu_j}
+- \frac{s_{ij}}{\eta}.
+\]
+Therefore
+\begin{equation}
+- \frac{d \ln p_{ij}}{d \ln q_{ij}}
+=
+\frac{1-\tilde{s}_{ij}}{\rho_j}
++
+\frac{\tilde{s}_{ij} - s_{ij}}{\nu_j}
++
+\frac{s_{ij}}{\eta}.
+\label{eq:app_inverse_demand_elasticity}
+\end{equation}
+
+Define the firm's \emph{perceived elasticity} under Cournot competition as
+\begin{equation}
+\frac{1}{\sigma_{ij}^C}
+\equiv
+- \frac{d \ln p_{ij}}{d \ln q_{ij}}.
+\label{eq:app_sigma_definition}
+\end{equation}
+Equivalently, since price and quantity are locally inverse functions,
+\[
+\sigma_{ij}^C
+=
+- \frac{d \ln q_{ij}}{d \ln p_{ij}}.
+\]
+Combining \eqref{eq:app_inverse_demand_elasticity} and \eqref{eq:app_sigma_definition} yields
+\begin{equation}
+\sigma_{ij}^C
+=
+\left(
+\frac{1-\tilde{s}_{ij}}{\rho_j}
++
+\frac{\tilde{s}_{ij} - s_{ij}}{\nu_j}
++
+\frac{s_{ij}}{\eta}
+\right)^{-1}.
+\label{eq:app_sigma_nested}
+\end{equation}
+
+\paragraph{Interpretation.}
+Equation \eqref{eq:app_sigma_nested} is easiest to read term by term.
+\begin{itemize}
+    \item The term $\frac{1-\tilde{s}_{ij}}{\rho_j}$ comes from substitution across \emph{domestic varieties}. If the firm is small within the domestic segment, this force is strong.
+    \item The term $\frac{\tilde{s}_{ij}-s_{ij}}{\nu_j}$ comes from substitution between the \emph{domestic composite} and the \emph{foreign composite} inside the sector.
+    \item The term $\frac{s_{ij}}{\eta}$ comes from substitution across \emph{sectors} in final demand.
+\end{itemize}
+Because $\rho_j > \nu_j > \eta$, the inverse elasticities satisfy
+\[
+\frac{1}{\rho_j} < \frac{1}{\nu_j} < \frac{1}{\eta}.
+\]
+So as a firm becomes more important in broader and broader aggregates, the relevant residual demand it faces becomes less elastic.
+
+\subsection{Cournot firm's FOC and the markup formula}
+
+Firm $i$ chooses quantity $q_{ij}$ to maximize
+\[
+\pi_{ij}
+=
+\bigl(p_{ij}(q_{ij},q_{-ij}) - \text{mc}_{ij}\bigr) q_{ij} - f_{ij}.
+\]
+The first-order condition is
+\begin{equation}
+\frac{\partial \pi_{ij}}{\partial q_{ij}}
+=
+p_{ij}
++ q_{ij} \frac{\partial p_{ij}}{\partial q_{ij}}
+- \text{mc}_{ij}
+=
+0.
+\label{eq:app_cournot_foc}
+\end{equation}
+
+Divide \eqref{eq:app_cournot_foc} by $p_{ij}$:
+\[
+1
++ \frac{q_{ij}}{p_{ij}} \frac{\partial p_{ij}}{\partial q_{ij}}
+- \frac{\text{mc}_{ij}}{p_{ij}}
+=
+0.
+\]
+Using the definition of the perceived elasticity,
+\[
+\frac{q_{ij}}{p_{ij}} \frac{\partial p_{ij}}{\partial q_{ij}}
+=
+\frac{d \ln p_{ij}}{d \ln q_{ij}}
+=
+- \frac{1}{\sigma_{ij}^C}.
+\]
+Hence
+\[
+1 - \frac{1}{\sigma_{ij}^C} = \frac{\text{mc}_{ij}}{p_{ij}}.
+\]
+Define the markup
+\[
+\mu_{ij} \equiv \frac{p_{ij}}{\text{mc}_{ij}}.
+\]
+Then
+\begin{equation}
+\frac{1}{\mu_{ij}}
+=
+1 - \frac{1}{\sigma_{ij}^C},
+\qquad
+\mu_{ij}
+=
+\frac{1}{1-\frac{1}{\sigma_{ij}^C}}
+=
+\frac{\sigma_{ij}^C}{\sigma_{ij}^C-1}.
+\label{eq:app_markup_sigma}
+\end{equation}
+
+Substituting \eqref{eq:app_sigma_nested} into \eqref{eq:app_markup_sigma},
+\begin{equation}
+\frac{1}{\mu_{ij}}
+=
+1
+-
+\left[
+\frac{1-\tilde{s}_{ij}}{\rho_j}
++
+\frac{\tilde{s}_{ij} - s_{ij}}{\nu_j}
++
+\frac{s_{ij}}{\eta}
+\right].
+\label{eq:app_inverse_markup_unsimplified}
+\end{equation}
+This is already a useful formula: a larger firm faces a less elastic residual demand, so $1/\mu_{ij}$ is lower and $\mu_{ij}$ is higher.
+
+Now use $s_{ij} = \lambda_j^D \tilde{s}_{ij}$, so $\tilde{s}_{ij} = s_{ij}/\lambda_j^D$. Then \eqref{eq:app_inverse_markup_unsimplified} becomes
+\begin{align}
+\frac{1}{\mu_{ij}}
+&=
+1 - \frac{1}{\rho_j}
++ \frac{\tilde{s}_{ij}}{\rho_j}
+- \frac{\tilde{s}_{ij}}{\nu_j}
++ \frac{s_{ij}}{\nu_j}
+- \frac{s_{ij}}{\eta}
+\notag \\
+&=
+\left( 1 - \frac{1}{\rho_j} \right)
+-
+\left[
+\frac{1}{\lambda_j^D}
+\left( \frac{1}{\nu_j} - \frac{1}{\rho_j} \right)
++
+\left( \frac{1}{\eta} - \frac{1}{\nu_j} \right)
+\right] s_{ij}.
+\label{eq:app_inverse_markup_linear}
+\end{align}
+
+\paragraph{Important notation point.}
+Equation \eqref{eq:app_inverse_markup_linear} is a linear equation for the \emph{inverse markup} $1/\mu_{ij}$, not for $\mu_{ij}$ itself. Therefore the corresponding markup is
+\begin{equation}
+\mu_{ij}
+=
+\frac{1}{
+\left( 1 - \frac{1}{\rho_j} \right)
+-
+\left[
+\frac{1}{\lambda_j^D}
+\left( \frac{1}{\nu_j} - \frac{1}{\rho_j} \right)
++
+\left( \frac{1}{\eta} - \frac{1}{\nu_j} \right)
+\right] s_{ij}
+}.
+\label{eq:app_markup_full}
+\end{equation}
+In the main text, I suppress the distinction between $\lambda_j^D$ and $\Lambda_j^D$ for expositional simplicity; under that notation, \eqref{eq:app_inverse_markup_linear} becomes exactly the linear markup condition reported there, except that it should strictly be read as an inverse-markup condition.
+
+\subsection{Sectoral markup and concentration}
+
+Define the sectoral markup as the share-weighted harmonic mean of firm markups:
+\begin{equation}
+\mu_j
+\equiv
+\left(
+\sum_{i=1}^{N_j} \frac{s_{ij}}{\mu_{ij}}
+\right)^{-1}.
+\label{eq:app_sector_harmonic}
+\end{equation}
+Taking inverses,
+\[
+\frac{1}{\mu_j}
+=
+\sum_{i=1}^{N_j} s_{ij} \frac{1}{\mu_{ij}}.
+\]
+Now substitute \eqref{eq:app_inverse_markup_linear}:
+\begin{align}
+\frac{1}{\mu_j}
+&=
+\sum_{i=1}^{N_j}
+s_{ij}
+\left[
+\left( 1 - \frac{1}{\rho_j} \right)
+-
+\left(
+\frac{1}{\lambda_j^D}
+\left( \frac{1}{\nu_j} - \frac{1}{\rho_j} \right)
++
+\left( \frac{1}{\eta} - \frac{1}{\nu_j} \right)
+\right) s_{ij}
+\right]
+\notag \\
+&=
+\left( 1 - \frac{1}{\rho_j} \right) \sum_{i=1}^{N_j} s_{ij}
+-
+\left[
+\frac{1}{\lambda_j^D}
+\left( \frac{1}{\nu_j} - \frac{1}{\rho_j} \right)
++
+\left( \frac{1}{\eta} - \frac{1}{\nu_j} \right)
+\right]
+\sum_{i=1}^{N_j} s_{ij}^2.
+\label{eq:app_sector_inverse_step}
+\end{align}
+Since $\sum_i s_{ij} = 1$, and defining the Herfindahl index
+\[
+\text{HHI}_j \equiv \sum_{i=1}^{N_j} s_{ij}^2,
+\]
+we obtain
+\begin{equation}
+\frac{1}{\mu_j}
+=
+\left( 1 - \frac{1}{\rho_j} \right)
+-
+\left[
+\frac{1}{\lambda_j^D}
+\left( \frac{1}{\nu_j} - \frac{1}{\rho_j} \right)
++
+\left( \frac{1}{\eta} - \frac{1}{\nu_j} \right)
+\right]
+\text{HHI}_j.
+\label{eq:app_sector_inverse_markup}
+\end{equation}
+Therefore
+\begin{equation}
+\mu_j
+=
+\frac{1}{
+\left( 1 - \frac{1}{\rho_j} \right)
+-
+\left[
+\frac{1}{\lambda_j^D}
+\left( \frac{1}{\nu_j} - \frac{1}{\rho_j} \right)
++
+\left( \frac{1}{\eta} - \frac{1}{\nu_j} \right)
+\right]
+\text{HHI}_j
+}.
+\label{eq:app_sector_markup}
+\end{equation}
+
+Again, the \emph{linear} object is $1/\mu_j$, not $\mu_j$.
+
+\subsubsection{Why concentration matters}
+
+Let
+\[
+A_j \equiv 1 - \frac{1}{\rho_j},
+\qquad
+B_j \equiv
+\frac{1}{\lambda_j^D}
+\left( \frac{1}{\nu_j} - \frac{1}{\rho_j} \right)
++
+\left( \frac{1}{\eta} - \frac{1}{\nu_j} \right).
+\]
+Then
+\[
+\frac{1}{\mu_j} = A_j - B_j \text{HHI}_j,
+\qquad
+\mu_j = \frac{1}{A_j - B_j \text{HHI}_j}.
+\]
+Differentiating,
+\[
+\frac{\partial \mu_j}{\partial \text{HHI}_j}
+=
+\frac{B_j}{(A_j - B_j \text{HHI}_j)^2}.
+\]
+Under $\rho_j > \nu_j > \eta$, we have
+\[
+\frac{1}{\nu_j} - \frac{1}{\rho_j} > 0,
+\qquad
+\frac{1}{\eta} - \frac{1}{\nu_j} > 0,
+\]
+so $B_j > 0$. Hence
+\begin{equation}
+\frac{\partial \mu_j}{\partial \text{HHI}_j} > 0.
+\label{eq:app_markup_concentration_positive}
+\end{equation}
+Sectoral markups rise with concentration because more expenditure gets concentrated on firms that face less elastic residual demand.
+
+\subsection{Dynamic extension and endogenous exit}
+
+Let $x_{ijt}$ denote the state of firm $i$ in sector $j$ at date $t$. This state includes productivity, demand shifters, lagged market share, and the output- and input-trade states $(\tau_{jt}^O,\tau_{jt}^I)$.
+
+If the firm stays active, its value function is
+\begin{equation}
+V(x_{ijt})
+=
+\max
+\left\{
+0,
+\pi(x_{ijt})
++ \beta \mathbb{E}\left[ V(x_{ij,t+1}) \mid x_{ijt} \right]
+\right\},
+\label{eq:app_bellman}
+\end{equation}
+where $\beta \in (0,1)$ is the discount factor.
+
+Define the continuation surplus
+\[
+W(x_{ijt})
+\equiv
+\pi(x_{ijt})
++ \beta \mathbb{E}\left[ V(x_{ij,t+1}) \mid x_{ijt} \right].
+\]
+The optimal exit rule is
+\begin{equation}
+\text{Exit}_{ijt} = 1
+\quad \Longleftrightarrow \quad
+W(x_{ijt}) < 0.
+\label{eq:app_exit_rule}
+\end{equation}
+Equivalently, if current profitability can be summarized by a latent scalar $\theta_{ijt}$, there exists a cutoff function $\theta^*(x_{ijt})$ such that
+\begin{equation}
+\text{Exit}_{ijt} = 1
+\quad \Longleftrightarrow \quad
+\theta_{ijt} < \theta^*(x_{ijt}).
+\label{eq:app_exit_threshold}
+\end{equation}
+
+\paragraph{Why this matters empirically.}
+Trade shocks affect both current profits and future continuation values. A rise in final-good import competition may reduce current operating profits; a favorable input-supply shock may reduce marginal cost and increase the value of staying active. Therefore the sample of surviving firms is not random. Observed firm-level markup changes mix:
+\begin{itemize}
+    \item genuine within-incumbent adjustment;
+    \item reallocation across surviving incumbents;
+    \item selection induced by endogenous exit.
+\end{itemize}
+This is the reason the empirical section later introduces a selection-correction strategy.

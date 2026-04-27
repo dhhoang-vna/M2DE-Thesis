@@ -1,0 +1,30 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Validation of Lagged EBIT Margin as State Proxy}
+\begin{tabular}{l*{5}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}\\
+                    &\multicolumn{1}{c}{Persistence}&\multicolumn{1}{c}{Exit (lin.)}&\multicolumn{1}{c}{Exit (quad.)}&\multicolumn{1}{c}{Markup Adjustments}&\multicolumn{1}{c}{Markov test}\\
+\midrule
+l\_ebitm             &      0.0437\sym{***}&   -0.000453\sym{**} &   -0.000524\sym{**} &    -0.00876\sym{***}&   -0.000977\sym{***}\\
+                    &    (0.0164)         &  (0.000229)         &  (0.000237)         &  (0.000528)         &  (0.000306)         \\
+\addlinespace
+l\_ebitm2            &                     &                     &  -0.0000133\sym{***}&                     &                     \\
+                    &                     &                     &(0.00000482)         &                     &                     \\
+\addlinespace
+L.l\_ebitm           &                     &                     &                     &                     &   0.0000519         \\
+                    &                     &                     &                     &                     &  (0.000287)         \\
+\midrule
+Obs.                &       41113         &       41150         &       41150         &       41150         &       29326         \\
+R-sq.               &       0.649         &       0.341         &       0.341         &       0.356         &       0.367         \\
+Dependent var.      &EBIT margin(t)         &        Exit         &        Exit         &Markup\_Adjustment         &        Exit         \\
+p-value: l\_ebitm^2  &                     &                     &     0.00592         &                     &                     \\
+p-value: 2nd lag    &                     &                     &                     &                     &       0.857         \\
+\bottomrule
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{6}{l}{\footnotesize All specs include firm, sector (isic4), and year fixed effects; SEs clustered at firm level.}\\
+\multicolumn{6}{l}{\footnotesize ,}\\
+\multicolumn{6}{l}{\footnotesize Controls: lleverage lliquidity llnsize l\_age l\_exporter and c.ls\_pre\_filled##i.post2016. Sample: 2011–2019.}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

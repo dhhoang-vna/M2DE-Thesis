@@ -1,0 +1,27 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Imported-input dependence heterogeneity}
+\begin{tabular}{l*{8}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}&\multicolumn{1}{c}{(8)}\\
+            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_rev}&\multicolumn{1}{c}{dln\_rev}&\multicolumn{1}{c}{dln\_dom\_sales}&\multicolumn{1}{c}{dln\_dom\_sales}&\multicolumn{1}{c}{dln\_export}&\multicolumn{1}{c}{dln\_export}\\
+\hline
+change\_IP   &      -0.540\sym{**} &      -0.979         &      -1.936\sym{***}&      -1.198         &      -1.627\sym{**} &      -1.515         &      -0.416         &      -11.75         \\
+            &     (0.231)         &     (0.927)         &     (0.637)         &     (3.075)         &     (0.673)         &     (3.902)         &     (2.625)         &     (17.31)         \\
+[1em]
+Z\_input     &      -6.864         &       0.373         &      -25.19\sym{*}  &       2.866\sym{*}  &       1.743         &       0.847         &       53.26         &      -10.10\sym{*}  \\
+            &     (5.884)         &     (0.429)         &     (14.52)         &     (1.661)         &     (18.51)         &     (2.009)         &     (35.05)         &     (5.985)         \\
+[1em]
+Z\_input\_H   &       28.65         &                     &       107.9\sym{*}  &                     &      -3.609         &                     &      -234.2\sym{*}  &                     \\
+            &     (23.00)         &                     &     (57.56)         &                     &     (70.00)         &                     &     (136.7)         &                     \\
+[1em]
+changeIP\_H  &                     &       1.861         &                     &      -1.554         &                     &      -0.438         &                     &       36.71         \\
+            &                     &     (2.849)         &                     &     (9.161)         &                     &     (12.14)         &                     &     (52.04)         \\
+\hline
+Observations&       30551         &       30551         &       24345         &       24345         &       30551         &       30551         &       19327         &       19327         \\
+KP rk Wald F&                     &                     &                     &                     &                     &                     &                     &                     \\
+\hline\hline
+\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

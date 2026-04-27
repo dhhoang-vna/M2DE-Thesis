@@ -1,0 +1,68 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Robustness to excluding sectors with largest Rotemberg weights}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}\\
+\hline \multicolumn{5}{l}{\textbf{Panel A. Second stage}}\\
+change\_IP   &      -0.462\sym{**} &      -0.316         &       0.246         &       2.008         \\
+            &     (0.226)         &     (1.889)         &     (2.285)         &     (4.575)         \\
+[1em]
+Z\_input     &       0.517         &       0.336         &       0.394         &       0.444         \\
+            &     (0.470)         &     (0.625)         &     (0.553)         &     (0.594)         \\
+\hline
+Observations&       30551         &       29393         &       28512         &       27669         \\
+KP rk Wald F&       24.81         &       3.178         &       8.129         &       4.759         \\
+\hline\hline
+\end{tabular}
+\end{table}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+\hline \multicolumn{5}{l}{\textbf{Panel B. First stage}}\\
+output\_IV   &       0.892\sym{***}&       0.324\sym{*}  &       0.382\sym{***}&       0.241\sym{**} \\
+            &     (0.179)         &     (0.182)         &     (0.134)         &     (0.110)         \\
+[1em]
+Z\_input     &       0.163         &      -0.242         &      -0.150         &     -0.0554         \\
+            &     (0.491)         &     (0.198)         &     (0.148)         &     (0.122)         \\
+\hline
+Observations&       30551         &       29393         &       28512         &       27669         \\
+\hline\hline
+\end{tabular}
+}
+
+
+
+better version 
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Robustness to excluding sectors with largest Rotemberg weights}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+            & Baseline & Excl. top 5 & Excl. top 10 & Excl. top 10\% \\
+\hline
+\multicolumn{5}{l}{\textbf{Panel A. Second stage}}\\
+change\_IP   & -0.462\sym{**} & -0.316 & 0.246 & 2.008 \\
+             & (0.226)        & (1.889) & (2.285) & (4.575) \\
+Z\_input     & 0.517          & 0.336   & 0.394   & 0.444 \\
+             & (0.470)        & (0.625) & (0.553) & (0.594) \\
+\hline
+Observations  & 30551 & 29393 & 28512 & 27669 \\
+KP rk Wald F & 24.81 & 3.178 & 8.129 & 4.759 \\
+\hline
+\multicolumn{5}{l}{\textbf{Panel B. First stage}}\\
+output\_IV    & 0.892\sym{***} & 0.324\sym{*} & 0.382\sym{***} & 0.241\sym{**} \\
+              & (0.179)        & (0.182)      & (0.134)        & (0.110) \\
+Z\_input      & 0.163          & -0.242       & -0.150         & -0.055 \\
+              & (0.491)        & (0.198)      & (0.148)        & (0.122) \\
+\hline
+Observations   & 30551 & 29393 & 28512 & 27669 \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses.}\\
+\multicolumn{5}{l}{\footnotesize KP rk Wald F is the Kleibergen--Paap weak identification statistic.}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}
+\end{tabular}
+\end{table}

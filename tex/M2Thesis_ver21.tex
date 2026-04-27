@@ -1,0 +1,1510 @@
+\documentclass[12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{palatino}
+\usepackage{graphics}
+\usepackage{rotating}
+\usepackage{fancyhdr}
+\usepackage{appendix}
+\usepackage{subfig}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{flafter}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{adjustbox}
+\usepackage{makecell}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[hidelinks]{hyperref}
+\usepackage[backend=biber, style=apa, natbib=true, hyperref=true]{biblatex}
+\IfFileExists{M2DEThesis.bib}{\addbibresource{M2DEThesis.bib}}{\IfFileExists{tex/M2DEThesis.bib}{\addbibresource{tex/M2DEThesis.bib}}{\addbibresource{tex/thesis.bib}}}
+\graphicspath{{./}{tex/}{Figs/}{../Figs/}}
+
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=Latex.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{LastRevised=Monday, May 16, 2011 15:26:56}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+\AtBeginDocument{\onehalfspacing}
+\setlength{\oddsidemargin}{0.01702in}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\setlength{\textwidth}{16.3cm}
+\setlength{\textheight}{21.25cm}
+\setlength{\topmargin}{-0.307in}
+\DeclareMathOperator*{\Min}{Min}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\theadstack}[1]{\makecell[c]{#1}}
+\newenvironment{fittabular}[1]{\begin{adjustbox}{max width=\textwidth}\begin{tabular}{#1}}{\end{tabular}\end{adjustbox}}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{0.15cm}
+{\large Universit\'{e} Paris 1 Panth\'{e}on-Sorbonne\par}
+\vspace{0.08cm}
+{\normalsize \'{E}cole d'\'{E}conomie de la Sorbonne\par}
+\vspace{0.08cm}
+{\normalsize Master 2 Development Economics\par}
+
+\vspace{0.95cm}
+
+{\Large\bfseries Import Competition and Markup Discipline\par}
+\vspace{0.18cm}
+{\large\bfseries Evidence from Turkish Manufacturing\par}
+
+\vspace{0.85cm}
+
+{\normalsize Master's Thesis\par}
+\vspace{0.32cm}
+{\large Hung D. Hoang\footnotemark\par}
+
+\vspace{0.2cm}
+
+{\normalsize Supervisor: Lorenzo Cassi\par}
+
+\vspace{0.38cm}
+
+{\normalsize April 19, 2026\par}
+\end{center}
+
+\footnotetext{I am grateful to Lorenzo Cassi for his dedicated supervision, Angelo Secchi for his generous support with the financial database, Maria Bas for her time and advice, R\'{e}mi Bazilier, Julieta Peveri, Cl\'{e}ment Bosquet, Laurine Martinoty, Ariane Salem, and other researchers and PhD students at CES for their valuable feedback during the Master thesis seminars.}
+
+\vspace{0.15cm}
+\noindent\rule{\textwidth}{0.5pt}
+
+\begingroup
+\setstretch{0.98}
+\footnotesize
+\begin{center}
+\begin{minipage}{0.94\textwidth}
+\textbf{Abstract}
+
+\smallskip
+
+This thesis estimates the effect of Chinese import-penetration growth on firm- and sector-level markup dynamics among observed incumbent manufacturers in Turkey. Guided by a parsimonious oligopoly model with variable markups and input-output linkages, I distinguish an output-competition channel from an input-supply channel using a shift-share design that combines pre-determined Turkish exposure shares with changes in Chinese export performance in other high-income markets. The baseline IV estimates imply that stronger Chinese import penetration lowers markup growth for surviving firms, with larger effects in the upper tail of the markup-adjustment distribution and in more concentrated sectors. The input-supply shifter does not generate a robust within-firm markup effect, but it is associated with reallocation out of high-markup firms and toward firms with stronger input dependence on China. Sector-wide markup effects are weaker because reallocation partly offsets within-firm discipline.
+
+\smallskip
+\textit{Keywords}: Oligopoly, variable markups, shift-share instrument, import competition, firm dynamics, emerging markets
+
+\smallskip
+\textit{JEL}: F14, F16, L11, L13, L22, O14
+\end{minipage}
+\end{center}
+\endgroup
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+\begin{center}
+\bigskip\vspace*{6in}
+
+\textit{L'universit\'{e} de Paris 1 Panth\'{e}on-Sorbonne n'entend donner aucune approbation
+ni d\'{e}sapprobation aux opinions \'{e}mises dans ce m\'{e}moire: elles doivent \^{e}tre consid\'{e}r\'{e}es comme propre \`{a} leur auteur.}
+
+\bigskip\vspace*{0.25in}
+
+\textit{The University of Paris 1 Panth\'{e}on-Sorbonne neither approves nor
+disapproves of the opinions expressed in this dissertation: they should be
+considered as the author's own.}
+\end{center}
+
+\pagebreak%
+\tableofcontents
+\pagebreak%
+\onehalfspacing
+
+\section{Introduction}
+
+Oligopoly is widespread in many industries, yet empirical evidence on how foreign competition affects market power in oligopolistic environments is limited, particularly in emerging markets where barriers to entry and exit can be more pronounced. This thesis reexamines the effects of the "China shocks" and highlights the distinct pro-competitive effects from foreign competition through strategic interactions between incumbents, specifically through within-firm adjustment of markups to strategically defend market position, and through across-incumbent reallocation of market shares. Each is promoted by a different channel of import exposure: the former is driven by the output-competition channel, while the latter is driven by the input-supply channel. Importantly, the selection effect from endogenous exit is negligible, which emphasizes that the pro-competitive effect of import competition is mostly driven by the adjustment of observed incumbent firms.
+
+Turkey is a useful setting for this question. Since 2010, Turkish manufacturing has faced rising Chinese import penetration in sectors that are often concentrated and heavily reliant on imported intermediates. Chinese exposure can therefore compress markups through tougher product-market competition while also relaxing marginal costs through cheaper imported inputs.\footnote{\textcite{aghionOpposingFirmLevelResponses2024} emphasizes these opposing firm-level responses to Chinese import exposure.} Markups are the natural outcome for studying this tension because they connect trade shocks to prices, allocative efficiency, rent distribution, and industrial dynamics.
+
+The empirical challenge is that these channels are easy to conflate. In models with variable markups, tougher import competition can reduce incumbents' pricing power.\footnote{Tougher import competition increases the elasticity of residual demand and compresses markups \parencite{melitzMarketSizeTrade2008, edmondCompetitionMarkupsGains2015}.} But observed average markups may also reflect selective survival, sample disappearance, and reallocation across firms \parencite{arkolakisElusiveProCompetitiveEffects2019}. In proprietary firm datasets such as ORBIS/AMADEUS, disappearance from the panel is not the same object as validated economic exit. A regression of markup changes on import penetration can therefore mix within-incumbent discipline with compositional change in the observed sample.
+
+To separate these margins, I combine a parsimonious oligopoly model with a four-part empirical design. First, I instrument changes in Chinese import penetration with a shift-share IV that interacts 2009 Turkish sectoral exposure shares with Chinese export growth to other high-income destinations. Second, I construct an input-supply shifter from pre-period Turkish input-output linkages to isolate the cost channel. Third, I use a flexible control-function correction based on lagged EBIT margin to assess whether selective sample survival materially changes the within-incumbent markup result. Fourth, I complement mean IV estimates with grouped IV quantile regressions and a sectoral decomposition into within-firm, reallocation, and observed entry/exit components.
+
+This design yields three main findings. First, stronger Chinese import penetration reduces markup growth among observed incumbent firms. Second, the negative effect is concentrated in the upper tail of the markup-adjustment distribution and is stronger in more concentrated sectors. Third, the input-supply channel does not produce a robust within-firm markup effect, but it does contribute to market-share reallocation toward firms with imported-input dependence on China. At the sector level, total markup effects are weaker because reallocation partly offsets within-firm discipline. The selection correction leaves the baseline coefficient close to unchanged, so the result suggests incumbent discipline and minimal selection effects.
+
+The paper contributes to several literatures. First, quantitative trade literature with oligopolistic competition and variable markups emphasize that trade costs and foreign competition can shift markups through market-share movements and variable pass-through \parencite{deblasUnderstandingMarkupsOpen2015,atkesonPricingtoMarketTradeCosts2008,gaubertGranularComparativeAdvantage2021}. I extend this literature by extending the theoretical model with intermediate input and production network to guide the empirical strategy.
+
+The second literature is China shock and its impact. Beginning with the seminal \textcite{autorChinaSyndromeLocal2013}, this empirical literature leverages a shift-share design to estimate the causal effects of rising Chinese import competition.\footnote{Much of this work focuses on labor markets, employment, and local outcomes \parencite{autorTradeAdjustmentWorkerLevel2014, acemogluImportCompetitionGreat2016,pierceSurprisinglySwiftDecline2016}, some focus on innovation and productivity outcomes \parencite{aghionOpposingFirmLevelResponses2024, bloomTradeInducedTechnical2016}.}. Some studies focus the impact of trade and trade policy on market power \parencite{deloeckerPricesMarkupsTrade2016,impullittiGlobalizationMarketPower2023}, consumer prices \parencite{jaravelWhatArePrice}, and concentration \parencite{amitiUSMarketConcentration2025}. However, these studies do not causally identify the effects of import competition on the dynamics of market power at different levels, and its underlying mechanisms. This paper contributes to this literature by providing firm-level evidence on this gap.
+
+The empirical question in this paper is inherently about industry dynamics \parencite{melitzImpactTradeIntraIndustry2003,ericsonMarkovPerfectIndustryDynamics1995,hopenhaynEntryExitFirm1992}: competition affects both firms' behavior and survival. Turkey's documented decline in business dynamism make this particularly relevant \parencite{akcigitFactsBusinessDynamism2020}. By explicitly correcting for endogenous exit, the paper contributes a flexible solution to a broader class of problems in which observed firm outcomes are selected by survival, and where separating within-firm effects from compositional change is necessary for interpretation. 
+
+The paper also contributes to the literature on the distributional effects of trade shocks\footnote{\textcite{chetverikovIVQuantileRegression2016} proposes a grouped-IV quantile methodology and its application in the case of China shocks. \textcite{galleSlicingPieQuantifying2023} quantifies the group-level welfare effect of trade.} and markup dynamics\footnote{\textcite{bursteinBottomUpMarkupFluctuations2025} shows the comovement of firm, sector, and aggregate markups with output in response to firm-level shocks. \textcite{baqaeeProductivityMisallocationGeneral2020} quantitatively shows that within-firm changes in markups are important in the accounting of movements in aggregate markups.} by showing that foreign competition on final goods disproportionately affects firms with initial higher markups and sectors with higher concentration, while inputs-supply shocks disproportionately reallocate market shares out of largest firms and toward firms with stronger input linkages to China. The two channels together heighten strategic rivalry across surviving firms in Turkey manufacturing, and the results suggest that trade liberalization and domestic antitrust policy can be partially substitutable to control the rise of market power in a dynamic oligopoly environment.
+
+The rest of the paper proceeds as follows. Section 2 presents the theoretical framework. Section 3 describes the data, variable construction, and sample definitions. Section 4 develops the identification strategy, selection correction, decomposition, and distributional design. Section 5 reports the main results. Section 6 presents robustness checks. Section 7 discusses mechanisms. Section 8 concludes. The appendix provides additional details on markup measurement and sample construction.
+
+\section{Theoretical framework}
+\label{sec:theory_model}
+
+\subsection{Model}
+This section presents the minimum theoretical backbone needed for the empirics. The model follows \textcite{atkesonPricingtoMarketTradeCosts2008, carvalhoProductionNetworksPrimer2019}, with domestic firms competing in quantities under nested CES demand and using imported intermediates in production. Detailed derivations of the nested CES system, the perceived elasticity formula, and the exit cutoff are in the Appendix \ref{app:theory_appendix}.
+
+\textbf{Environment and demand}. The economy contains a continuum of sectors $j \in [0,1]$. In each sector, a finite set of domestic firms $i = 1,\ldots,N_j$ produces differentiated varieties and competes under Cournot. A representative household allocates expenditure across sectoral composites with elasticity $\eta > 1$, so sectoral absorption is
+\[
+D_j = \alpha_j \left(\frac{P_j}{P}\right)^{1-\eta} Y.
+\]
+Within each sector, expenditure is split between a domestic composite and a foreign composite with elasticity $\nu_j > 1$:
+\[
+Q_j = \left[(\Lambda_j^D)^{\frac{1}{\nu_j}} (Q_j^D)^{\frac{\nu_j-1}{\nu_j}} + (1-\Lambda_j^D)^{\frac{1}{\nu_j}} (Q_j^F)^{\frac{\nu_j-1}{\nu_j}}\right]^{\frac{\nu_j}{\nu_j-1}}.
+\]
+Within the domestic segment, varieties are aggregated with elasticity $\rho_j > 1$:
+\[
+Q_j^D = \left(\sum_{i=1}^{N_j} \xi_i^{\frac{1}{\rho_j}} q_{ij}^{\frac{\rho_j-1}{\rho_j}} \right)^{\frac{\rho_j}{\rho_j-1}}.
+\]
+I maintain $\rho_j > \nu_j > \eta$, so substitution is strongest across domestic varieties, weaker between domestic and foreign composites, and weakest across sectors. This ordering is what makes the output-competition effect stronger for firms with larger market shares and for more concentrated sectors.
+
+\textbf{Production and the input channel}. Each firm produces according to
+\[
+q_{ij} = \varphi_{ij} L_{ij}^{\beta_j} M_{ij}^{1-\beta_j},
+\qquad 0<\beta_j<1,
+\]
+which implies marginal cost
+\[
+\text{mc}_{ij} \propto \varphi_{ij}^{-1} w^{\beta_j} (P_j^M)^{1-\beta_j}.
+\]
+Log changes in intermediate-input prices propagate through the Turkish input-output network, so a reduced-form approximation to marginal-cost growth is
+\begin{equation}
+d \ln \text{mc}_{ij} \approx -d \ln \varphi_{ij} + \beta_j d \ln w + (1-\beta_j) \sum_k l_{jk} \omega_k^{CHN} d \ln P_k^{CHN}.
+\label{eq:marginal_cost_io}
+\end{equation}
+This expression is the basis for the empirical input-supply channel: Chinese input shocks lower costs more in sectors with stronger upstream exposure.
+
+\textbf{Oligopoly and markups}. Let $\tilde{s}_{ij}$ denote firm $i$'s share within the domestic segment and $s_{ij}$ its share in total sectoral expenditure. Under Cournot competition, the firm-specific perceived elasticity is
+\[
+\sigma_{ij}^C =
+\left(
+\frac{1-\tilde{s}_{ij}}{\rho_j}
++
+\frac{\tilde{s}_{ij}-s_{ij}}{\nu_j}
++
+\frac{s_{ij}}{\eta}
+\right)^{-1}.
+\]
+The resulting optimal markup is $\mu_{ij} = \sigma_{ij}^C / (\sigma_{ij}^C-1)$, or, more usefully for interpretation,
+\begin{equation}
+\frac{1}{\mu_{ij}} =
+\left(1-\frac{1}{\rho_j}\right)
+-
+\left[
+\frac{1}{\Lambda_j^D}\left(\frac{1}{\nu_j}-\frac{1}{\rho_j}\right)
++
+\left(\frac{1}{\eta}-\frac{1}{\nu_j}\right)
+\right] s_{ij}.
+\label{eq:firm_inverse_markup}
+\end{equation}
+Aggregating across firms with the market-share-weighted harmonic mean implies
+\begin{equation}
+\frac{1}{\mu_j} =
+\left(1-\frac{1}{\rho_j}\right)
+-
+\left[
+\frac{1}{\Lambda_j^D}\left(\frac{1}{\nu_j}-\frac{1}{\rho_j}\right)
++
+\left(\frac{1}{\eta}-\frac{1}{\nu_j}\right)
+\right] \text{HHI}_j.
+\label{eq:sector_inverse_markup}
+\end{equation}
+Sectoral markups therefore rise with concentration, and the slope of that relationship depends on the domestic expenditure share $\Lambda_j^D$. Stronger foreign competition lowers $\Lambda_j^D$, steepens residual demand, and disciplines markups most in sectors where concentration is already high.
+
+\textbf{Dynamic selection}. Following \textcite{aguirregabiriaDynamicGamesEmpirical}, a firm that remains active in period $t$ receives current profits and retains the option value of future operation. If the firm stays active, its continuation value satisfies
+\[
+V(x_{ijt}) = \max \left\{0,\; \pi(x_{ijt}) + \beta \mathbb{E}[V(x_{ij,t+1}) \mid x_{ijt}] \right\}.
+\]
+Trade shocks affect both current profitability and continuation values, so observed firm-level outcomes among survivors are selected on latent state variables. This is why the empirical strategy later treats the selection correction as a reduced-form adjustment for non-random sample survival rather than as a structural estimation of the exit problem.
+
+\subsection{Testable predictions and empirical mapping}
+
+The static model gives a useful map for the empirical design. The firm-level inverse-markup condition in equation~\eqref{eq:firm_inverse_markup} shows that markups depend on the domestic expenditure share and on the firm's market-share state, while the sectoral aggregation in equation~\eqref{eq:sector_inverse_markup} shows that the same residual-demand force is amplified by concentration. A rise in Chinese import penetration reduces the domestic share of spending and makes residual demand more elastic for Turkish incumbents. The first prediction is therefore a disciplining effect of output-market import competition on incumbent markup growth. Because equations~\eqref{eq:firm_inverse_markup}--\eqref{eq:sector_inverse_markup} load this channel through firm shares and \(HHI_j\), the effect should be stronger where initial market power is larger, especially among high-markup firms and in more concentrated sectors.
+
+The input channel is different. The marginal-cost expression in equation~\eqref{eq:marginal_cost_io} implies that cheaper or more abundant Chinese intermediates affect firms through production costs, with the strength of the channel depending on upstream input exposure. These cost changes can also reallocate sales across producers with different cost positions. The model therefore does not require the input channel to produce the same within-firm markup response as final-goods competition. I treat the input-supply shifter as a separate control in the baseline markup regressions and use the sectoral decomposition to study whether it operates mainly through reallocation.
+
+The empirical specification translates these comparative statics into annual first differences. The main outcome is
+\[
+\Delta \log \hat\mu_{ijt}
+=
+\log \hat\mu_{ijt} - \log \hat\mu_{ij,t-1}.
+\]
+For small annual changes, this is the first-difference counterpart of equations~\eqref{eq:firm_inverse_markup} and~\eqref{eq:sector_inverse_markup}.\footnote{Appendix~\ref{app:bridge} gives the formal bridge from the static inverse-markup condition to the first-difference estimating equation.} A predicted increase in inverse markups corresponds to lower log-markup growth. The coefficient on instrumented import-penetration growth is therefore interpreted as a local reduced-form response of incumbent markup growth to an output-competition shock, conditional on fixed effects, lagged controls, and the input-supply shifter. Because the instrument is a shift-share design, the identifying variation is relative across sector-year cells and is most informative for the cells receiving the largest Rotemberg weights.
+
+The grouped-IV quantile regressions and concentration interactions test whether discipline is concentrated where the model predicts residual-demand effects to be strongest. The sectoral decomposition separates within-firm adjustment from reallocation and observed sample turnover, so sector-level markup changes need not mirror the average incumbent response. Finally, because markup growth is observed only for continuing reporters, the selection correction in Section~\ref{sec:selection} is interpreted as a reduced-form adjustment for non-random survival.
+
+\section{Data and Measurement}
+In this section, I describe the data sources, define the samples and key variables I use in the analysis, and present summary statistics.
+
+\subsection{Data sources}
+\textbf{Firm-level data.} The ORBIS/AMADEUS dataset contains harmonized balance-sheet, income-statement, and profit-and-loss information for firms. I use the Turkish manufacturing panel from 2009 to 2023 and map firms from NACE Rev.2 into 4-digit ISIC sectors using a concordance. The raw manufacturing panel contains 15,957 firms and 78,921 firm-year observations. Because the main dependent variable is markup growth, the estimation sample is necessarily smaller than the raw panel: a firm-year enters the baseline markup regressions only when current and lagged accounting variables are both observed and revenue, COGS, and capital are positive. After applying these restrictions, winsorizing extreme variables at the 1st and 99th percentiles, and adding lagged controls, the main firm-level specifications use about 31,000 firm-year observations.
+
+The panel is unbalanced, and I do not impute intermittent reporting gaps. I define \emph{observed exit} as disappearance from ORBIS/AMADEUS between $t-1$ and $t$. This operational definition is useful for studying sample composition, but it is not equivalent to validated legal or economic firm death. Throughout the thesis, results on entry and exit should therefore be read as evidence on observed sample turnover unless otherwise stated.
+
+\textbf{Trade data.} My main treatment variable is Chinese import penetration at the 4-digit ISIC sector-year level, defined as
+\begin{equation}
+    \begin{aligned}
+    \text{China IP}_{jt} = \frac{\text{Import}_{jt}^{\text{CHN} \to \text{TR}}}{\text{Output}_{jt} + \text{Import}_{jt}^{\text{World} \to \text{TR}} - \text{Export}_{jt}^{\text{TR} \to \text{World}}} 
+\end{aligned}
+\end{equation}
+where the denominator corresponds to domestic absorption. I construct the numerator from CEPII BACI HS96 bilateral trade data at the HS 6-digit level and map products to 4-digit ISIC sectors using the HS-ISIC concordance of Liao et al. (2021). Sectoral output and trade aggregates used in the denominator come from UNIDO ISDB4/INDSTAT4. The treatment in the regressions is the annual change in this import-penetration rate.
+
+For the input-supply channel, I propagate the output-side shift-share shock through Turkish input-output linkages. The weights come from the 2003 Turkish input-output table in WIOD and are kept fixed over the sample period. Using pre-period weights is a deliberate trade-off: it cannot capture subsequent changes in sourcing networks, but it preserves a predetermined exposure matrix and avoids loading the upstream shifter with contemporaneous endogenous restructuring.
+
+\textbf{Other data.} I use several TURKSTAT datasets to construct controls and deflators. The 3-digit Producer Price Index (PPI) is used to deflate nominal variables. Personnel-cost and value-added data from the Annual Industry and Service Statistics are used to construct pre-period sectoral labor intensity. Across the empirical sections, the firm-level outcome data are therefore combined with a sector-year treatment design and a smaller set of effective identifying cells.
+
+Table \ref{tab:summary_statistics} reports summary statistics for firm-level and sector-level variables used in the baseline and mechanism analyses.
+
+\begin{table}[htbp]\centering
+\caption{Summary Statistics}
+\label{tab:summary_statistics}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{fittabular}{L{0.26\textwidth}rrrrrr}
+\hline\hline
+Variable & N & Mean & SD & P50 & Min & Max \\
+\hline
+\multicolumn{7}{l}{\textbf{Panel A: Firm-level}} \\
+$\Delta \ln \mu$            & 31339 &  0.002 & 0.141 & 0.001 & -3.873 &  4.184 \\
+Observed exit                 & 31339 &  0.083 & 0.276 & 0.000 &  0.000 &  1.000 \\
+EBIT margin                   & 31339 &  6.890 & 8.818 & 5.670 & -95.350 & 95.750 \\
+$\ln(\text{Size})$           & 31339 & 15.181 & 1.632 & 15.132 &  7.399 & 22.085 \\
+Leverage                      & 31339 &  0.229 & 0.205 & 0.193 & -0.053 &  2.024 \\
+Liquidity ratio               & 31339 &  1.411 & 2.714 & 0.910 &  0.000 & 99.470 \\
+Age                           & 31339 &  5.772 & 3.317 & 5.000 &  2.000 & 15.000 \\
+Exporter                      & 31339 &  0.697 & 0.460 & 1.000 &  0.000 &  1.000 \\
+\hline
+\multicolumn{7}{l}{\textbf{Panel B: Sector-level}} \\
+$\Delta IP$                   & 609 & -0.000 & 0.027 & -0.000 & -0.224 & 0.213 \\
+Output IV                     & 609 & -0.001 & 0.008 & -0.000 & -0.071 & 0.066 \\
+$Z^{\text{Input}}$            & 609 & -0.000 & 0.003 & -0.000 & -0.009 & 0.011 \\
+Labor share (pre)             & 609 &  0.510 & 0.092 &  0.510 &  0.260 & 0.887 \\
+HHI (domestic)                & 609 &  0.200 & 0.220 &  0.114 &  0.001 & 1.000 \\
+\hline\hline
+\multicolumn{7}{l}{\footnotesize Panel A reports firm-level variables; Panel B reports sector-level variables.}\\
+\end{fittabular}
+\end{table}
+
+\subsection{Chinese import competition}
+\label{sec:data_treatment}
+
+Estimating the effect of changes in Chinese import penetration on firm outcomes by OLS is problematic for at least three reasons. First, Turkish sectoral demand or productivity shocks may affect both imports from China and domestic firm outcomes. Second, persistent sectoral characteristics may jointly shape exposure to Chinese competition and firm performance. Third, the treatment varies at the sector-year level while the main outcomes are observed at the firm-year level, so naive firm-level regressions risk overstating the amount of independent identifying variation.
+
+To address these issues, I implement a shift-share instrumental-variable design following \textcite{autorTradeAdjustmentWorkerLevel2014} and the shock-level interpretation in \textcite{borusyakQuasiExperimentalShiftShareResearch2022}. The instrument combines exogenous shifts in Chinese export performance in other high-income markets with predetermined Turkish exposure shares. In the baseline, the exposure shares are fixed at $t_0 = 2009$. This construction is meant to isolate variation in Turkish import competition that comes from common China-driven shocks rather than from contemporaneous Turkish sectoral conditions.
+
+Formally, let $M_{jt}^{\text{CHN} \to \text{HI}}$ denote Chinese exports to high-income countries in sector $j$ at time $t$, and let $M_{jt}^{\text{World} \to \text{HI}}$ denote total world exports to high-income countries in the same sector and period. The shift component of the instrument is defined as the change in China’s export share in high-income destination markets:
+\[
+g_{jt} = \Delta \ln \text{Import Share}_{jt}^{\text{CHN} \to \text{HI}} = \Delta \ln M_{jt}^{\text{CHN} \to \text{HI}} - \Delta \ln M_{jt}^{\text{World} \to \text{HI}}
+\]
+The share component is the baseline level of Chinese import penetration in Turkey in period $t_0 = 2009$. The shift-share instrument for changes in Chinese import penetration is therefore
+\[
+Z_{jt}^{\text{Output}} = s_{j,\text{CHN}}^{2009} \times g_{jt}.
+\]
+To capture the input-supply channel separately, I construct an additional control variable by weighting the sector-level output instrument by Turkish input-output linkages across sectors, following \textcite{amitiTradeLiberalizationIntermediate2007}:
+\[
+Z_{jt}^{\text{Input}} = \sum_k w_{jk}^{t_0} \times Z_{kt}^{\text{Output}}
+\]
+where $w_{jk}^{t_0}$ denotes the technical coefficient derived from the 2003 Turkish input-output table, defined as the share of sector $k$ in total intermediate inputs used by sector $j$:
+\[
+w_{jk}^{t_0} = \frac{\text{Domestic Use}_{jk} + \text{Imported Use}_{jk}}{\text{Total Intermediate Inputs}_j}
+\]
+
+The relevant treatment cell in all IV specifications is therefore the sector-year, not the firm-year. In the baseline sample, the firm-level regressions reuse 609 effective sector-year cells spanning 95 ISIC4 manufacturing sectors. Sector fixed effects absorb time-invariant sector heterogeneity, year fixed effects absorb aggregate shocks common across sectors, and placebo-lead tests assess whether future China shocks predict current outcomes. The main remaining threat is a sector-specific global demand or technology shock that simultaneously raises Chinese exports to other high-income markets and changes Turkish markups. The identifying assumption is that, conditional on fixed effects and controls, these residual sector-year shocks are orthogonal to the constructed shift. Because Rotemberg-weight diagnostics show that some sectors are much more influential than others, I interpret the IV estimates as local to the more exposed sector-year cells rather than as universal effects for all Turkish manufacturing sectors.
+
+
+\subsection{Markup estimation and other variables}
+
+\textbf{Markups.} I estimate markups using the production approach pioneered by \textcite{hallRelationPriceMarginal1988} and developed by \textcite{deloeckerMarkupsFirmLevelExport2012,deloeckerRiseMarketPower2020}. In the baseline implementation, I estimate a Cobb-Douglas revenue production function within ISIC4 sectors, use COGS as the flexible input, and recover the output elasticity of COGS from that production function. The markup estimator is
+\[
+\mu_{it} = \theta_{ivt} \frac{P_{it}Q_{it}}{P_{vit}V_{it}},
+\]
+where $\theta_{ivt}$ is the output elasticity of the flexible input, $P_{it}Q_{it}$ is firm revenue, and $P_{vit}V_{it}$ is expenditure on input $v$. COGS is the most consistently observed short-run variable input in ORBIS/AMADEUS and is therefore the baseline flexible input. Appendix A.1 reports the implementation details, a translog sensitivity check, and robustness exercises from \textcite{kirovMeasuringMarkupsRevenue2026}.
+
+Because accounting-based markup levels are sensitive to production-function assumptions, reporting quality, and the choice of flexible input, I focus on within-firm changes rather than levels \parencite{deridderHitchhikersGuideMarkup2026}. The main dependent variable is
+\[
+\Delta \log \hat{\mu}_{it} \equiv \log \hat{\mu}_{it} - \log \hat{\mu}_{i,t-1}
+\]
+This choice is meant to limit the influence of time-invariant reporting differences and level mismeasurement.
+
+\textbf{Labor Intensity.} Labor intensity is constructed as the ratio of personnel costs to value added factor cost, averaged over 2009--2015 at the 4-digit sector level. This time-invariant measure captures differences in production technology across industries. The interaction of labor intensity with a post-2016 dummy captures differential effects after the minimum wage hike, which may have caused attrition of formal firms from the ORBIS database.
+
+\textbf{Sectoral Markup.} Following \textcite{bursteinBottomUpMarkupFluctuations2025}, sectoral markup is defined as the market-share-weighted harmonic mean of firm markups:
+\[
+\mu_{jt} = \left( \sum_{i \in j} s_{ijt} \mu_{it}^{-1} \right)^{-1}
+\]
+where $s_{ijt} = \frac{D_{it}}{\sum_{i' \in j} D_{i't}}$ is firm market share, which is firm domestic sales deflated by industry PPI. The harmonic mean is appropriate because it gives more weight to low-markup firms, which are more likely to be affected by import competition and selection. The change in sectoral markup is then defined as the first difference of the log of the sectoral markup.
+
+
+\section{Empirical strategy}
+\label{sec:empirical_strategy}
+The empirical strategy has four components. Section 4.1 states the baseline shift-share IV specification and the identifying assumptions, with particular emphasis on the fact that the effective variation comes from a limited set of sector-year cells. Section 4.2 asks whether selective survival in the observed panel materially changes the within-incumbent estimate. Sections 4.3 and 4.4 then connect the mean result to sectoral aggregation and distributional heterogeneity through a decomposition and grouped IV quantile regressions.
+
+\subsection{Identification strategy and baseline IV regression}
+\label{sec:empirical_strategy_iv}
+
+My baseline IV specification estimates the effect of changes in Chinese import penetration on firm-level markup adjustments, controlling for the input-supply channel and other covariates. The regression is specified as follows:
+\begin{equation}
+\begin{aligned}
+Y_{ijt} &= \beta_O \Delta IP_{jt} + \beta_I Z_{jt}^{\text{Input}} + \gamma_1 \text{LaborShare}_{jt_0} \times \text{Post2016}_t \\
+&\quad + \gamma_2 \text{LaborShare}_{jt_0} + X'_{ijt-1} \gamma + \tau_t + \delta_j + \varepsilon_{ijt}
+\end{aligned}
+\end{equation}
+
+where $Y_{ijt}$ is the outcome of interest (observed exit probability or markup adjustments), $\Delta IP_{jt}$ is the change in Chinese import penetration, $Z_{jt}^{\text{Input}}$ is the control variable for the input-supply channel, $\text{LaborShare}_{jt_0}$ is the pre-2016 averaged labor intensity, $X_{ijt-1}$ are lagged firm-level controls, and $\tau_t$ and $\delta_j$ are year and sector fixed effects. The coefficient of interest is $\beta_O$, which measures the effect of output-market import competition after controlling for upstream input shocks and observables.
+
+Identification comes from the output-side shift-share IV $Z_{jt}^{\text{Output}}$ for $\Delta IP_{jt}$, while $Z_{jt}^{\text{Input}}$ remains included as a control. Two clarifications are important. First, the treatment cell is the sector-year and the baseline exposure share is fixed in 2009, so the firm-level regression does not create additional independent shocks beyond those sector-year cells. Second, the coefficient should be interpreted as local to the sector-year cells that receive the most identifying weight. The Rotemberg-weight robustness reported later shows that a limited set of sectors is particularly influential, which disciplines the external-validity claim of the baseline estimate.
+
+This limitation is substantive rather than cosmetic. The appendix exclusion exercise shows that once the most influential Rotemberg-weight sectors are removed, the first stage weakens sharply and the second-stage estimate becomes unstable in both sign and magnitude. I therefore treat the baseline IV as evidence that Chinese import competition disciplines markups in influential exposed sectors, while avoiding the stronger claim that the same estimate is stable across all plausible reallocations of identifying weight.
+
+The control for pre-2016 labor share interacted with the post-2016 dummy captures differential exposure to the minimum-wage episode, which may have affected the formal-firm coverage \parencite{akcigitFactsBusinessDynamism2020}. Because firms with similar exposure structures may have correlated residuals, inference is clustered at the ISIC4 level and complemented, where available, with wild-cluster bootstrap p-values in the robustness section.
+
+To assess the plausibility of the exclusion restriction, I conduct lead-placebo tests. If the instrument is valid, future realizations of the China shock should not predict current outcomes once fixed effects and controls are included. Conversely, significant placebo coefficients would suggest pre-trends or omitted sectoral shocks that threaten the design.
+
+Formally, for horizon $k \in \{1,2,3\}$, I estimate:
+\begin{equation}
+\begin{aligned}
+Y_{ijt} &= \beta^{k}_O Z^{\text{Output}}_{j,t+k} + \beta_I0 Z_{jt}^{\text{Input}} + \beta_{I1} Z_{j,t-1}^{\text{Input}} + \gamma_1 \text{LaborShare}_{jt_0} \times \text{Post2016}_t \\
+&\quad + \gamma_2 \text{LaborShare}_{jt_0} + X'_{ijt-1} \gamma + \tau_t + \delta_j + \varepsilon_{ijt}
+\end{aligned}
+\end{equation}
+
+Under the identifying assumption, the placebo coefficients $\beta^{k}_O$ should be statistically indistinguishable from zero, providing evidence against pre-trends and supporting the validity of the instrument. I summarize these placebo coefficients graphically using a coefficient plot with confidence intervals across horizons.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=0.92\textwidth,
+        height=7.2cm,
+        xmin=-1.05, xmax=0.80,
+        ymin=0.5, ymax=3.5,
+        axis x line=bottom,
+        axis y line=left,
+        xlabel={Coefficient on future shock},
+        ylabel={Future horizon},
+        ytick={1,2,3},
+        yticklabels={t+3, t+2, t+1},
+        xtick={-1.0,-0.5,0,0.5,0.8},
+        xmajorgrids=true,
+        ymajorgrids=false,
+        grid style={dashed, draw=gray!20},
+        major grid style={line width=0.3pt},
+        tick align=outside,
+        tick style={black},
+        axis line style={black},
+        clip=false,
+    ]
+
+    \addplot[dashed, gray!70, thick] coordinates {(0,0.5) (0,3.5)};
+
+    \addplot[
+        only marks,
+        mark=*,
+        mark size=2.8pt,
+        blue!70!black
+    ] coordinates {(0.48,3)};
+    \addplot[
+        blue!70!black,
+        thick,
+        error bars/.cd,
+        x dir=both,
+        x explicit
+    ] coordinates {(0.48,3) +- (0.50,0)};
+
+    \addplot[
+        only marks,
+        mark=*,
+        mark size=2.8pt,
+        magenta!75!black
+    ] coordinates {(-0.08,2)};
+    \addplot[
+        magenta!75!black,
+        thick,
+        error bars/.cd,
+        x dir=both,
+        x explicit
+    ] coordinates {(-0.08,2) +- (0.90,0)};
+
+    \addplot[
+        only marks,
+        mark=*,
+        mark size=2.8pt,
+        teal!70!black
+    ] coordinates {(-0.23,1)};
+    \addplot[
+        teal!70!black,
+        thick,
+        error bars/.cd,
+        x dir=both,
+        x explicit
+    ] coordinates {(-0.23,1) +- (0.38,0)};
+
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Placebo: future shocks predicting current markup changes}
+    \label{fig:my_plot}
+\end{figure}
+
+The results in Figure \ref{fig:my_plot} support the validity of the design. Across the one to three-year horizons, the estimated placebo coefficients are small, not systematically signed, and statistically insignificant, suggesting no evidence of pre-trends or reverse causality. This provides credibility to the interpretation of the main IV estimates as capturing the causal effect of Chinese import penetration on firm outcomes.
+
+\subsection{Selection correction}
+\label{sec:selection}
+
+A key concern in the baseline regression is endogenous sample selection. Firm-level markup adjustments are observed only for firms that remain in the panel and continue reporting. In ORBIS/AMADEUS, disappearance may reflect true economic exit, reporting gaps, or coverage changes. The empirical problem is the same in each case: if Chinese import competition affects observed survival and that margin is correlated with unobserved determinants of markup adjustment, then the baseline IV estimates mix a within-firm response with compositional change in the observed sample.
+
+To address this issue, I adopt a semiparametric control-function correction inspired by the selection approach in \textcite{backusWhyProductivityCorrelated2020,pavcnikTradeLiberalizationExit2002}. The objective is to purge the markup equation of selection on unobservables: if observed survival depends on latent firm state and that state also affects markup adjustment, then the regression error among observed firms is not mean-independent of trade exposure.
+
+I proxy the latent state with lagged EBIT margin, denoted $s_{i,t-1}$. This variable is observable, persistent, predictive of observed exit, and informative about subsequent markup adjustment, so it provides a practical control-function index for selection. Let the second-stage error decompose as $\varepsilon_{i(j)t} = \lambda_{jt} + \eta_{it}$, where $\lambda_{jt}$ captures sector-year shocks and $\eta_{it}$ is an idiosyncratic component. Among surviving firms, I model the selection-induced component as a flexible function of the lagged state proxy,
+\[
+\mathbb{E}[\eta_{it} \mid s_{it-1}] = g(s_{it-1}),
+\]
+and approximate $g(\cdot)$ with a third-order polynomial in $s_{it-1}$. The cubic is flexible enough to capture nonlinear selection on profitability without overfitting a relatively small support of the state proxy. The corrected second-stage regression therefore includes this control function:
+\begin{equation}
+\begin{aligned}
+\Delta \ln \mu_{i(j)t} &= \beta_O \widehat{\Delta IP_{jt}} + \beta_I Z_{jt}^{\text{Input}} + \gamma_1 \text{LaborShare}_{jt_0} \times \text{Post2016}_t \\
+&\quad + \gamma_2 \text{LaborShare}_{jt_0} + X'_{ijt-1} \gamma + \tau_t + \delta_j + g(s_{it-1}) + \epsilon_{i(j)t}
+\end{aligned}
+\end{equation}
+
+Conditional on the flexible control function $g(s_{it-1})$, the remaining variation in the instrumented import penetration shock identifies the within-incumbent effect on markup adjustments, net of selection bias under this reduced-form approximation. Thus, $\beta_O$ should be interpreted as a within-incumbent treatment effect among observed survivors rather than as a reduced-form combination of treatment and composition. 
+
+\begin{table}[!htb]\centering
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{Validation of Lagged EBIT Margin as State Proxy}
+    \label{tab:ebit_validation}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{0.95}
+    \begin{threeparttable}
+    \begin{fittabular}{L{0.28\textwidth}*{5}{c}}
+    \toprule
+    & \theadstack{(1)\\Persistence} & \theadstack{(2)\\Observed Exit\\(linear)} & \theadstack{(3)\\Observed Exit\\(quadratic)} & \theadstack{(4)\\Markup\\Adjustments} & \theadstack{(5)\\Markov\\Test} \\
+    \midrule
+    $\text{EBIT Margin}_{t-1}$ & 0.0437\sym{***} & -0.000453\sym{**} & -0.000524\sym{**} & -0.00876\sym{***} & -0.000977\sym{***} \\
+    & (0.0164) & (0.000229) & (0.000237) & (0.000528) & (0.000306) \\
+    \addlinespace[0.15em]
+    $\text{EBIT Margin}_{t-1}^2$ & & & -0.0000133\sym{***} & & \\
+    & & & (0.00000482) & & \\
+    \addlinespace[0.15em]
+    $\text{EBIT Margin}_{t-2}$ & & & & & 0.0000519 \\
+    & & & & & (0.000287) \\
+    \midrule
+    Observations & 41,113 & 41,150 & 41,150 & 41,150 & 29,326 \\
+    $R^2$ & 0.649 & 0.341 & 0.341 & 0.356 & 0.367 \\
+    \bottomrule
+    \end{fittabular}
+    \begin{tablenotes}[flushleft]
+    \scriptsize
+    \item Standard errors clustered at firm level in parentheses. All specifications include firm, sector (ISIC4), and year fixed effects. Controls: leverage, liquidity ratio, log firm size, age, export status, and labor share $\times$ Post-2016 indicator; sample 2011--2019.
+    \item Column (1) tests persistence; columns (2)--(3) test predictive power for observed exit; column (4) tests markup adjustments among survivors; column (5) reports the Markov test (lagged EBIT margin at $t-2$, p-value 0.857).
+    \item \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).
+    \end{tablenotes}
+    \end{threeparttable}
+    \renewcommand{\arraystretch}{1}
+\end{table}
+
+The validity of lagged EBIT margin as a state proxy is examined in Table \ref{tab:ebit_validation}. The evidence supports its use. First, lagged EBIT margin is persistent over time, consistent with a slowly evolving firm state. Second, it predicts observed exit, as required for the correction. Third, it is associated with future markup adjustments among survivors, indicating that it captures economically relevant heterogeneity in firms' dynamic responses. Finally, the Markov restriction is supported by the data: once lagged EBIT margin at $t-1$ is included, the additional lag at $t-2$ is not significant. This does not prove that EBIT margin is a sufficient statistic, but it supports its use as a practical reduced-form proxy for latent profitability.
+
+\subsection{Decomposition of sectoral markup changes}
+\label{sec:decomposition}
+
+Firm-level regressions identify whether Chinese import penetration disciplines incumbents' pricing behavior, but they do not by themselves show how these responses aggregate to the sector level. This matters because sectoral markups may move differently from firm-level markups when import shocks also reallocate market shares across incumbents or change which firms are observed in adjacent years. To connect micro responses to sector-wide outcomes, I therefore decompose annual changes in sectoral markups into within-firm, reallocation, observed entry, and observed exit components. This decomposition is suited to environments with variable markups, where sectoral markup movements depend jointly on firm-specific markup adjustment and changes in market shares. 
+
+Let $S_t$ denote the set of firms observed in sector $j$ at time $t$, $C = S_{t-1} \cap S_t$ the set of continuing firms, $E = S_t \setminus S_{t-1}$ observed entrants, and $X = S_{t-1} \setminus S_t$ observed exiters. Adapted from \textcite{melitzDynamicOlleyPakesProductivity2015}, the change in sectoral inverse markup can then be written as:
+\[\Delta \mu_{jt}^{-1}
+=
+\underbrace{\sum_{i \in C} \bar{s}_{ij}\,\Delta \mu_{ij}^{-1}}_{\text{Within (continuers)}}
++
+\underbrace{\sum_{i \in C} \Delta s_{ij}\,\bar{\mu}_{ij}^{-1}}_{\text{Between (continuers)}}
++
+\underbrace{\sum_{i \in E} s_{ijt}\,\mu_{ijt}^{-1}}_{\text{Observed entry}} - \underbrace{\sum_{i \in X} s_{ij,t-1}\,\mu_{ij,t-1}^{-1}}_{\text{Observed exit}}\]
+where $\bar{s}_{ij} = \frac{1}{2}(s_{ijt} + s_{ijt-1})$ and $\bar{\mu}_{ij}^{-1} = \frac{1}{2}(\mu_{it}^{-1} + \mu_{it-1}^{-1})$ are the average market share and inverse markup for firm $i$ over the two periods. This decomposition allows me to isolate the contributions of different mechanisms to sectoral markup changes.
+
+The within term captures markup adjustment among continuing firms, holding their market shares fixed at midpoint weights. It therefore measures the contribution of incumbent pricing responses to aggregate markup discipline. The reallocation term captures changes in sectoral inverse markups due to shifts in market shares across continuing firms, holding their markups fixed at midpoint values. This term is positive when market shares move toward firms with lower markups and negative when reallocation favors firms with higher markups. The observed-entry term measures the contribution of firms newly appearing in year $t$, while the observed-exit term captures the contribution of firms present in $t-1$ that disappear in $t$. Because the decomposition is written in inverse markups, a positive component corresponds to a decline in sectoral markups, that is, a pro-competitive effect, while a negative component corresponds to an increase in sectoral markups, that is, an anti-competitive effect.
+
+I compute these four components for each sector-year and then use them separately as dependent variables in the sector-level IV specifications. This allows the import-competition shock to affect aggregate markups through distinct channels. Formally, for each outcome $m \in \{ \text{within-firm, reallocation, observed entry, observed exit} \}$, I estimate: 
+\begin{equation}
+\begin{aligned}
+    Y^m_{jt} &= \beta_O^m \widehat{\Delta IP}_{jt} + \beta_I^m Z_{jt}^{\text{Input}} + \Gamma' W_{jt} + \delta_j + \tau_t + \epsilon_{jt}^m
+\end{aligned}
+\end{equation}
+where $Y^m_{jt}$ is the sector-level outcome corresponding to component $m$, $\widehat{\Delta IP_{jt}}$ is the change in Chinese import penetration instrumented by the output-competition shock, $Z_{jt}^{\text{Input}}$ is the control for input supply channel, $W_{jt}$ are sector-level controls, and $\delta_j$ and $\tau_t$ are sector and year fixed effects. The coefficient $\beta_O^m$ captures the effect of import competition on the specific channel $m$.
+
+This decomposition is central because the aggregate response of sectoral markups need not mirror the average firm-level response. Even if import competition disciplines continuing firms, the sectoral effect may be attenuated or reversed when market shares are reallocated toward dominant incumbents, or when observed entry and exit contribute in offsetting directions. Estimating the four terms separately therefore makes it possible to distinguish whether sectoral markup changes are primarily driven by incumbent adjustments, reallocation of market shares, or observed sample turnover. In addition, to assess the relative importance of each margin, I express each decomposition component as a share of the total absolute change in inverse sector markup. 
+
+\subsection{Distributional effects and concentration heterogeneity}
+\label{sec:distributional}
+
+To move beyond average effects, I examine whether the impact of import competition varies across the distribution of firm-level markup adjustments. This is important because mean IV estimates may mask whether trade discipline is concentrated among firms at the upper tail of the markup-adjustment distribution, where pricing power is likely to be strongest. I therefore complement the baseline specification with a grouped IV quantile approach \textcite{chetverikovIVQuantileRegression2016} adapted to the settings in which the endogenous treatment varies at the sector-year level. 
+
+I define $\rho_{jt}^{(k)}$ as the $k$-th decile of the distribution of the within-sector-year distribution of firm-level markup adjustments among survivors. For each decile $k$, the regression is specified as:
+\begin{equation}
+\begin{aligned}
+\rho_{jt}^{(k)} &= \beta_O^{(k)} \widehat{\Delta IP_{jt}} + \beta_I^{(k)} Z_{jt}^{\text{Input}} + \gamma_1^{(k)} \text{LaborShare}_{jt_0} \times \text{Post2016}_t \\
+&\quad + \gamma_2^{(k)} \text{LaborShare}_{jt_0} + X'_{jt-1} \gamma^{(k)} + \tau_t^{(k)} + \delta_j^{(k)} + \nu_{jt}^{(k)}
+\end{aligned}
+\end{equation}
+
+The grouped formulation is preferable to a standard firm-level IV quantile regression because the treatment is common within sector-year cells. Pooling firms directly would require rank-similarity assumptions across sectors that are difficult to justify in the presence of sector-level unobservables. By using sector-year quantiles as the dependent variable, the specification instead isolates how import competition shifts different parts of the outcome distribution across groups. 
+
+Identification relies on the same shift-share design as in the baseline analysis. Sectoral changes in Chinese import penetration are instrumented using exogenous growth in Chinese exports to high-income destinations interacted with predetermined Turkish exposure shares, while controlling for the input supply channel. Conditional on fixed effects and controls, $\widehat{\Delta IP_{jt}}$ is therefore interpreted as exogenous variation in output-market competitive pressure. 
+
+Because sample quantiles are mechanically sensitive to the number of firms in each sector-year cell, particularly in smaller sectors, I correct for order-statistic bias (Neyman and Scott, 1948) by augmenting the specification with a flexible control function of the number of firm observations $n_{jt}$:
+\begin{equation}
+\begin{aligned}
+\rho_{jt}^{(k)} &= \beta_O^{(k)} \widehat{\Delta IP_{jt}} + \beta_I^{(k)} Z_{jt}^{\text{Input}} + \gamma_1^{(k)} \text{LaborShare}_{jt_0} \times \text{Post2016}_t \\
+&\quad + \gamma_2^{(k)} \text{LaborShare}_{jt_0} + X'_{jt-1} \gamma^{(k)} + \tau_t^{(k)} + \delta_j^{(k)} + g^{(k)}(n_{jt}) + \nu_{jt}^{(k)}
+\end{aligned}
+\end{equation}
+where $g^{(k)}(\cdot)$ is approximated with a third-order polynomial in $n_{jt}$. This follows the correction proposed in \textcite{backusWhyProductivityCorrelated2020}, where order statistics can be spuriously correlated with group size when the number of firms is small relative to the number of quantiles.
+
+I then study heterogeneity in the pro-competitive effect by interacting predicted import penetration with lagged domestic concentration measures such as HHI, CR10, and CR4:
+\begin{equation}
+\begin{aligned}
+\rho_{jt}^{(k)} &= \beta_{O1}^{(k)} \widehat{\Delta IP_{jt}} + \beta_{O2}^{(k)} \widehat{\Delta IP_{jt}} \times \text{Concentration}_{jt-1} + \beta_I^{(k)} Z_{jt}^{\text{Input}}  + \gamma_2^{(k)} \text{LaborShare}_{jt_0} \\
+&\quad + \gamma_1^{(k)} \text{LaborShare}_{jt_0} \times \text{Post2016}_t + X'_{jt-1} \gamma^{(k)} + \tau_t^{(k)} + \delta_j^{(k)} + g^{(k)}(n_{jt}) + \nu_{jt}^{(k)}
+\end{aligned}
+\end{equation}
+
+This specification tests whether import competition exerts stronger disciplinary effects in sectors where domestic market power is initially more concentrated. The same logic is extended to additional mechanism tests using interactions with baseline sectoral characteristics, such as initial markup levels, size, or revenue growth.
+
+\section{Results}
+
+\subsection{First stage and identification diagnostics}
+
+I begin by assessing the relevance of the output-side instrument and the empirical distinctness of the output and input channels. Table \ref{tab:firststage} reports the first-stage estimates from regressing sectoral Chinese import penetration on the output-competition instrument \(Z^{\text{Output}}_{jt}\), while controlling for the input-supply shifter \(Z^{\text{Input}}_{jt}\), sector fixed effects, and year fixed effects. I report both a parsimonious specification and the baseline specification that additionally includes lagged firm-level controls. Because the treatment varies at the sector-year level, the firm-year observation count overstates the amount of independent variation; the effective design contains 609 sector-year cells.
+
+The first-stage results show that the instrument is strongly predictive of realized import-penetration changes. In both specifications, the coefficient on \(Z^{\text{Output}}_{jt}\) is positive and precisely estimated, with an estimate of 0.892 and a standard error of 0.179. The corresponding excluded-instrument first-stage \(F\)-statistic is about 24.8 in both columns, well above conventional weak-instrument thresholds. This indicates that the variation in Chinese export growth to other high-income destinations provides a strong source of identifying variation for import competition in Turkish manufacturing sectors.
+
+By contrast, the coefficient on the input-supply control \(Z^{\text{Input}}_{jt}\) is small and statistically insignificant in the first stage. This pattern is useful for interpretation. It suggests that, conditional on sector and year fixed effects, the main predictive power for sectoral import penetration comes from the output-side shift-share instrument rather than from the upstream input channel. In other words, the first stage is not being driven by input-cost comovement.
+
+A related concern is whether the two shifters are too closely aligned to be interpreted as distinct channels. The table therefore also reports the small correlation between \(Z^{\text{Output}}_{jt}\) and \(Z^{\text{Input}}_{jt}\). This positive but modest correlation indicates that the two measures are related, as one would expect given their common connection to China-driven trade shocks, but far from collinear. In the robustness, orthogonalizing the output shock with respect to the input-supply channel does not change any coefficients of interest. This supports the strategy of using \(Z^{\text{Output}}_{jt}\) as the excluded instrument while including \(Z^{\text{Input}}_{jt}\) as a control for the input-supply channel.
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{First Stage and Identification Diagnostics}
+\label{tab:firststage}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{fittabular}{L{0.34\textwidth}*{2}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{Parsimonious}&\multicolumn{1}{c}{Baseline}\\
+                    &        b/se         &        b/se         \\
+\hline
+Output-competition IV&       0.892\sym{***}&       0.892\sym{***}\\
+                    &     (0.179)         &     (0.179)         \\
+[1em]
+Input-supply control&       0.164         &       0.163         \\
+                    &     (0.492)         &     (0.491)         \\
+\hline
+Lagged firm controls&          No         &         Yes         \\
+Sector FE           &         Yes         &         Yes         \\
+Year FE             &         Yes         &         Yes         \\
+Excluded-instrument F-stat&       24.82         &       24.81         \\
+Corr.$(Z^{\text{Output}}_{jt}, Z^{\text{Input}}_{jt})$&       0.136         &       0.136         \\
+Number of sectors   &          95         &          95         \\
+Effective sector-year cells &      609         &        609         \\
+Observations        &       30551         &       30551         \\
+\hline\hline
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses.}\\
+\multicolumn{3}{l}{\footnotesize Observations are repeated firm-year rows; identification comes from the 609 sector-year treatment cells.}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}\\
+\end{fittabular}
+\end{table}
+
+Finally, the near-identical first-stage estimates across the parsimonious and baseline specifications indicate that the predictive content of the instrument is not sensitive to the inclusion of lagged firm characteristics. This stability is reassuring for the subsequent IV analysis. At the same time, the combination of a moderate number of sector-year cells and concentrated Rotemberg weights implies that the estimates should be read as local to influential exposed sectors. Overall, the first-stage evidence supports the relevance of the output-side instrument and clarifies the scope of the identifying variation used in the baseline specifications.
+
+That qualification matters quantitatively. In the Rotemberg exclusion exercise reported later, dropping the top five influential sectors reduces the Kleibergen--Paap statistic from 24.8 to 3.2, and larger exclusions make the second-stage coefficient unstable in sign and magnitude. The baseline estimate is therefore best read as a disciplined local result rather than as a uniformly stable average effect for all Turkish manufacturing sectors.
+
+\subsection{Baseline IV estimates and selection correction}
+    
+Table~\ref{tab:firm_level_responses} reports the baseline IV evidence on observed exit and markup adjustments. The estimates point to a pro-competitive effect of Chinese import penetration at the firm level. In columns (2)--(4), the coefficient on instrumented import penetration is negative throughout and remains statistically significant across specifications, indicating that greater exposure to Chinese import competition reduces firms' markup adjustments. This pattern is consistent with models in which stronger competitive pressure compresses residual demand and limits firms' pricing power.
+
+    \begin{table}[htbp]\centering
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{Firm-Level Responses to Import Competition: Observed Exit and Markup Adjustments}
+    \label{tab:firm_level_responses}
+    \small
+    \setlength{\tabcolsep}{4pt}
+    \begin{threeparttable}
+    \begin{fittabular}{L{0.34\textwidth}cccc}
+    \toprule
+    & \multicolumn{4}{c}{\textbf{Dependent Variable}} \\
+    \cmidrule(lr){2-5}
+    \textbf{Variable} & \theadstack{\textbf{Observed Exit}\\\textbf{Probability}} & \theadstack{\textbf{Markup}\\\textbf{Adjustments}} & \theadstack{\textbf{Markup}\\\textbf{Adjustments}} & \theadstack{\textbf{Markup}\\\textbf{Adjustments}} \\
+    \midrule
+    $\text{Import penetration} (\widehat{\Delta IP}_{jt})$ & 0.914\sym{**} & -0.422\sym{*} & -0.462\sym{**} & -0.454\sym{*} \\
+    & (0.459) & (0.229) & (0.226) & (0.253) \\
+    \addlinespace[0.25em]
+    $\text{Input supply shocks} (Z_{jt}^{\text{Input}})$ & 0.878 & 0.432 & 0.517 & 0.477 \\
+    & (1.078) & (0.490) & (0.470) & (0.486) \\
+    \midrule
+    \multicolumn{5}{l}{\textbf{Specification}} \\
+    Lagged Controls & No & No & Yes & Yes \\
+    Polynomial Correction & No & No & No & Yes \\
+    \midrule
+    Fixed Effects & \multicolumn{4}{c}{Sector and Year FE} \\
+    F-stats & 33.969 & 24.813 & 24.777 & 25.105 \\
+    Observations & 30,591 & 31,403 & 30,551 & 30,445 \\
+    $R^2$ & 0.015 & -0.003 & -0.002 & 0.078 \\
+    \bottomrule
+    \end{fittabular}
+    \begin{tablenotes}[flushleft]
+    \footnotesize
+    \item Standard errors clustered at ISIC4 sector level in parentheses.
+    \item Column (1) reports marginal effects from the observed-exit specification. Columns (2)--(4) estimate markup adjustments with increasing controls.
+    \item Chinese import penetration is instrumented with shift-share measure $Z_{jt}^{\text{Output}}$ based on Chinese exports to high-income countries.
+    \item Observed exit denotes disappearance from ORBIS/AMADEUS between $t-1$ and $t$ and should not be interpreted as validated legal firm death.
+    \item \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).
+    \end{tablenotes}
+    \end{threeparttable}
+    \end{table}
+
+At the same time, column (1) shows that import competition also affects observed survival in the panel. The positive and significant coefficient in the observed-exit regression indicates that sectors more exposed to Chinese import penetration experience more sample disappearance. This matters for identification because the observed sample of markup changes is conditional on survival. If import competition disproportionately removes firms with systematically different markup dynamics, conventional IV estimates on surviving firms may conflate within-firm pricing responses with composition effects arising from endogenous selection.
+
+To address this issue, column (4) implements the selection-correction procedure based on a control function in the spirit of Backus (2020), using lagged EBIT margin as a proxy for the latent firm state governing observed survival and subsequent adjustment decisions. The corrected estimate remains negative and significant, implying that the decline in markup adjustments is not solely an artifact of sample selection. Hence, even after accounting for endogenous survival in the observed panel, the evidence supports a genuine within-firm disciplining effect of import competition on markups.
+
+Comparing columns (3) and (4) further suggests that selection bias is economically relevant but not dominant. Once lagged firm controls are included, the coefficient on import penetration is $-0.462$; after adding the polynomial control-function correction, it becomes $-0.454$. The stability of the estimate indicates that conditioning on observed survival does not overturn the baseline conclusion, although it remains important to account for selection explicitly when panel disappearance responds to the same trade shock. Put differently, Chinese import competition appears to reduce markup growth among surviving firms, while also reshaping which firms remain observed in the sample.
+
+Finally, the coefficient on the input-supply shock is statistically insignificant in all markup specifications. This suggests that, in this setting, the output-competition channel is the main force behind firm-level pricing adjustment, whereas upstream input-supply effects do not generate a robust independent effect on markup changes. Substantively, the results imply that Chinese import exposure primarily disciplines domestic firms through direct competitive pressure in output markets rather than through changes in access to imported inputs.
+
+\subsection{From firm to sector}
+
+Table \ref{tab:decomposition_results_alt} connects the firm-level evidence to sector-level markup dynamics by decomposing changes in inverse sector markups into four components: within-firm adjustment, reallocation across continuing firms, observed entry, and observed exit. The sectoral markup is constructed as the inverse of the market-share-weighted average of firm-level inverse markups, so that changes in sectoral market power reflect both individual pricing responses and changes in the composition of firms and market shares. This aggregation follows the harmonic-mean logic emphasized in the recent markup literature.
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Decomposition of Sector-Level Markup Adjustments: Comparison Specification}
+\label{tab:decomposition_results_alt}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{fittabular}{L{0.29\textwidth}ccccc}
+\hline\hline
+& \multicolumn{5}{c}{\textbf{Dependent Variable}} \\
+\hline
+\textbf{Variable} & \textbf{Total} & \textbf{Within} & \textbf{Reallocation} & \textbf{Entry} & \textbf{- Exit} \\
+\hline
+\multicolumn{6}{l}{\textbf{Panel A: Regression coefficients}} \\
+\theadstack{$\text{Import Penetration Change}$\\$(\widehat{\Delta IP}_{jt})$}
+& 0.225 & 0.088 & -0.191 & -0.371 & 0.663 \\
+& (0.441) & (0.170) & (0.728) & (0.430) & (0.571) \\
+[1em]
+\theadstack{$\text{Input Supply Shocks}$\\$(Z_{jt}^{\text{Input}})$}
+& 3.356\sym{**} & -0.764 & 8.055\sym{**} & -1.375 & -3.331 \\
+& (1.661) & (0.465) & (3.399) & (2.556) & (2.543) \\
+\hline
+Observations & 609 & 610 & 610 & 610 & 610 \\
+\hline
+\multicolumn{6}{l}{\textbf{Panel B: Shares of gross absolute decomposition mass (size-weighted, \%)}} \\
+Within-firm adjustment & \multicolumn{5}{c}{48.44} \\
+Reallocation            & \multicolumn{5}{c}{49.30} \\
+Entry                   & \multicolumn{5}{c}{1.16}  \\
+Exit                    & \multicolumn{5}{c}{1.09}  \\
+\hline
+Total                   & \multicolumn{5}{c}{100.00} \\
+\hline\hline
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses.}\\
+\multicolumn{6}{l}{\footnotesize Panel A reports decomposition regressions under the comparison specification.}\\
+\multicolumn{6}{l}{\footnotesize Panel B reports shares of \emph{gross absolute} decomposition mass attributable to each component.}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}\\
+\end{fittabular}
+\end{table}
+
+Panel A shows that, under the sector-level IV specification, the estimated effect of output import competition on the total change in sector-level markups is small and statistically insignificant. The same is true for each individual component. In particular, the coefficient on within-firm adjustment is close to zero, while the reallocation and observed-entry margins are negative and the observed-exit margin is positive, but all are imprecisely estimated. Taken together, these estimates suggest that, once firm-level responses are aggregated to the sector level, the pro-competitive effect of Chinese import penetration does not translate into a precisely estimated change in sectoral markups. By contrast, the input-supply shock is associated with a significant increase in inverse sector markups, which is equivalent to lower sectoral markup growth. This effect is driven almost entirely by the reallocation component: sectors more exposed to upstream input shocks experience a statistically significant shift in market shares toward firms with higher inverse markups, or lower markups. The within-firm, observed-entry, and observed-exit terms are all statistically insignificant.
+
+Panel B shows that, in gross absolute terms, sectoral markup adjustment is overwhelmingly accounted for by the within-firm and reallocation margins. The within component represents 48.44\% of total absolute adjustment, while reallocation contributes 49.30\%. Observed entry and observed exit are quantitatively negligible, each accounting for about 1\% of the total. Thus, the accounting decomposition makes clear that sector-level markup movements are shaped almost entirely by incumbent firms, through a combination of their own markup changes and the redistribution of market shares across survivors.
+
+Overall, the table highlights an important difference between firm-level and sector-level responses. At the firm level, import competition disciplines markups among surviving firms. At the sector level, however, this effect is partly offset by countervailing reallocation forces, so the total effect becomes weak. A consistent pattern across both levels is that observed entry and exit do not play a major role, and most markup variation comes from continuing firms.
+
+
+\subsection{Distributional heterogeneity}
+
+Average effects can conceal substantial heterogeneity in firms' responses to import competition. To examine how the trade shock affects different parts of the markup-adjustment distribution, I estimate grouped IV quantile regressions at the sector-year level. The results reveal a clear asymmetric pattern. Across the central part of the distribution, from the 10th to roughly the 70th percentile, the estimated effects of Chinese import competition on markup adjustments are close to zero. By contrast, the coefficients become increasingly negative from the upper quartile onward, reaching about $-2.0$ at the 90th percentile. Figure \ref{fig:ivq_combined} shows that the pro-competitive effect is therefore concentrated in the upper tail of the distribution rather than spread uniformly across firms.
+
+\begin{figure}[htbp]
+\centering
+\begin{minipage}{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{IVQ 95 CI.jpg}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{IVQ 95 CI CR4.jpg}
+\end{minipage}
+\caption{Point estimates and 95\% confidence intervals across deciles of the markup-adjustment distribution. The left panel reports the baseline grouped IV quantile estimates for $\beta_O^{(k)}$. The right panel reports the interaction coefficients by pre-period domestic concentration (CR4), showing that the negative upper-tail effects are stronger in more concentrated sectors.}
+\label{fig:ivq_combined}
+\end{figure}
+
+This pattern suggests that import competition primarily constrains large positive markup adjustments among firms located at the top of the distribution. In other words, the main within-firm discipline effect does not operate through a broad compression of all firms' pricing behavior, but through a disproportionate reduction in the ability of upper-tail firms to raise markups. Firms in the center of the distribution, which are already making small or moderate markup adjustments, appear much less responsive to the trade shock. This finding is consistent with models in which competition bites most strongly for firms enjoying greater ex ante pricing power.
+
+I next examine whether this upper-tail compression depends on domestic market structure. To do so, I interact import penetration with a measure of pre-period sectoral concentration, proxied by the domestic CR4 ratio. The estimates, reported in Figure \ref{fig:ivq_combined}, show that the negative upper-tail effects are stronger in more concentrated sectors. The interaction coefficients remain close to zero in the lower and central quantiles, but become increasingly negative at high quantiles when concentration is high. This indicates that the compression of the markup-adjustment distribution is amplified in markets where a small number of firms account for a large share of domestic sales.
+
+Taken together, these results support a mechanism in which import competition disciplines the firms with the greatest scope to adjust markups upward, especially in concentrated domestic industries. The evidence is therefore more consistent with targeted compression at the top of the distribution than with a uniform decline in markups across all firms. This also helps reconcile the firm-level and sector-level results: even when average sectoral effects appear modest, import competition may still exert economically meaningful pro-competitive pressure by restricting the pricing behavior of high-markup firms.
+
+\section{Robustness checks}
+
+This section asks whether the baseline result survives the main empirical vulnerabilities in the thesis. Section 6.1 revisits identification, including the concentration of Rotemberg weights and the sensitivity of the first stage to influential sectors. Section 6.2 addresses markup measurement and trimming, Section 6.3 focuses on panel composition, and Sections 6.4--6.5 check that the output-channel interpretation and the upper-tail distributional pattern are not artifacts of the baseline specification.
+
+\subsection{Identification robustness}
+
+Table \ref{tab:rob12_fe} reports robustness checks of the main IV estimate using alternative functional forms and progressively reduced control sets. In the baseline specification (column 1), import penetration has a negative and statistically significant effect on markup growth (coefficient: -0.462), and this result remains significant under wild-cluster bootstrap inference (p = 0.026). Adding a quadratic term for import penetration (column 2) does not provide evidence of meaningful nonlinearity, as the squared term is imprecisely estimated. Across columns 3 to 9, the coefficient on import penetration remains consistently negative and broadly similar in magnitude as controls are removed step-by-step, indicating that the main result is not driven by a specific control choice. Overall, the table supports the robustness of the core finding that greater import penetration is associated with lower markup adjustments.
+
+Rotemberg weights are concentrated, which is consistent with the granular structure of Turkish manufacturing and the oligopolistic mechanism emphasized in the model. Excluding the most influential sectors sharply weakens the first stage: the Kleibergen--Paap statistic falls from 24.8 in the baseline to 3.2 when the top five sectors are removed, and the second-stage coefficient becomes unstable across broader exclusions (Table \ref{tab:rob_rotemberg_exclusions}). This pattern does not nullify the baseline result, but it does show that the identifying variation is economically concentrated rather than broadly diffuse. I therefore treat the estimate as credible but local to influential exposed sectors, not as evidence that the same magnitude necessarily applies uniformly across all manufacturing sectors.
+
+\subsection{Alternative markup measures}
+I implement the \textcite{kirovMeasuringMarkupsRevenue2026} methodology (Appendix A.2) as a robustness check to the baseline measurement. Table \ref{tab:kirov_iv} reports these estimates. Because this approach requires estimating markup levels using lagged markup shifters and a Markov process for revenue productivity, the usable firm-year sample falls substantially relative to the baseline. When markup adjustments are then constructed from these estimated levels, the sample contracts further in a non-random way (about 25\% sample loss). The resulting estimates are therefore illustrative rather than decisive. Even so, the point estimates remain negative and of similar magnitude to the baseline, which suggests that the main findings are not purely an artifact of the baseline markup measure.
+
+Re-estimating the baseline under tighter and looser trimming of extreme markup changes does not alter the sign or broad magnitude of the main coefficient (Table \ref{tab:rob_trimming}), which suggests that the results are not driven by outliers in the markup-adjustment distribution. The distributional results are similarly stable under alternative trimming choices: the negative effect remains concentrated in the upper tail.
+
+\subsection{Selection and panel composition}
+Table \ref{tab:rob_longlived} examines increasingly selective subsamples of longer-lived firms. The negative markup coefficient attenuates and becomes less precise when the sample is restricted to firms with longer observed panel histories. This is the expected direction: conditioning on long-lived firms removes part of the compositional margin through which import competition changes the observed sample. For that reason, the baseline specification based on the full unbalanced panel remains the preferred estimate of within-incumbent discipline in the observed data.
+
+\subsection{Residualizing the input supply channel}
+As an additional check, I residualize the output-competition instrument with respect to the input-supply shock and re-estimate the main specifications using only the orthogonalized component of the output shock. This addresses the concern that the main IV could be picking up variation shared with the input channel rather than purely output-market competitive pressure. Appendix Tables \ref{tab:rob_resid_fs}--\ref{tab:rob_resid_aux} report the first-stage comparison, the baseline markup specification, the control-set sensitivity exercise, and the auxiliary-outcome regressions.
+
+The results are strikingly stable. In the baseline markup equation, the coefficient on import penetration is unchanged when the residualized instrument replaces the original output IV: the point estimate remains $-0.462$ with the same standard error and the same first-stage strength (Appendix Table \ref{tab:rob_resid_main}). The same stability appears in the auxiliary outcomes. Revenue growth and domestic-sales growth remain negative and statistically significant, while export growth remains negative but imprecisely estimated (Appendix Table \ref{tab:rob_resid_aux}). In other words, purging the output instrument of its linear overlap with $Z^{\text{Input}}$ does not alter the qualitative or quantitative conclusions.
+
+This robustness check strengthens the interpretation of the main estimates as evidence for an output-competition channel. The negative markup response is not an artifact of correlation between the two shift-share shocks; rather, it survives when identification comes only from the component of output competition orthogonal to the input-supply shock. Together with the mechanism exercises, this supports the view that Chinese import exposure primarily disciplined firms through product-market competition rather than through contamination from the input-cost channel.
+
+\subsection{Distributional design robustness}
+I report three additional distributional checks in Appendix Figure \ref{fig:rob41_decquin}--\ref{fig:rob43_thin}. First, comparing grouped IVQ estimates built on deciles versus quintiles yields very similar profiles: coefficients are close to zero through the middle of the distribution and turn more negative in the upper tail, indicating that the main pattern is not driven by bin choice (Figure \ref{fig:rob41_decquin}). Second, I re-rank observations by lagged markup level instead of markup change. The resulting coefficients remain weak in most bins and become most negative near the top ranks, confirming that upper-tail discipline is not specific to the baseline ranking metric (Figure \ref{fig:rob42_rank}). Third, I exclude thin sector-year cells and compare cutoffs for minimum cell size. The estimated quantile profile is nearly unchanged across these restrictions, with the strongest negative effects still concentrated at high quantiles (Figure \ref{fig:rob43_thin}).
+
+
+\section{Mechanisms}
+
+\subsection{Evidence of residual-demand effects}
+To indirectly test the residual-demand channel, I augment the baseline IV specification by interacting Chinese import penetration with lagged firm market-power proxies (lagged markup level). In reduced form, the estimated equation is
+\[
+\Delta \ln \mu_{ijt} = \beta_1 \Delta IP_{jt} + \beta_2 (\Delta IP_{jt} \times \mu_{ijt-1}) + \Gamma X_{ijt-1} + \alpha_i + \delta_{jt} + \varepsilon_{ijt},
+\]
+
+The estimates in Appendix Table \ref{tab:mech_lagged_interactions} show a negative baseline effect of import penetration on markup growth. The interaction with lagged markup is positive and economically significant, implying that the disciplining effect becomes less negative at higher initial markup levels. This is not a clean confirmation of a simple ``high-markup firms are hit most'' narrative. Even so, the implied marginal effects remain negative at the 25th, 50th, and 75th percentiles of lagged markup. I therefore treat this interaction exercise as supportive but partial evidence on residual-demand effects, and I place more weight on the grouped-IV quantile results for the claim that discipline is concentrated in the upper tail of markup adjustments.
+
+Appendix grouped-IV quantile results complement these interaction regressions by showing that distributional compression is concentrated in the upper part of the markup-adjustment distribution.
+
+
+\subsection{Marginal cost and input-supply effects}
+I test input-side mechanisms using sectoral Chinese imported-input dependence $H_j$ and two interaction terms: $Z_{input,jt} \times H_j$ and $\Delta IP_{jt} \times H_j$. The index $H_j = \sum_{k} w_{jk} \bar{s}_k^{\text{CHN}}$ is built from average 2000--2004 Chinese-Turkey input-output weights and China's average import share in upstream Turkish sectors over the same period, so higher values indicate stronger reliance on imported intermediates from China.
+
+Results indicate that the main markup-discipline effect of output competition remains negative and does not vary systematically with $H_j$ (insignificant $\Delta IP \times H$ interaction in markup regressions). By contrast, heterogeneity appears more clearly with the input-supply shock. Firms with stronger past dependence on Chinese inputs can maintain their market power better in the face of stronger competition in final goods. These firms can also maintain their revenue and domestic-sales growth somewhat better, although the estimates are less precise (Table \ref{tab:input_dep_heterogeneity}).
+
+\begin{table}[htbp]
+\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Imported-input dependence heterogeneity}
+\label{tab:input_dep_heterogeneity}
+\begin{threeparttable}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{fittabular}{L{0.31\textwidth}*{6}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+            &\multicolumn{1}{c}{\theadstack{Markup\\Changes}}&\multicolumn{1}{c}{\theadstack{Markup\\Changes}}&\multicolumn{1}{c}{\theadstack{Revenue\\Changes}}&\multicolumn{1}{c}{\theadstack{Revenue\\Changes}}&\multicolumn{1}{c}{\theadstack{Sales\\Changes}}&\multicolumn{1}{c}{\theadstack{Sales\\Changes}}\\
+\hline
+Output penetration         &      -0.454\sym{**} &      -1.216\sym{*}  &      -1.632\sym{***}&      -1.974         &      -1.629\sym{**} &      -3.227         \\
+                                   &     (0.190)         &     (0.681)         &     (0.535)         &     (2.056)         &     (0.631)         &     (3.209)         \\
+[0.3em]
+Input supply                 &      -2.041\sym{*}  &       0.285         &       0.996         &       2.651         &      -1.721         &       0.325         \\
+                                   &     (1.098)         &     (0.412)         &     (3.526)         &     (1.598)         &     (3.388)         &     (1.977)         \\
+[0.3em]
+Input supply &       125.8\sym{**} &                     &       87.06         &                     &       124.7         &                     \\
+  $\times$ China dependence                                 &     (53.42)         &                     &     (205.2)         &                     &     (159.2)         &                     \\
+[0.3em]
+Output penetration &                     &       16.84         &                     &       7.252         &                     &       35.52         \\
+  $\times$ China dependence                                 &                     &     (11.23)         &                     &     (33.32)         &                     &     (56.91)         \\
+[0.3em]
+\hline
+Observations                       &       30551         &       30551         &       24345         &       24345         &       30551         &       30551         \\
+F-stat                       &       27.71         &       2.743         &       32.03         &       2.845         &       27.71         &       2.743         \\
+\hline\hline
+\end{fittabular}
+\begin{tablenotes}
+\small
+\item Notes: Standard errors in parentheses. \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\subsection{Do large incumbents gain share when import competition rises?}
+To evaluate whether trade shocks reallocate demand toward dominant firms, I estimate market-share growth regressions that interact shocks with lagged firm size, large-firm status (above the median lagged size within year), and CR4 membership.
+    \[
+    \Delta \ln (share_{ijt}) = \beta \Delta IP_{jt-1} \times H_{ijt-1} + \gamma X'_{ijt-1} + \alpha_i + \delta_{jt} + \varepsilon_{ijt}
+    \]
+where $H_{ijt-1}$ is alternatively lagged size, top-firm status, or CR4 membership. I run the same specification with the input-side shock interactions to compare output and input channels.
+
+The coefficients in Table \ref{tab:mech_share_reallocation} on output-shock interactions are not statistically different from zero, which does not support reallocation toward large incumbents under stronger import competition. Input-side interactions are, if anything, negative for large-firm and concentration proxies, indicating that any reallocation linked to input channels is not concentrated among dominant firms. This evidence is consistent with the decomposition: output competition mainly disciplines markups within firms, while reallocation effects are limited and not driven by the largest incumbents. 
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Market-share reallocation toward large incumbents: output competition and input supply}
+\label{tab:mech_share_reallocation}
+\normalsize
+\setlength{\tabcolsep}{3pt}
+\begin{fittabular}{L{0.36\textwidth}*{6}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+            &\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{market share}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{market share}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{market share}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{market share}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{market share}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{market share}$}}\\
+\hline
+Output shock      &      0.0732         &                     &                     &                     &                     &                     \\
+   $\times$ lagged firm size         &    (0.0853)         &                     &                     &                     &                     &                     \\
+[1em]
+Input shock   &                     &      -0.843\sym{*}  &                     &                     &                     &                     \\
+  $\times$ lagged firm size          &                     &     (0.451)         &                     &                     &                     &                     \\
+[1em]
+Output shock     &                     &                     &       0.803         &                     &                     &                     \\
+  $\times$ large-firm indicator          &                     &                     &     (0.868)         &                     &                     &                     \\
+[1em]
+Input shock  &                     &                     &                     &      -8.689\sym{**} &                     &                     \\
+  $\times$ large-firm indicator          &                     &                     &                     &     (3.788)         &                     &                     \\
+[1em]
+Output shock      &                     &                     &                     &                     &       1.787         &                     \\
+  $\times$ CR4 membership           &                     &                     &                     &                     &     (1.379)         &                     \\
+[1em]
+Input shock    &                     &                     &                     &                     &                     &      -12.43\sym{**} \\
+ $\times$ CR4 membership           &                     &                     &                     &                     &                     &     (6.086)         \\
+\hline
+Observations&       28159         &       35379         &       28159         &       35379         &       28159         &       35379         \\
+F-stat      &       33.40         &                     &       0.904         &                     &       3.238         &                     \\
+\hline\hline
+\multicolumn{7}{l}{\footnotesize Standard errors in parentheses. \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{fittabular}
+\end{table}
+
+\subsection{Auxiliary outcomes}
+As a complementary validation, I re-estimate the mechanism specifications using non-price outcomes (revenue growth, domestic-sales growth, and export growth). Appendix Table \ref{tab:aux_outcomes} reports these estimates. These regressions use the same shock structure and controls as the markup equation, so they are interpreted as supporting evidence on adjustment margins rather than as the core identification results.
+
+Auxiliary outcome regressions show that greater import competition significantly reduces firm revenue and domestic sales, while having no statistically significant effect on exports. This suggests that the main adjustment margin is the domestic market: foreign competition compresses firms' home-market sales rather than inducing a systematic export response.
+
+\section{Conclusion}
+
+This thesis studies how Chinese import competition reshapes market power in Turkish manufacturing by separating output-competition from input-supply effects and by distinguishing within-firm markup adjustment from compositional change. Using ORBIS/AMADEUS firm data, a shift-share instrument based on Chinese exports to other high-income markets, an input-supply shifter built from pre-period input-output linkages, and complementary evidence from selection correction, grouped IV quantiles, and sectoral decomposition, I find a clear pro-competitive effect at the firm level. Higher Chinese import penetration reduces markup growth among surviving firms, with stronger effects in the upper tail of the markup-adjustment distribution and in more concentrated sectors. The input-supply channel does not robustly raise within-firm markups, but it does contribute to reallocation toward lower-markup firms in sectors more exposed to Chinese inputs.
+
+The aggregate interpretation is narrower than the original framing of ``creative destruction.'' Import competition raises observed exit probabilities in the panel, yet the selection correction shows that the within-incumbent disciplining effect is not driven by survival bias. At the sector level, total markup effects are weak because within-firm discipline is partly offset by reallocation across continuing firms, while observed entry and exit contribute little in the decomposition. Since ORBIS disappearance is not validated firm death, it is safe to conclude that Chinese import competition disciplines markup growth among observed incumbents and reshuffles market shares among survivors.
+
+This thesis has three main limitations. First, the estimates are local to the sector-year cells carrying the identifying weight, so they should not be interpreted as a uniform effect across all Turkish manufacturing. Second, markup measurement remains sensitive to accounting data quality, production-function assumptions, and the choice of flexible input. Third, firm disappearance in ORBIS/AMADEUS should be read as observed sample turnover rather than validated economic exit, which limits what can be said about creative destruction. These limits do not weaken the main findings, but they define the scope of interpretation. Future research could extend the analysis in several directions. One promising avenue is to combine firm-level data with a richer model of entry and exit to separate true survival effects from reporting attrition. Another is to study longer-run adjustment and general-equilibrium consequences, including consumer prices, welfare, and reallocation across industries. A third is to test whether similar markup discipline appears in other emerging economies exposed to Chinese competition, which would help assess external validity and the broader applicability of the mechanism.
+\pagebreak
+
+\printbibliography
+
+\pagebreak
+
+\appendix
+
+\section{Theoretical Appendix}
+\label{app:theory_appendix}
+
+\input{theopendix_selected_ver21.tex}
+
+\subsection{From the static model to the first-difference specification}
+\label{app:bridge}
+
+This appendix makes explicit the bridge between the static oligopoly model and the first-difference IV specification used in the empirical sections. The derivations above show why inverse markups are the natural theoretical object. The remaining step is to interpret annual changes in estimated log markups as a local approximation to movements between adjacent equilibria.
+
+\subsubsection*{Local first-difference approximation}
+
+Let the equilibrium markup of firm \(i\) in sector \(j\) and year \(t\) be written as
+\[
+\mu_{ijt}
+=
+M_j\!\left(\Lambda^D_{jt},\, s_{ijt},\, mc_{ijt};\, \theta_j\right),
+\]
+where \(\Lambda^D_{jt}\) is the domestic expenditure share, \(s_{ijt}\) is the relevant domestic market-share state, \(mc_{ijt}\) is marginal cost, and \(\theta_j\) collects demand and technology parameters. The closed-form markup condition in Section~\ref{sec:theory_model} is written in inverse-markup form. Since \(\log \mu_{ijt}=-\log \mu^{-1}_{ijt}\),
+\[
+\Delta \log \mu_{ijt}
+=
+-\Delta \log \mu^{-1}_{ijt}
+\approx
+-\frac{\Delta \mu^{-1}_{ijt}}{\mu^{-1}_{ij,t-1}}
+=
+-\mu_{ij,t-1}\Delta \mu^{-1}_{ijt}.
+\]
+Thus, for small annual changes, the sign predictions for changes in inverse markups translate directly into sign predictions for changes in log markups, with the opposite sign.
+
+Define the local state vector
+\[
+z_{ijt}
+=
+\big(\log \Lambda^D_{jt},\, s_{ijt},\, \log mc_{ijt}\big).
+\]
+A first-order expansion of \(\log M_j\) around the lagged equilibrium \(z_{ij,t-1}\) gives
+\[
+\Delta \log \mu_{ijt}
+\approx
+\psi_{\Lambda,ij,t-1}\Delta \log \Lambda^D_{jt}
++
+\psi_{s,ij,t-1}\Delta s_{ijt}
++
+\psi_{c,ij,t-1}\Delta \log mc_{ijt}
++
+r_{ijt},
+\]
+where the \(\psi\)-terms are local derivatives and \(r_{ijt}\) collects higher-order terms. The empirical coefficient on a trade variable should therefore be read as a local reduced-form equilibrium response, not as a primitive structural parameter. It combines the direct residual-demand effect of the shock with any induced movement in market shares and marginal costs that remains after controls are included.
+
+\subsubsection*{Mapping to the estimating equation}
+
+The empirical design uses two observable trade-exposure measures to proxy for the theoretical state variables. Output-side Chinese import penetration proxies for changes in the domestic expenditure share:
+\[
+\Delta \log \Lambda^D_{jt}
+=
+\kappa_O \Delta IP_{jt}
++
+\nu^O_{jt},
+\qquad
+\kappa_O<0.
+\]
+The input-supply shifter proxies for upstream cost exposure:
+\[
+\Delta \log mc_{ijt}
+=
+\kappa_I Z_{jt}^{\text{Input}}
++
+\nu^I_{ijt}.
+\]
+Substituting these proxy mappings into the local expansion yields the baseline empirical analogue
+\[
+\Delta \log \hat\mu_{ijt}
+=
+\beta_O \Delta IP_{jt}
++
+\beta_I Z_{jt}^{\text{Input}}
++
+X'_{ijt-1}\gamma
++
+\delta_j
++
+\tau_t
++
+\varepsilon_{ijt}.
+\]
+Here \(\beta_O\) is the local response of markup growth to output-market import competition, conditional on the input channel, lagged firm controls, sector fixed effects, and year fixed effects. The input coefficient \(\beta_I\) captures the separate reduced-form association between upstream exposure and markup growth.
+
+Because \(\Delta IP_{jt}\) may respond to Turkish sectoral shocks, it is instrumented with the output-side shift-share variable
+\[
+Z_{jt}^{\text{Output}}
+=
+s_{j,\text{CHN}}^{2009} g_{jt},
+\]
+where \(s_{j,\text{CHN}}^{2009}\) is baseline Turkish exposure to Chinese imports and \(g_{jt}\) is Chinese export growth to other high-income markets in sector \(j\). The input control is constructed from the same output shocks using predetermined input-output links,
+\[
+Z_{jt}^{\text{Input}}
+=
+\sum_k w_{jk}^{2003}Z_{kt}^{\text{Output}}.
+\]
+This separates the excluded product-market competition shock from the observed upstream exposure channel. The resulting IV estimate is local to the sector-year cells that carry identifying weight in the shift-share design.
+
+\subsubsection*{Selection and aggregation}
+
+The first-difference outcome is available only when a firm reports the required accounting variables in adjacent years. The dynamic selection block of the model implies that survival can depend on latent profitability states that also affect markup adjustment. The corrected specification therefore adds a control function in lagged EBIT margin, \(a_{i,t-1}\):
+\[
+\Delta \log \hat\mu_{ijt}
+=
+\beta_O \widehat{\Delta IP}_{jt}
++
+\beta_I Z_{jt}^{\text{Input}}
++
+h(a_{i,t-1})
++
+X'_{ijt-1}\gamma
++
+\delta_j
++
+\tau_t
++
+\epsilon_{ijt}.
+\]
+In the main text, \(h(\cdot)\) is implemented as a third-order polynomial. Under the maintained control-function assumption, \(\beta_O\) is a within-incumbent response among observed survivors. It should not be interpreted as the total effect of import competition on all firms, including those that disappear from the panel.
+
+The same logic explains why the sectoral analysis is written in inverse markups. Under the harmonic-mean sectoral markup, inverse markups aggregate linearly, so sectoral changes can be decomposed into within-firm adjustment, reallocation across continuing firms, observed entry, and observed exit. This decomposition is an accounting bridge between the incumbent-level IV estimates and sector-level markup movements; it does not impose that the average firm response and the aggregate response have the same sign.
+
+\subsubsection*{Assumptions and scope}
+
+The bridge rests on four maintained conditions. First, annual changes must be small enough for the Taylor remainder to be absorbed into the residual. Second, sectoral demand and technology parameters must be stable enough that the local derivatives do not drift sharply within the estimation window. Third, the observable import-penetration and input-supply measures must be informative proxies for the theoretical domestic-share and cost states. Fourth, conditional on fixed effects and controls, Chinese export growth to other high-income markets must be orthogonal to residual Turkish sector-year shocks affecting markups.
+
+These conditions define the scope of the empirical interpretation. The design identifies relative exposure effects across Turkish manufacturing sectors, not the common aggregate effect of China's rise on markups, prices, or welfare. The coefficient is also weighted toward influential sector-year cells, as emphasized by the Rotemberg-weight diagnostics in Section~\ref{sec:empirical_strategy_iv}. Within that scope, the model justifies interpreting a negative coefficient on instrumented import penetration as evidence of markup discipline among observed incumbents.
+
+\section{Empirical Appendix}
+
+\subsection{Markup Estimation}
+
+\textbf{Baseline estimator}: I estimate firm markups using the production approach in \textcite{deloeckerMarkupsFirmLevelExport2012}, with the implementation guided by \textcite{deridderHitchhikersGuideMarkup2026}. The baseline uses COGS as the flexible input because it is the most consistently observed short-run variable input in ORBIS/AMADEUS. For firm \(i\) in year \(t\), let
+\begin{align*}
+r_{it} &= \log R_{it}, \\
+x_{it} &= \log X_{it}, \\
+k_{it} &= \log K_{it},
+\end{align*}
+where \(R_{it}\) is revenue, \(X_{it}\) is COGS, and \(K_{it}\) is capital. The estimation sample requires \(R_{it}>0\), \(X_{it}>0\), and \(K_{it}>0\).
+
+\textbf{Markup recovery}: For a flexible input, the first-order condition implies
+\[
+\mu_{it}
+=
+\theta_{it}^{\text{COGS}} \frac{R_{it}}{X_{it}},
+\]
+where \(\theta_{it}^{\text{COGS}}\) is the output elasticity of COGS. In logs, the empirical markup is therefore
+\[
+\log \hat{\mu}_{it}
+=
+\log \hat{\theta}_{it}^{\text{COGS}}
++ \log R_{it}
+- \log X_{it}.
+\]
+The main empirical outcome is \(\Delta \log \hat{\mu}_{it}\) rather than the level \(\log \hat{\mu}_{it}\). This choice is deliberate: markup levels inferred from accounting data are more exposed to persistent reporting differences, production-function misspecification, and denominator error, whereas within-firm changes are better aligned with the time variation in the import-competition shock.
+
+\textbf{Cobb--Douglas elasticity}: In the baseline implementation, I estimate the following revenue production function separately within each ISIC4 sector:
+\[
+r_{it}
+=
+\beta_x x_{it}
++ \beta_k k_{it}
++ \lambda_t
++ \varepsilon_{it}.
+\]
+The Cobb--Douglas specification imposes a constant COGS elasticity within sector, so
+\[
+\hat{\theta}_{it}^{\text{COGS}} = \hat{\beta}_x.
+\]
+
+\textbf{Translog sensitivity}: As a sensitivity check, I allow the flexible-input elasticity to vary with input levels by estimating a two-input translog specification:
+\[
+r_{it}
+=
+\beta_x x_{it}
++ \beta_k k_{it}
++ \beta_{xx} x_{it}^2
++ \beta_{kk} k_{it}^2
++ \beta_{xk}x_{it}k_{it}
++ \lambda_t
++ \varepsilon_{it}.
+\]
+The implied firm-year COGS elasticity is then
+\[
+\hat{\theta}_{it}^{\text{COGS}}
+=
+\frac{\partial r_{it}}{\partial x_{it}}
+=
+\hat{\beta}_x
++ 2\hat{\beta}_{xx}x_{it}
++ \hat{\beta}_{xk}k_{it}.
+\]
+
+\subsection{Implementing Kirov et al. (2026) methodology as robustness check}
+
+KMT is designed to treat omitted-price bias and allow markup heterogeneity across firms and over time. KMT methodology consists of two steps: first, recover a revenue elasticity, which is contaminated by the markup, from the flexible-input share equation; second, use a Markov process for revenue productivity to back out the true physical output elasticity and thus the markup level. The KMT approach is more robust to misspecification of the production function and allows for more flexible markup dynamics, but it also relies on stronger assumptions about the evolution of productivity and the structure of demand.
+
+\textbf{Revenue production function}: In the implemented robustness, I use a Cobb-Douglas baseline:
+\[r_{it} = \beta_x x_{it} + \beta_k k_{it} + \nu_{it} + \varepsilon_{it}\]
+where $\nu_{it}$ is the revenue productivity shock that follows a first-order Markov process: $\nu_{it} = \rho \nu_{it-1} + \eta_{it}$, and $\varepsilon_{it}$ is an i.i.d. shock. The key difference from the standard production function estimation is that the dependent variable is revenue rather than physical output, which means that the estimated $\beta_x$ captures both the physical output elasticity with respect to the flexible input and the markup. 
+
+\textbf{Revenue productivity Markov process}: To identify the physical output elasticity, KMT exploits the first-order Markov structure of revenue productivity as follows:
+\[\nu_{it} = \rho g(\nu_{it-1}) + \eta_{it}\]
+where $g(\cdot)$ is a non-parametric function that captures the potentially non-linear evolution of revenue productivity. I approximate $g(\cdot)$ using a third-order polynomial in lagged revenue productivity.
+
+\textbf{Markup control function}: Let markups be a function of inputs, time and firm fixed effects, and a vector of both firm- and sector-level time-varying parameters $\mathbb{D}_{i(j)t-1}$ that shift markups but are not included in the production function estimation. These parameters include lagged share of sales, lagged exporter status, and lagged HHI at the ISIC4 level, which are all potential confounders of the markup estimation. 
+
+\textbf{Share equation}: I then regress the log flexible-input cost share in revenue ($s^x_{it} \equiv cx_{it} - r_{it}$) on log inputs and markup shifters:
+\[s^x_{it} = \ln \beta_x - \mu_{it} + b - \varepsilon_{it}\]
+where $\ln(\beta_x)$ is the technological component, which captures the effect of the flexible input on revenue. $\mu_{it}$ is the markup component, which captures the effect of markups on the cost share. Higher markups lower the cost share, so it enters with a negative sign. $b-\varepsilon_{it}$ is the error term, which states that even after firms choose inputs, realized cost shares may differ from the predicted cost shares due to measurement error or other unobserved factors.
+
+In my analysis, the share equation is estimated as follows:
+\[
+\begin{aligned}
+\ln(\text{COGS}_{it}) - \ln(R_{it})
+&= \ln \beta_{\text{COGS}}
+- \big(\phi_0 + \phi_x x_{it} + \phi_k k_{it}
++ \phi_1 \text{share\_sales}_{it-1} \\
+&\quad
++ \phi_2 \text{exporter\_status}_{it-1}
++ \phi_3 \text{HHI}_{jt-1}
++ \tau_t + \delta_j + \lambda_i \big)
++ b - \varepsilon_{it}.
+\end{aligned}
+\]
+
+\textbf{Final markup estimator}: After recovering $\hat{\theta}^{\text{COGS}} = \hat{\beta}_{\text{COGS}}$, I compute: 
+\[
+\hat{\mu}_{it}^{\mathrm{KMT}}
+=
+\frac{\hat{\theta}^{\text{COGS}}}{\text{COGS}_{it}/R_{it}}.
+\]
+I then define the KMT markup adjustment as \(\Delta \log \hat{\mu}_{it}^{\mathrm{KMT}} = \log \hat{\mu}_{it}^{\mathrm{KMT}} - \log \hat{\mu}_{i,t-1}^{\mathrm{KMT}}\), which is the dependent variable in the robustness regression.
+
+\begin{table}[htbp]
+\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Robustness using Kirov et al. (2026) markup estimates}
+\label{tab:kirov_iv}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{fittabular}{L{0.38\textwidth}*{2}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}\\
+                    &\multicolumn{1}{c}{Dep. var.: $\Delta \ln \mu^{\mathrm{KMT}}$}&\multicolumn{1}{c}{Dep. var.: $\ln \mu^{\mathrm{KMT}}$}\\
+\midrule
+Import penetration change ($\Delta IP$) &      -0.446         &      -0.143         \\
+                    &     (0.518)         &     (0.397)         \\
+\addlinespace
+Input-supply control ($Z^{\text{Input}}$) &       1.028         &       0.937         \\
+                    &     (0.955)         &     (0.684)         \\
+\addlinespace
+Mean pre-period labor share &       0.101         &      -0.146         \\
+                    &     (0.089)         &     (0.121)         \\
+\addlinespace
+Post-2016 indicator &       0.012         &       0.032         \\
+                    &     (0.018)         &     (0.024)         \\
+\addlinespace
+Post-2016 $\times$ mean labor share &      -0.007         &      -0.076\sym{*}  \\
+                    &     (0.033)         &     (0.044)         \\
+\midrule
+Observations        &       23039         &       29511         \\
+$\alpha_M$          &       0.940         &       0.940         \\
+$\alpha_K$          &       0.060         &       0.060         \\
+$b$                 &       0.024         &       0.024         \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses.}\\
+\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}\\
+\end{fittabular}
+\end{table}
+
+
+\subsection{Data Details}
+
+\paragraph{ORBIS/AMADEUS firm panel.} The core microdata come from Bureau van Dijk's ORBIS/AMADEUS company-accounting database. The project archive uses two raw Turkish extracts: a financial-accounting file and a BvD industry-classification file. The financial file contains harmonized balance-sheet, income-statement, and ratio variables, including operating revenue, costs of goods sold, tangible and intangible fixed assets, total assets, export revenue, debt, current assets and liabilities, working capital, interest expenses, cash holdings, EBIT margins, gross margins, and liquidity ratios. The classification file provides BvD firm identifiers and NACE Rev. 2 sector codes. I merge the two files by the BvD identifier and then retain the Turkish manufacturing panel after sector and deflator matches.
+
+The cleaning procedure is designed to turn the raw accounting extract into a firm-year panel rather than a collection of filings. I date each observation by the fiscal closing date and keep one record per BvD firm-year. When more than one filing is available in the same year, the code gives priority to unconsolidated accounts before consolidated accounts, following the order U1, U2, C1, and C2. This matters because duplicate firm-years are often generated by consolidated and unconsolidated filings for the same legal entity. If the primary NACE code is unavailable, I use the secondary NACE code to reduce sector-code attrition. I then map firms from NACE Rev. 2 to 4-digit ISIC Rev. 4 sectors using the NACE--ISIC concordance used throughout the construction scripts.
+
+Nominal ORBIS/AMADEUS accounting values are combined with TURKSTAT producer price indices before the main variables are constructed. The deflator is matched first at the 3-digit NACE level and, where needed, at the 2-digit NACE level. Observations without a usable manufacturing sector or without a matched PPI are dropped. The resulting raw Turkish manufacturing panel used in the thesis covers 15,957 firms and 78,921 firm-year observations from 2009 to 2023. The panel is unbalanced: firms can enter the observed sample, disappear, or report intermittently. I do not impute missing accounting years. For this reason, the thesis interprets disappearance from ORBIS/AMADEUS as observed sample turnover rather than validated legal closure or economic exit.
+
+The firm-level outcome construction follows the same panel logic. Revenue, costs of goods sold, tangible fixed assets, intangible fixed assets, and domestic sales are deflated by the matched PPI. Domestic sales are calculated as operating revenue minus export revenue when export revenue is available. Sector-year domestic market shares are then computed within 4-digit ISIC sectors, and these shares are used to build concentration measures such as CR10, CR20, the domestic HHI, and the firm-count variables used in the heterogeneity and decomposition exercises. Firm age is measured as years since the first observed year in the ORBIS/AMADEUS panel, so it is a panel-age measure rather than a legal incorporation-age measure. Other controls and mechanisms are built from lagged accounting ratios, including firm size, leverage, liquidity, current ratio, working-capital intensity, interest burden, and cash buffers.
+
+The markup measure is revenue-based. The baseline construction uses deflated operating revenue as output revenue, costs of goods sold as the flexible input, and tangible fixed assets as the state input. In the construction scripts, a translog revenue production function is estimated using log revenue, log COGS, log tangible fixed assets, their squares and interaction, and sector and year controls. The implied output elasticity of the flexible input is then combined with the COGS revenue share to obtain firm-year markups. The main dependent variable is the annual change in log markup, so the estimation sample is smaller than the raw firm panel: a firm-year must have positive revenue, COGS, and capital, a valid markup, consecutive observations for first differences, and the lagged controls required by the specification. After these restrictions and the analysis-stage trimming of extreme observations, the main firm-level specifications use about 31,000 firm-year observations. The shift-share treatment design contains 609 effective sector-year cells.
+
+Figure \ref{fig:data_number_firms} documents the evolution of the number of observed firms over time. The decline in coverage in later years is one reason why the main text treats ORBIS/AMADEUS disappearance cautiously and why the baseline regressions control for pre-period labor intensity interacted with the post-2016 period. Figure \ref{fig:data_sector_size} summarizes the distribution of sector size in the manufacturing sample and illustrates the granularity behind the shift-share design.
+
+\paragraph{CEPII BACI trade data.} CEPII BACI HS96 files provide bilateral trade flows at the HS 6-digit level. In the import-penetration construction, I keep Chinese exports to Turkey, using China as exporter code 156 and Turkey as importer code 792, and aggregate product flows to ISIC Rev. 4 manufacturing sectors. The baseline treatment is
+\[
+IP_{jt}=\frac{M^{CHN\rightarrow TUR}_{jt}}{\text{Apparent consumption}_{jt}},
+\]
+and the regressor used in the firm-level specifications is the annual change in this sectoral import-penetration rate. The BACI files are also used for the shift-share design. The exposure share is based on China's 2009 exports to Turkey by sector relative to sectoral absorption. The shift component is the change in China's export performance in other high-income destinations, including the United States, Japan, South Korea, Australia, and EU-15 economies. A separate BACI construction over 2000--2004 is used in the mechanism section to measure China's pre-period share in Turkey's upstream imports.
+
+\paragraph{UNIDO sector data.} UNIDO ISDB/INDSTAT4 files provide sectoral manufacturing aggregates at the 4-digit ISIC level. I use Turkish sectoral output and apparent consumption to construct the denominator of import penetration and the 2009 exposure shares. The construction scripts import Turkish output from the UNIDO file, harmonize sector codes to ISIC Rev. 4, and use the ISDB apparent-consumption series directly when computing import penetration for 2011--2019. A high-income import file is also used to normalize the high-income-destination shift in the output-competition instrument.
+
+\paragraph{WIOD input-output data.} The input-supply shifter is built from the Turkish national input-output table in WIOD. The main construction uses the 2003 table. I keep domestic and imported intermediate-flow rows, drop final-demand and total rows, reshape the table into input-sector by using-sector cells, and compute
+\[
+w_{jk}=\frac{\text{intermediate purchases by sector }j\text{ from sector }k}{\text{total intermediate purchases by sector }j}.
+\]
+Manufacturing using sectors are retained, while the denominator includes all intermediate inputs rather than only manufacturing inputs. The output-side sector shock is then propagated through this fixed input-output matrix to obtain the input-supply control $Z^{\text{Input}}_{jt}=\sum_k w_{jk}Z^{\text{Output}}_{kt}$. For the imported-input-dependence mechanism, I also use 2000--2004 WIOD weights and combine them with BACI-based Chinese import shares in upstream sectors.
+
+\paragraph{TURKSTAT data.} TURKSTAT data enter in two places. First, the monthly sectoral Producer Price Index is converted into annual sectoral PPI series and used to deflate ORBIS/AMADEUS accounting variables. The construction uses 3-digit NACE deflators where available and falls back to 2-digit deflators otherwise. Second, TURKSTAT Annual Industry and Service Statistics extracts on personnel costs and value added at factor cost are used to construct sectoral labor intensity. I compute the ratio of personnel costs to value added, average it over the pre-2016 period, fill missing 4-digit values with 3-digit or 2-digit sector means when necessary, and map the resulting measure to ISIC Rev. 4. This time-invariant labor-intensity control is interacted with a post-2016 dummy in the baseline specifications.
+
+\paragraph{Concordances and replication note.} Two concordance layers are used repeatedly. The ORBIS/AMADEUS firm data are mapped from NACE Rev. 2 to ISIC Rev. 4 using the NACE--ISIC file in the raw data folder. BACI product flows are mapped from HS96 6-digit products to ISIC Rev. 4 industries using the HS--ISIC concordance generated by the R scripts in \texttt{dofile construction/}; where a product maps to multiple sectors, the provided allocation shares are used before collapsing to the sector-year level. A fully public replication package cannot be distributed because the main firm-level source, ORBIS/AMADEUS, is proprietary. Replication of the full empirical analysis therefore requires licensed access to ORBIS/AMADEUS and compliance with the terms of use of the other underlying datasets, including BACI, WIOD, UNIDO, and TURKSTAT. Within the project archive, the construction scripts are organized in \texttt{dofile construction/} and \texttt{dofile analysis/}, with derived tables and figures stored in \texttt{Tables/} and \texttt{Figs/}. Public sharing is feasible for code, concordances, and non-restricted sectoral aggregates, but not for the proprietary firm-level extracts themselves.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{number_firms_over_time.jpg}
+    \caption{Number of firms over time}
+    \label{fig:data_number_firms}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{sector_size_distribution.jpg}
+    \caption{Distribution of sector size}
+    \label{fig:data_sector_size}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Specification diagnostics: functional form and control-set sensitivity}
+\label{tab:rob12_fe}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{fittabular}{L{0.08\textwidth}L{0.17\textwidth}L{0.16\textwidth}L{0.16\textwidth}c c c L{0.28\textwidth}}
+\toprule
+Spec & Output-shock effect ($\Delta IP$) & Input-shock control ($Z^{\text{Input}}$) & Quadratic term ($\Delta IP^2$) & Obs. & Wild p-value & ID & Control-set design \\
+\midrule
+S1 & -0.462\sym{**} (0.226) & 0.517 (0.470) & -- & 30551 & 0.026 & (1) & Baseline \\
+S2 & -0.101 (0.485) & 0.578 (0.391) & 7.783 (6.489) & 30551 & . & (2) & Quadratic \\
+S3 & -0.462\sym{**} (0.226) & 0.518 (0.471) & -- & 30551 & . & (3) & No age \\
+S4 & -0.462\sym{**} (0.227) & 0.519 (0.471) & -- & 30551 & . & (4) & No age, size \\
+S5 & -0.461\sym{**} (0.226) & 0.521 (0.470) & -- & 30551 & . & (5) & No age, size, exporter \\
+S6 & -0.441\sym{*} (0.225) & 0.497 (0.463) & -- & 30566 & . & (6) & No age, size, exporter, liquidity \\
+S7 & -0.442\sym{*} (0.225) & 0.495 (0.463) & -- & 30566 & . & (7) & No age, size, exporter, liquidity, LSxPost \\
+S8 & -0.409\sym{*} (0.226) & -- & -- & 30655 & . & (8) & No input shock \\
+S9 & -0.396\sym{*} (0.230) & -- & -- & 31496 & . & (9) & No controls \\
+\bottomrule
+\multicolumn{8}{l}{\footnotesize Cluster-robust standard errors (ISIC4) in parentheses.}\\
+\multicolumn{8}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}\\
+\end{fittabular}
+\end{table}
+
+
+\subsection{Additional Tables and Figures}
+
+Additional robustness evidence is reported in Tables \ref{tab:rob_rotemberg_exclusions}, \ref{tab:rob_trimming}, \ref{tab:rob_longlived}, \ref{tab:givq_panel_a}, and \ref{tab:givq_panel_b}. These tables complement the main robustness and distributional results in the text.
+
+\subsubsection{Mechanism and Auxiliary Outcome Tables}
+
+\begin{table}[htbp]
+\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Interaction with lagged firm markup}
+\label{tab:mech_lagged_interactions}
+\begin{threeparttable}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{fittabular}{L{0.40\textwidth}c*{3}{c}}
+\toprule
+& (1) & \multicolumn{3}{c}{Marginal effect of import competition} \\
+\cmidrule(lr){2-2}\cmidrule(lr){3-5}
+& $\Delta \log \mu$ & p25 $\mu_{t-1}$ & p50 $\mu_{t-1}$ & p75 $\mu_{t-1}$ \\
+\midrule
+\multicolumn{5}{l}{\textbf{Panel A: IV coefficients}} \\
+Import penetration change ($\Delta IP$) & -1.185\sym{**} & & & \\
+& (0.452) & & & \\
+$\Delta IP$ $\times$ lagged log markup & 11.52\sym{*} & & & \\
+& (6.699) & & & \\
+Input-supply shock ($Z^{\text{Input}}$) & 0.265 & & & \\
+& (0.592) & & & \\
+\addlinespace[0.35em]
+\midrule
+\multicolumn{5}{l}{\textbf{Panel B: Implied marginal effects}} \\
+$\partial \Delta \log \mu / \partial \Delta IP$ & & -2.354 & -1.597 & -0.556 \\
+\midrule
+Observations & 30551 & & & \\
+F-Stat & 9.560 & & & \\
+\bottomrule
+\end{fittabular}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item Standard errors in parentheses. \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Auxiliary outcomes: revenue, domestic sales, and exports}
+\label{tab:aux_outcomes}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{fittabular}{L{0.30\textwidth}*{8}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}&\multicolumn{1}{c}{(8)}\\
+            &\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{Revenue}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{Revenue}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{Domestic sales}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{Domestic sales}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{Exports}$}}&\multicolumn{1}{c}{\theadstack{$\Delta \log$\\$\text{Exports}$}}\\
+\hline
+Import penetration change ($\Delta IP$)   &      -0.540\sym{**} &      -0.979         &      -1.936\sym{***}&      -1.198         &      -1.627\sym{**} &      -1.515         &      -0.416         &      -11.75         \\
+            &     (0.231)         &     (0.927)         &     (0.637)         &     (3.075)         &     (0.673)         &     (3.902)         &     (2.625)         &     (17.31)         \\
+[1em]
+Input-supply shock ($Z^{\text{Input}}$)     &      -6.864         &       0.373         &      -25.19\sym{*}  &       2.866\sym{*}  &       1.743         &       0.847         &       53.26         &      -10.10\sym{*}  \\
+            &     (5.884)         &     (0.429)         &     (14.52)         &     (1.661)         &     (18.51)         &     (2.009)         &     (35.05)         &     (5.985)         \\
+[1em]
+Input-supply shock $\times$ imported-input dependence   &       28.65         &                     &       107.9\sym{*}  &                     &      -3.609         &                     &      -234.2\sym{*}  &                     \\
+            &     (23.00)         &                     &     (57.56)         &                     &     (70.00)         &                     &     (136.7)         &                     \\
+[1em]
+Import penetration $\times$ imported-input dependence  &                     &       1.861         &                     &      -1.554         &                     &      -0.438         &                     &       36.71         \\
+            &                     &     (2.849)         &                     &     (9.161)         &                     &     (12.14)         &                     &     (52.04)         \\
+\hline
+Observations&       30551         &       30551         &       24345         &       24345         &       30551         &       30551         &       19327         &       19327         \\
+KP rk Wald F&          --         &         --          &         --          &         --          &         --          &         --          &         --          &         --          \\
+\hline\hline
+\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{fittabular}
+\end{table}
+
+\subsubsection{Residualized Output-IV Robustness}
+
+The next four appendix tables report the robustness exercise in which the output-competition instrument is residualized on the input-supply shock before re-estimation. They show that the first stage is unchanged, the baseline markup coefficient is numerically identical to the main estimate, the control-set sensitivity results remain negative throughout, and the signs of the auxiliary outcomes are preserved.
+
+\input{../Tables/rob_resid_firststage.tex}
+
+\input{../Tables/rob_resid_markup_main_ver21.tex}
+
+\input{../Tables/rob_resid_fe_ver21.tex}
+
+\input{../Tables/rob_resid_aux.tex}
+
+\subsubsection{Distributional Design Figures}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{rob41_decquin.png}
+    \caption{Distributional design robustness: deciles versus quintiles}
+    \label{fig:rob41_decquin}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{rob42_rank.png}
+    \caption{Distributional design robustness: ranking by markup level}
+    \label{fig:rob42_rank}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{rob43_thin.png}
+    \caption{Distributional design robustness: excluding thin cells}
+    \label{fig:rob43_thin}
+\end{figure}
+
+\subsubsection{Additional Identification and Sample Robustness Tables}
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Robustness to excluding sectors with largest Rotemberg weights}
+\label{tab:rob_rotemberg_exclusions}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{fittabular}{L{0.35\textwidth}*{4}{c}}
+\hline\hline
+            & Baseline & Excl. top 5 & Excl. top 10 & Excl. top 10\% \\
+\hline
+\multicolumn{5}{l}{\textbf{Panel A. Second stage}}\\
+Import penetration change ($\Delta IP$)   & -0.462\sym{**} & -0.316 & 0.246 & 2.008 \\
+             & (0.226)        & (1.889) & (2.285) & (4.575) \\
+Input-supply shock ($Z^{\text{Input}}$)     & 0.517          & 0.336   & 0.394   & 0.444 \\
+             & (0.470)        & (0.625) & (0.553) & (0.594) \\
+\hline
+Observations  & 30551 & 29393 & 28512 & 27669 \\
+KP rk Wald F & 24.81 & 3.178 & 8.129 & 4.759 \\
+\hline
+\multicolumn{5}{l}{\textbf{Panel B. First stage}}\\
+Output-competition IV ($Z^{\text{Output}}$)    & 0.892\sym{***} & 0.324\sym{*} & 0.382\sym{***} & 0.241\sym{**} \\
+              & (0.179)        & (0.182)      & (0.134)        & (0.110) \\
+Input-supply shock ($Z^{\text{Input}}$)      & 0.163          & -0.242       & -0.150         & -0.055 \\
+              & (0.491)        & (0.198)      & (0.148)        & (0.122) \\
+\hline
+Observations   & 30551 & 29393 & 28512 & 27669 \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses.}\\
+\multicolumn{5}{l}{\footnotesize KP rk Wald F is the Kleibergen--Paap weak identification statistic.}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}
+\end{fittabular}
+\end{table}
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Trimming/winsorization}
+\label{tab:rob_trimming}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{fittabular}{L{0.38\textwidth}*{3}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+            &\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{\theadstack{$\Delta \log \mu$\\(winsorized 5--95)}}&\multicolumn{1}{c}{\theadstack{$\Delta \log \mu$\\(winsorized 0.5--99.5)}}\\
+\hline
+Import penetration change ($\Delta IP$)   &      -0.462\sym{**} &      -0.323\sym{**} &      -0.524\sym{**} \\
+            &     (0.226)         &     (0.144)         &     (0.231)         \\
+[1em]
+Input-supply shock ($Z^{\text{Input}}$)     &       0.517         &       0.133         &       0.332         \\
+            &     (0.470)         &     (0.255)         &     (0.359)         \\
+\hline
+Observations&       30551         &       30551         &       30551         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{fittabular}
+\end{table}
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{The case of long-lived firms and exclusion of micro and top firms by size}
+\label{tab:rob_longlived}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{fittabular}{L{0.28\textwidth}*{8}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}&\multicolumn{1}{c}{(8)}\\
+            &\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}&\multicolumn{1}{c}{$\Delta \log \mu$}\\
+\hline
+Import penetration change ($\Delta IP$)   &      0.0462         &      0.0348         &      -0.194         &      -0.301         &      -0.344         &      -0.540         &      -0.525\sym{***}&      -0.448\sym{**} \\
+            &     (0.138)         &     (0.111)         &     (0.180)         &     (0.217)         &     (0.248)         &     (0.335)         &     (0.179)         &     (0.225)         \\
+[1em]
+Input-supply shock ($Z^{\text{Input}}$)     &     -0.0171         &     -0.0920         &      0.0144         &      0.0411         &       0.145         &      0.0510         &       0.225         &       0.477         \\
+            &     (0.581)         &     (0.373)         &     (0.544)         &     (0.472)         &     (0.427)         &     (0.377)         &     (0.425)         &     (0.470)         \\
+[1em]
+Lagged leverage   &      0.0123\sym{**} &      0.0147\sym{*}  &      0.0215\sym{***}&      0.0195\sym{***}&      0.0158\sym{***}&      0.0124\sym{***}&      0.0112\sym{**} &     0.00740\sym{*}  \\
+            &   (0.00597)         &   (0.00746)         &   (0.00478)         &   (0.00414)         &   (0.00432)         &   (0.00409)         &   (0.00447)         &   (0.00395)         \\
+[1em]
+Lagged liquidity ratio  &   -0.000942\sym{*}  &   -0.000810         &   -0.000584         &   -0.000762\sym{**} &   -0.000557\sym{**} &   -0.000356         &   -0.000975         &    -0.00142         \\
+            &  (0.000504)         &  (0.000506)         &  (0.000411)         &  (0.000306)         &  (0.000235)         &  (0.000495)         &   (0.00125)         &  (0.000913)         \\
+[1em]
+Lagged log firm size     &    -0.00269\sym{***}&    -0.00137\sym{*}  &    -0.00155\sym{***}&    -0.00131\sym{***}&   -0.000303         &    0.000295         &   0.0000996         &    0.000403         \\
+            &  (0.000606)         &  (0.000742)         &  (0.000501)         &  (0.000403)         &  (0.000614)         &  (0.000719)         &  (0.000750)         &  (0.000797)         \\
+[1em]
+Lagged firm age       &   0.0000308         &   -0.000590         &   -0.000511         &   -0.000318         &   -0.000185         &   -0.000244         &  -0.0000220         &   -0.000127         \\
+            &  (0.000318)         &  (0.000561)         &  (0.000376)         &  (0.000266)         &  (0.000258)         &  (0.000248)         &  (0.000252)         &  (0.000302)         \\
+[1em]
+Lagged exporter status  &     0.00214         &    -0.00271         &    -0.00410         &    -0.00145         &   -0.000146         &     0.00104         &     0.00191         &     0.00300         \\
+            &   (0.00273)         &   (0.00398)         &   (0.00300)         &   (0.00256)         &   (0.00218)         &   (0.00176)         &   (0.00168)         &   (0.00187)         \\
+\hline
+Observations&        4136         &        5473         &       10531         &       13661         &       17501         &       23138         &       27492         &       30249         \\
+\hline\hline
+\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{fittabular}
+\end{table}
+
+\subsubsection{Grouped IV Quantile Estimates}
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Grouped IV quantiles of markup adjustment (Panel A: p5--p50)}
+\label{tab:givq_panel_a}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{fittabular}{L{0.25\textwidth}*{10}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{q5}&\multicolumn{1}{c}{q10}&\multicolumn{1}{c}{q15}&\multicolumn{1}{c}{q20}&\multicolumn{1}{c}{q25}&\multicolumn{1}{c}{q30}&\multicolumn{1}{c}{q35}&\multicolumn{1}{c}{q40}&\multicolumn{1}{c}{q45}&\multicolumn{1}{c}{q50}\\
+\hline
+Import penetration change ($\Delta IP$)   &      -0.531         &       0.154         &       0.245         &    -0.00378         &      0.0130         &     -0.0290         &     -0.0971         &      -0.158         &      -0.223         &      -0.195         \\
+            &     (0.506)         &     (0.429)         &     (0.207)         &     (0.217)         &     (0.185)         &     (0.160)         &     (0.160)         &     (0.154)         &     (0.156)         &     (0.141)         \\
+[1em]
+Input-supply shock ($Z^{\text{Input}}$)     &       5.836\sym{*}  &       3.821         &       0.800         &     -0.0735         &      -0.396         &      -0.334         &      0.0461         &      0.0166         &      0.0383         &      0.0150         \\
+            &     (3.339)         &     (2.725)         &     (1.229)         &     (0.694)         &     (0.648)         &     (0.628)         &     (0.550)         &     (0.526)         &     (0.506)         &     (0.489)         \\
+\hline
+Sector-year observations&         609         &         609         &         609         &         609         &         609         &         609         &         609         &         609         &         609         &         609         \\
+\hline\hline
+\multicolumn{11}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{11}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{fittabular}
+\end{table}
+
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Grouped IV quantiles of markup adjustment (Panel B: p55--p95)}
+\label{tab:givq_panel_b}
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{fittabular}{L{0.25\textwidth}*{9}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{q55}&\multicolumn{1}{c}{q60}&\multicolumn{1}{c}{q65}&\multicolumn{1}{c}{q70}&\multicolumn{1}{c}{q75}&\multicolumn{1}{c}{q80}&\multicolumn{1}{c}{q85}&\multicolumn{1}{c}{q90}&\multicolumn{1}{c}{q95}\\
+\hline
+Import penetration change ($\Delta IP$)   &      -0.182         &      -0.219         &      -0.235         &      -0.108         &      -0.246         &      -0.848\sym{***}&      -1.423\sym{**} &      -1.585\sym{***}&      -1.462\sym{*}  \\
+            &     (0.148)         &     (0.147)         &     (0.158)         &     (0.148)         &     (0.160)         &     (0.313)         &     (0.597)         &     (0.550)         &     (0.748)         \\
+[1em]
+Input-supply shock ($Z^{\text{Input}}$)     &      -0.176         &      0.0432         &       0.141         &       1.474         &       1.476         &       1.465         &       1.782         &       1.709         &       6.899\sym{**} \\
+            &     (0.504)         &     (0.559)         &     (0.592)         &     (1.560)         &     (1.563)         &     (1.757)         &     (2.125)         &     (2.215)         &     (3.199)         \\
+\hline
+Sector-year observations&         609         &         609         &         609         &         609         &         609         &         609         &         609         &         609         &         609         \\
+\hline\hline
+\multicolumn{10}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{10}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{fittabular}
+\end{table}
+
+
+\end{document}

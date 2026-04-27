@@ -1,0 +1,33 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Interaction with lagged firm markup and lagged firm market share}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}\\
+\hline
+change\_IP   &      -1.185\sym{**} &      -0.492\sym{**} &      -0.751\sym{**} \\
+            &     (0.452)         &     (0.246)         &     (0.295)         \\
+[1em]
+c.change\_IP#c.clln\_mu&       11.52\sym{*}  &                     &       5.479         \\
+            &     (6.699)         &                     &     (3.412)         \\
+[1em]
+Z\_input     &       0.265         &       0.529         &       0.513         \\
+            &     (0.592)         &     (0.478)         &     (0.509)         \\
+[1em]
+c.change\_IP#c.cl\_share&                     &       0.850         &       0.659         \\
+            &                     &     (0.950)         &     (1.091)         \\
+\hline
+Marginal effect of import competition at p25 lagged markup&      -2.354         &           .         &      -1.307         \\
+Marginal effect of import competition at p50 lagged markup&      -1.597         &           .         &      -0.947         \\
+Marginal effect of import competition at p75 lagged markup&      -0.556         &           .         &      -0.452         \\
+Marginal effect of import competition at p25 lagged market share&           .         &      -0.508         &      -0.763         \\
+Marginal effect of import competition at p50 lagged market share&           .         &      -0.506         &      -0.762         \\
+Marginal effect of import competition at p75 lagged market share&           .         &      -0.501         &      -0.758         \\
+Observations&       30551         &       30551         &       30551         \\
+KP rk Wald F&                     &                     &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

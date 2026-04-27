@@ -1,0 +1,33 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Market-share reallocation toward large incumbents: output competition and input supply}
+\begin{tabular}{l*{6}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+            &\multicolumn{1}{c}{dln\_share}&\multicolumn{1}{c}{dln\_share}&\multicolumn{1}{c}{dln\_share}&\multicolumn{1}{c}{dln\_share}&\multicolumn{1}{c}{dln\_share}&\multicolumn{1}{c}{dln\_share}\\
+\hline
+ip\_size     &      0.0732         &                     &                     &                     &                     &                     \\
+            &    (0.0853)         &                     &                     &                     &                     &                     \\
+[1em]
+input\_size  &                     &      -0.740\sym{**} &                     &                     &                     &                     \\
+            &                     &     (0.352)         &                     &                     &                     &                     \\
+[1em]
+ip\_large    &                     &                     &      -3.992         &                     &                     &                     \\
+            &                     &                     &     (6.361)         &                     &                     &                     \\
+[1em]
+input\_large &                     &                     &                     &      -8.391\sym{***}&                     &                     \\
+            &                     &                     &                     &     (3.020)         &                     &                     \\
+[1em]
+ip\_cr4      &                     &                     &                     &                     &      -1.644         &                     \\
+            &                     &                     &                     &                     &     (4.434)         &                     \\
+[1em]
+input\_cr4   &                     &                     &                     &                     &                     &      -11.48\sym{*}  \\
+            &                     &                     &                     &                     &                     &     (6.240)         \\
+\hline
+Observations&       28159         &       35379         &       26184         &       35379         &       26184         &       35379         \\
+F-stat      &       33.40         &                     &       0.904         &                     &       3.238         &                     \\
+\hline\hline
+\multicolumn{7}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{7}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
