@@ -1,2 +1,5 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+*.tex text eol=lf
+*.do text eol=lf
+*.R text eol=lf
+*.py text eol=lf
+*.csv text eol=lf

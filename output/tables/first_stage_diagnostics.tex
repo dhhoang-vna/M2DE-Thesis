@@ -1,0 +1,23 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{First Stage and Identification Diagnostics}
+\begin{tabular}{l*{2}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{Parsimonious}&\multicolumn{1}{c}{Baseline}\\
+                    &        b/se         &        b/se         \\
+\hline
+output\_IV           &       0.892\sym{***}&       0.892\sym{***}\\
+                    &     (0.179)         &     (0.179)         \\
+(sum) contrib       &       0.164         &       0.163         \\
+                    &     (0.492)         &     (0.491)         \\
+\hline
+Lagged firm controls&          No         &         Yes         \\
+Sector FE           &         Yes         &         Yes         \\
+Year FE             &         Yes         &         Yes         \\
+Excluded-instrument F-stat&       24.82         &       24.81         \\
+Corr.(^{Output}\_{jt}, Z^{Input}\_{jt}$)&       0.136         &       0.136         \\
+Number of sectors   &          95         &          95         \\
+Observations        &       30551         &       30551         \\
+\hline\hline
+\end{tabular}
+\end{table}

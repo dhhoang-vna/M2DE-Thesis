@@ -1,0 +1,2 @@
+variant_id,variant_name,treat_year,treated_unit,treated_isic4,treated_pre_rmspe,treated_post_rmspe,treated_rmspe_ratio,treated_avg_post_gap,treated_n_donors,n_placebos,n_ratio_ge,n_avg_gap_ge,p_rmspe_ratio,p_avg_gap_pos,positive_post_gap,robust_rank,recommended_robust
+1,single_T2015_base_full,2015,92,2790,.0169815139318608,.0527947261133044,3.108952848676859,.0222305148477143,34,34,0,2,.0285714285714286,.0857142857142857,1,1,1

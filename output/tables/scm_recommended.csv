@@ -1,0 +1,2 @@
+treated_isic4,dIP_base_mid,dIP_base_end,dIP_screen,avg_n_pre,input_exposure,treated_pre_rmspe,treated_post_rmspe,treated_rmspe_ratio,treated_avg_post_gap,n_placebos,p_rmspe_ratio,p_avg_gap_pos,case_id,treated_unit,treated_n_donors,n_ratio_ge,n_avg_gap_ge,pre_sd_y,positive_post_gap,recommendation_score,recommended_scm
+2790,.2260833829641342,.060807541012764,.060807541012764,64.33333333333333,0,.0138712762338799,.0501810441995544,3.617622730127002,.038411519173833,34,.3428571428571429,.2,92,92,35,11,6,.0207415245482118,1,.3205521917897527,1

@@ -1,0 +1,3 @@
+spec_id,spec_name,treated_isic4,treat_year,treated_pre_rmspe,treated_post_rmspe,treated_rmspe_ratio,treated_avg_post_gap,n_placebos,p_rmspe_ratio,p_avg_gap_pos,treated_unit,treated_n_donors,n_ratio_ge,n_avg_gap_ge,preferred_spec,conservative_spec
+1,preferred_T2015_nested_full,2790,2015,.0150806709319593,.0478126628744436,3.170459927821773,.0184946357225851,33,.3823529411764706,.2647058823529412,92,34,12,8,1,0
+2,conservative_T2016_nested_full,2790,2016,.014235967582608,.0505379165908695,3.550016273752364,.0381011318586672,33,.3235294117647059,.2058823529411765,92,34,10,6,0,1

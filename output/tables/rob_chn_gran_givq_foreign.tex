@@ -1,0 +1,31 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Grouped IV quantiles: Chinese product granularity interaction}
+\label{tab:rob_chn_gran_givq_foreign}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l*{4}{c}}
+\toprule
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{Q25}&\multicolumn{1}{c}{Q50}&\multicolumn{1}{c}{Q75}&\multicolumn{1}{c}{Q90}\\
+\midrule
+Chinese import-penetration growth&  -0.0467         &   -0.200         &   -0.133         &   -1.363\sym{**} \\
+                &  (0.202)         &  (0.160)         &  (0.258)         &  (0.523)         \\
+China IP $\times$ Chinese product HHI&  0.00505         &  -0.0276         &  -0.0727         &   -0.260         \\
+                & (0.0770)         & (0.0673)         &  (0.116)         &  (0.229)         \\
+Lagged Chinese product HHI, standardized& 0.000861         &  0.00187         & -0.00454         & 0.000307         \\
+                &(0.00341)         &(0.00320)         &(0.00590)         &(0.00660)         \\
+Chinese input-supply exposure&   -0.203         &    0.290         &    1.397         &    1.319         \\
+                &  (0.655)         &  (0.438)         &  (1.427)         &  (2.088)         \\
+\midrule
+Sector-year observations&      596         &      596         &      596         &      596         \\
+Kleibergen-Paap rk Wald F&     8.24         &     8.24         &     8.24         &     8.24         \\
+Quantile        &      Q25         &      Q50         &      Q75         &      Q90         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize The dependent variable is the indicated sector-year quantile of firm-level markup growth.}\\
+\multicolumn{5}{l}{\footnotesize All specifications include ISIC4 sector fixed effects, year fixed effects, sector-year cell-size polynomial controls, averaged lagged firm controls, the input-supply exposure control, and pre-period size $\times$ post-2016 controls.}\\
+\multicolumn{5}{l}{\footnotesize Chinese import penetration and its interaction with Chinese product granularity are instrumented by the corresponding output-IV terms. Standard errors are clustered by ISIC4 sector.}\\
+\end{tabular}
+\end{adjustbox}
+\end{table}

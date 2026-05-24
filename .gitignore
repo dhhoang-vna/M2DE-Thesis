@@ -1,27 +1,55 @@
-Data/
-RawData/
-Logs/
-Figs/
+# Operating-system and editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Stata and logs
+__*.dta
 *.dta
-*.csv
-*.pdf
-*.jpg
-*.jpeg
-*.png
+*.smcl
+*.log
+*.tmp
+*.ster
+*.gph
+output/logs/*
+output/struct2/logs/*
+
+# LaTeX build products
 *.aux
 *.bbl
 *.bcf
 *.blg
 *.fdb_latexmk
 *.fls
-*.log
+*.lof
+*.lot
 *.out
 *.run.xml
-*.synctex.gz
 *.toc
-*.bak
-.Rhistory
-*.docx
-*.ipynb
-__pycache__/
-.ipynb_checkpoints/
+*.synctex.gz
+
+# Restricted or bulky data. Keep only README/placeholder files.
+data/restricted_placeholder/raw/**
+data/restricted_placeholder/derived/**
+!data/restricted_placeholder/raw/**/
+!data/restricted_placeholder/derived/**/
+!data/restricted_placeholder/raw/**/README.md
+!data/restricted_placeholder/derived/**/README.md
+!data/restricted_placeholder/raw/**/.gitkeep
+!data/restricted_placeholder/derived/**/.gitkeep
+
+# Locally regenerated private outputs
+output/private/

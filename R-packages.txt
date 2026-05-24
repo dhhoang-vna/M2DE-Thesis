@@ -1,0 +1,8 @@
+concordance
+dplyr
+purrr
+readr
+readxl
+stringr
+tidyr
+tidyverse

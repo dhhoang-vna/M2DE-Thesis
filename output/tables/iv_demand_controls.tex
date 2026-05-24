@@ -1,0 +1,32 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{IV Robustness: Demand-Control Checks}
+\begin{tabular}{l*{4}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}\\
+\hline
+change\_IP   &      -0.462\sym{**} &      -0.458\sym{**} &      -0.462\sym{**} &      -0.459\sym{**} \\
+            &     (0.226)         &     (0.226)         &     (0.224)         &     (0.227)         \\
+[1em]
+Z\_input     &       0.517         &       0.565         &       0.534         &       0.556         \\
+            &     (0.470)         &     (0.478)         &     (0.471)         &     (0.476)         \\
+[1em]
+dln\_GlobalDemand\_HI&                     &       0.029         &                     &       0.018         \\
+            &                     &     (0.022)         &                     &     (0.030)         \\
+[1em]
+dln\_ExportDemand\_TUR&                     &                     &       0.019         &       0.010         \\
+            &                     &                     &     (0.012)         &     (0.014)         \\
+\hline
+Observations&   30551.000         &   30542.000         &   30542.000         &   30542.000         \\
+R-squared   &      -0.002         &      -0.002         &      -0.002         &      -0.002         \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize All regressions instrument change\_IP with output\_IV.}\\
+\multicolumn{5}{l}{\footnotesize ,}\\
+\multicolumn{5}{l}{\footnotesize Controls include lagged firm controls, Z\_input, labor-share-by-post-2016 interaction, ISIC4 FE, and year FE.}\\
+\multicolumn{5}{l}{\footnotesize ,}\\
+\multicolumn{5}{l}{\footnotesize Standard errors are clustered by ISIC4.}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

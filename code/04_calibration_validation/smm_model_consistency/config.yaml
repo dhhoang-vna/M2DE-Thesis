@@ -1,0 +1,104 @@
+paths:
+  data: ../../../data/restricted_placeholder/derived/data_ready_mec.dta
+  stata_sector_moments: ../../../data/derived_public/sector_moments.csv
+  outputs: ../../../output/struct2/outputs
+  figures: ../../../output/struct2/figures
+  tables: ../../../output/struct2/tables
+  logs: ../../../output/struct2/logs
+  thesis_source: ../../../tex/M2Thesis_ver24.tex
+  thesis_struct: ../../../tex/M2Thesis_ver24.tex
+
+outputs:
+  output_dir: outputs/final_exitfix_20260513
+
+sample:
+  year_min: 2011
+  year_max: 2019
+  min_sector_year_firms: 5
+
+elasticities:
+  eta: 1.01
+  nu: 4.0
+  rho: 8.0
+  lambda_min: 0.05
+  lambda_max: 0.98
+  default_lambda: 0.85
+
+estimation:
+  maxiter: 50
+  maxfun: 500
+  reuse_existing: false
+  ftol: 1.0e-7
+  weight_min_scale: 0.05
+  parameter_order:
+    - output_scale
+    - output_markup
+    - high_markup_output
+    - concentration_output
+    - share_output
+    - share_input
+    - input_markup
+    - mean_reversion
+    - drift
+    - exit_intercept
+    - exit_ip
+    - exit_markup
+  start:
+    output_scale: 1.0
+    output_markup: -0.40
+    high_markup_output: -0.25
+    concentration_output: -0.50
+    share_output: -0.15
+    share_input: 0.20
+    input_markup: 0.00
+    mean_reversion: -0.05
+    drift: 0.00
+    exit_intercept: -2.30
+    exit_ip: 0.50
+    exit_markup: 0.00
+  bounds:
+    output_scale: [0.0, 8.0]
+    output_markup: [-5.0, 5.0]
+    high_markup_output: [-8.0, 8.0]
+    concentration_output: [-20.0, 20.0]
+    share_output: [-5.0, 5.0]
+    share_input: [-5.0, 5.0]
+    input_markup: [-4.0, 4.0]
+    mean_reversion: [-1.5, 1.5]
+    drift: [-0.5, 0.5]
+    exit_intercept: [-8.0, 2.0]
+    exit_ip: [-8.0, 8.0]
+    exit_markup: [-4.0, 4.0]
+  moment_weight_multipliers:
+    baseline_iv_dln_mu: 3.0
+    grouped_iv_q80: 2.0
+    grouped_iv_q90: 3.0
+    sector_inverse_markup_iv: 1.5
+    within_decomp_abs_share: 1.5
+    between_decomp_abs_share: 1.5
+    entry_decomp_abs_share: 0.75
+    exit_decomp_abs_share: 0.75
+    input_shock_between_reallocation: 1.5
+
+moments:
+  active:
+    - baseline_iv_dln_mu
+    - grouped_iv_q80
+    - grouped_iv_q90
+    - grouped_iv_q90_cr4_interaction
+    - sector_inverse_markup_iv
+    - within_decomp_abs_share
+    - between_decomp_abs_share
+    - entry_decomp_abs_share
+    - exit_decomp_abs_share
+    - input_shock_between_reallocation
+    - exit_iv
+  quantiles: [0.75, 0.80, 0.85, 0.90]
+  include_exit: true
+  include_interaction: true
+  print_diagnostics: true
+
+counterfactuals:
+  scenarios: [observed, no_output, no_output_input]
+  sector_sales_output_elasticity: -0.20
+  sector_sales_input_elasticity: 0.10

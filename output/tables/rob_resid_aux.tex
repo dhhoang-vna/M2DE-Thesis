@@ -1,0 +1,22 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Main-text outcome validation with residualized output IV}
+\begin{tabular}{l*{8}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}&\multicolumn{1}{c}{(8)}\\
+            &\multicolumn{1}{c}{Markup: main}&\multicolumn{1}{c}{Markup: resid}&\multicolumn{1}{c}{Revenue: main}&\multicolumn{1}{c}{Revenue: resid}&\multicolumn{1}{c}{Domestic: main}&\multicolumn{1}{c}{Domestic: resid}&\multicolumn{1}{c}{Exports: main}&\multicolumn{1}{c}{Exports: resid}\\
+\hline
+change\_IP   &      -0.462\sym{**} &      -0.462\sym{**} &      -1.639\sym{***}&      -1.639\sym{***}&      -1.636\sym{**} &      -1.636\sym{**} &      -1.123         &      -1.123         \\
+            &     (0.226)         &     (0.226)         &     (0.537)         &     (0.537)         &     (0.658)         &     (0.658)         &     (2.452)         &     (2.452)         \\
+[1em]
+Z\_input     &       0.517         &       0.517         &       2.746\sym{*}  &       2.746\sym{*}  &       0.813         &       0.813         &      -7.200         &      -7.200         \\
+            &     (0.470)         &     (0.470)         &     (1.653)         &     (1.653)         &     (1.942)         &     (1.942)         &     (5.215)         &     (5.215)         \\
+\hline
+Observations&       30551         &       30551         &       24345         &       24345         &       30551         &       30551         &       19327         &       19327         \\
+KP rk Wald F&       24.81         &       24.81         &       26.97         &       26.97         &       24.81         &       24.81         &       32.57         &       32.57         \\
+Instrument  &     Main IV         &Residualized IV         &     Main IV         &Residualized IV         &     Main IV         &Residualized IV         &     Main IV         &Residualized IV         \\
+\hline\hline
+\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

@@ -1,0 +1,2 @@
+moment,kind,value,se,nobs,nclusters,first_stage_f,interpretation
+residual_iv_validation,iv,0.04168670601110766,0.2502856208232077,31375,90,22.930355879621494,Residual IV coefficient tests whether the causal-core incumbent-markup model absorbs the output-shock markup variation; small/insignificant values mean residuals no longer load on the excluded output shifter.

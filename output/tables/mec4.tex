@@ -1,0 +1,36 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Auxiliary Outcomes}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+            &\multicolumn{1}{c}{dln\_rev}&\multicolumn{1}{c}{dln\_export}&\multicolumn{1}{c}{dln\_dom\_sales}\\
+\hline
+change\_IP   &      -1.639\sym{***}&      -1.123         &      -1.636\sym{**} \\
+            &     (0.537)         &     (2.452)         &     (0.658)         \\
+[1em]
+Z\_input     &       2.746\sym{*}  &      -7.200         &       0.813         \\
+            &     (1.653)         &     (5.215)         &     (1.942)         \\
+[1em]
+lleverage   &      0.0518\sym{***}&       0.117\sym{***}&      0.0600\sym{***}\\
+            &    (0.0131)         &    (0.0370)         &    (0.0226)         \\
+[1em]
+lliquidity  &  -0.0000509         &    -0.00955\sym{*}  &    0.000919         \\
+            &   (0.00163)         &   (0.00522)         &   (0.00265)         \\
+[1em]
+llnsize     &     -0.0198\sym{***}&     -0.0519\sym{***}&     -0.0351\sym{***}\\
+            &   (0.00276)         &   (0.00666)         &   (0.00383)         \\
+[1em]
+l\_age       &     -0.0153\sym{***}&     -0.0173\sym{***}&     -0.0167\sym{***}\\
+            &   (0.00152)         &   (0.00283)         &   (0.00125)         \\
+[1em]
+l\_exporter  &    -0.00391         &                     &    -0.00751         \\
+            &   (0.00753)         &                     &    (0.0104)         \\
+\hline
+Observations&       24345         &       19327         &       30551         \\
+KP rk Wald F&                     &                     &                     \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}

@@ -1,0 +1,37 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Relative oligopoly triple interaction}
+\label{tab:rob_chn_gran_triple}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{l*{1}{c}}
+\toprule
+                &\multicolumn{1}{c}{(1)}\\
+                &\multicolumn{1}{c}{Triple interaction}\\
+\midrule
+Chinese import-penetration growth&   -0.945\sym{***}\\
+                &  (0.350)         \\
+China IP $\times$ domestic HHI&    0.196         \\
+                &  (0.151)         \\
+China IP $\times$ Chinese product HHI&   -1.118         \\
+                &  (0.757)         \\
+China IP $\times$ domestic HHI $\times$ Chinese product HHI&    0.117         \\
+                &  (0.129)         \\
+Lagged domestic HHI, standardized& -0.00158         \\
+                &(0.00200)         \\
+Lagged Chinese product HHI, standardized& -0.00519         \\
+                &(0.00572)         \\
+Chinese input-supply exposure&    0.561         \\
+                &  (0.522)         \\
+\midrule
+Observations    &    30269         \\
+Kleibergen-Paap rk Wald F&     1.80         \\
+Specification   &Triple interaction         \\
+\bottomrule
+\multicolumn{2}{l}{\footnotesize This specification estimates whether the China import-competition effect varies jointly with domestic concentration and Chinese product granularity.}\\
+\multicolumn{2}{l}{\footnotesize Chinese import penetration and all interaction terms are instrumented by the corresponding output-IV terms.}\\
+\multicolumn{2}{l}{\footnotesize Standard errors are clustered by ISIC4 sector.}\\
+\end{tabular}
+\end{adjustbox}
+\end{table}

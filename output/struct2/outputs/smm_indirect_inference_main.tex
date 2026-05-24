@@ -1,0 +1,82 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.03}
+\captionsetup{font=small,labelfont=bf}
+\newcommand{\dd}{\mathrm{d}}
+\begin{document}
+
+\section{Model-Based Indirect Inference and Counterfactual Validation}
+
+The reduced-form estimates identify a local causal response of incumbent markups to Chinese output-market competition. The structural exercise in this section asks a different but complementary question: whether a parsimonious oligopoly mechanism can reproduce the causal IV response, its upper-tail heterogeneity, and the sector-level inverse-markup response when subjected to the same auxiliary empirical design. The model is therefore used as a disciplined extrapolation device, not as a substitute for the shift-share IV design. Its target is deliberately narrow: it estimates the output-competition channel among observed incumbents. Input shocks, exit, and the accounting decomposition are retained as validation diagnostics rather than fitted moments.
+
+I estimate the model by simulated method of moments, equivalently a Wald indirect-inference estimator. Let \(\widehat m\) denote the vector of auxiliary causal moments estimated in the data and let \(m^{s}(\theta)\) denote the same vector computed from the simulated panel under structural parameter vector \(\theta\). The estimator is
+\begin{equation}
+\widehat\theta
+=\arg\min_{\theta\in\Theta}
+\left[\widehat m-m^{s}(\theta)\right]'
+W
+\left[\widehat m-m^{s}(\theta)\right].
+\end{equation}
+The auxiliary moments are not arbitrary descriptive statistics. They are the empirical objects that the theory is designed to discipline: the baseline IV effect of import penetration on incumbent markup growth, grouped-IV upper-tail effects, concentration heterogeneity, and the sector inverse-markup response. The same sample restrictions, shock variables, and auxiliary regressions are applied to the observed and simulated panels. The final objective value is \(Q=1.727\), down from approximately \(37.6\) at the initial vector, so the optimization delivers a stable and economically interpretable fit to the targeted causal moments.
+
+\begin{table}[h!]
+\centering
+\caption{Causal-core parameter estimates}
+\begin{threeparttable}
+\small
+\begin{tabular}{lrl}
+\toprule
+Parameter & Estimate & Interpretation \\
+\midrule
+\texttt{output\_scale} & 3.449 & Scale of the output-competition channel \\
+\texttt{output\_markup} & -0.674 & Baseline output-shock effect on markup growth \\
+\texttt{high\_markup\_output} & -1.514 & Extra effect for high-markup units \\
+\texttt{concentration\_output} & -3.964 & Extra effect in concentrated markets \\
+\texttt{share\_output} & 0.500 & Output-shock component in share dynamics \\
+\texttt{mean\_reversion} & 1.382 & Pullback of markup growth toward its reference level \\
+\texttt{drift} & -0.104 & Average residual drift in markup dynamics \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item Notes: The input and selection blocks are fixed in this causal-core run: \texttt{share\_input}=\texttt{input\_markup}=\texttt{exit\_ip}=\texttt{exit\_markup}=0. The estimates should therefore be interpreted as parameters of the output-competition mechanism, not as a complete model of input pass-through or endogenous exit.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+The signs of the estimated parameters are coherent. Output competition reduces markup growth on average, and the effect becomes stronger among initially high-markup units and in concentrated markets. This is precisely the residual-demand discipline predicted by the model: when foreign output-market pressure rises, high-rent incumbents have the most room to compress markups.
+
+\begin{table}[h!]
+\centering
+\caption{Targeted causal moment fit}
+\begin{threeparttable}
+\small
+\begin{tabular}{lrrl}
+\toprule
+Target moment & Data & Model & Assessment \\
+\midrule
+Baseline IV, \(\Delta\ln\mu\) & -0.429 & -0.441 & Very close central response \\
+Grouped IV, q80 & -0.803 & -0.803 & Essentially exact \\
+Grouped IV, q85 & -1.236 & -0.942 & Correct sign; magnitude too small \\
+Grouped IV, q90 & -1.625 & -1.771 & Correct sign; slightly too strong \\
+Grouped IV, q90 \(\times\) CR4 & -5.371 & -5.042 & Correct sign and order of magnitude \\
+Sector inverse-markup IV & 0.128 & 0.238 & Correct sign; aggregate response too large \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{table}
+
+Table 2 shows that the model matches the main causal evidence well. The baseline IV coefficient and the q80 grouped-IV effect are almost exactly replicated. The model also generates a steep upper-tail response and stronger discipline in concentrated markets. The remaining miss is informative rather than fatal: the model is too coarse to match the full gradient from q85 to q90 and somewhat overstates the sector inverse-markup response. I therefore interpret the exercise as supporting the output-competition mechanism while leaving room for a richer heterogeneity block in future work.
+
+A residual-IV validation provides the strongest external check on the causal-core interpretation. I subtract the model-implied output-competition component from incumbent markup growth and re-estimate the IV regression on the residual. The excluded output shifter no longer predicts the residual: the coefficient is \(0.042\), with standard error \(0.250\), \(31{,}375\) observations, 90 sector clusters, and a first-stage \(F\)-statistic of \(22.93\). The model therefore absorbs the output-shock variation it was built to explain; the validation is not driven by a weak first stage.
+
+The counterfactual exercise gives the correct scale of interpretation. Removing the fitted output-competition channel barely changes the manufacturing-wide markup path: the average aggregate inverse markup is \(0.8361\) in the observed model path and \(0.8350\) in the no-output counterfactual, while the corresponding average aggregate markup is \(1.1966\) versus \(1.1981\). This muted aggregate difference is consistent with the local nature of the IV estimates and with heterogeneous sectoral exposure. The model supports a causal output-competition markup-discipline channel among exposed incumbents; it does not yet justify broad welfare claims about Turkish manufacturing as a whole.
+
+\end{document}

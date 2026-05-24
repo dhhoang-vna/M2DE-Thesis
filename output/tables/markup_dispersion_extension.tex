@@ -1,0 +1,36 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Import Competition and Markup Dispersion}
+\begin{tabular}{l*{4}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                    &\multicolumn{1}{c}{Level disp.}&\multicolumn{1}{c}{Growth disp.}&\multicolumn{1}{c}{Level disp.}&\multicolumn{1}{c}{Growth disp.}\\
+\midrule
+Delta Chinese import penetration&     -0.0392         &     -0.0958\sym{**} &      -0.104         &     -0.0657         \\
+                    &    (0.0652)         &    (0.0401)         &    (0.0679)         &    (0.0503)         \\
+\addlinespace
+Delta IP x CR4      &                     &                     &       0.265         &      -0.122         \\
+                    &                     &                     &     (0.211)         &     (0.143)         \\
+\addlinespace
+CR4                 &                     &                     &    -0.00793         &     0.00407         \\
+                    &                     &                     &   (0.00512)         &   (0.00365)         \\
+\addlinespace
+Chinese input-supply shifter&       0.403         &       0.192         &       0.505         &       0.144         \\
+                    &     (0.511)         &     (0.232)         &     (0.570)         &     (0.214)         \\
+\midrule
+Obs.                &         609         &         609         &         609         &         609         \\
+R-sq.               &       0.008         &      -0.013         &      -0.018         &      -0.013         \\
+Outcome             &Delta Var(log markup)         &Var(Delta log markup)         &Delta Var(log markup)         &Var(Delta log markup)         \\
+Specification       & Baseline IV         & Baseline IV         &    IV x CR4         &    IV x CR4         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize Sector-year panel. Sector and year fixed effects included; year effects are partialled out.}\\
+\multicolumn{5}{l}{\footnotesize ,}\\
+\multicolumn{5}{l}{\footnotesize Standard errors clustered by ISIC4 sector.}\\
+\multicolumn{5}{l}{\footnotesize ,}\\
+\multicolumn{5}{l}{\footnotesize Level dispersion is the first difference of the domestic-sales-weighted variance of log markups.}\\
+\multicolumn{5}{l}{\footnotesize ,}\\
+\multicolumn{5}{l}{\footnotesize Growth dispersion is the domestic-sales-weighted variance of firm-level markup growth within sector-year.}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+\end{table}
