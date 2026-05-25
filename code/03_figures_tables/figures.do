@@ -224,7 +224,7 @@ graph export "$OUTPUT_FIGURES\lorenz_1.jpg", as(jpg) replace
 
 *------- Main text
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 capture confirm variable exporter
 if _rc gen byte exporter = (export_revenue>0) if !missing(export_revenue)
 
@@ -463,7 +463,7 @@ graph export "$OUTPUT_FIGURES\sector_size_distribution.jpg", as(jpg) replace
 
 
 /***********************************************************************
-CONTEXT FIGURES: LORENZ, CR4/HHI, AND CHINA-IP Ã— CONCENTRATION
+CONTEXT FIGURES: LORENZ, CR4/HHI, AND CHINA-IP x CONCENTRATION
 ***********************************************************************/
 
 cap mkdir "$OUTPUT_FIGURES"

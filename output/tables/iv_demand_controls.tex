@@ -1,32 +1,49 @@
-\begin{table}[htbp]\centering
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{0.96}
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{IV Robustness: Demand-Control Checks}
-\begin{tabular}{l*{4}{c}}
-\hline\hline
-            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
-            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_mu}\\
-\hline
-change\_IP   &      -0.462\sym{**} &      -0.458\sym{**} &      -0.462\sym{**} &      -0.459\sym{**} \\
-            &     (0.226)         &     (0.226)         &     (0.224)         &     (0.227)         \\
-[1em]
-Z\_input     &       0.517         &       0.565         &       0.534         &       0.556         \\
-            &     (0.470)         &     (0.478)         &     (0.471)         &     (0.476)         \\
-[1em]
-dln\_GlobalDemand\_HI&                     &       0.029         &                     &       0.018         \\
-            &                     &     (0.022)         &                     &     (0.030)         \\
-[1em]
-dln\_ExportDemand\_TUR&                     &                     &       0.019         &       0.010         \\
-            &                     &                     &     (0.012)         &     (0.014)         \\
-\hline
-Observations&   30551.000         &   30542.000         &   30542.000         &   30542.000         \\
-R-squared   &      -0.002         &      -0.002         &      -0.002         &      -0.002         \\
-\hline\hline
-\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{5}{l}{\footnotesize All regressions instrument change\_IP with output\_IV.}\\
-\multicolumn{5}{l}{\footnotesize ,}\\
-\multicolumn{5}{l}{\footnotesize Controls include lagged firm controls, Z\_input, labor-share-by-post-2016 interaction, ISIC4 FE, and year FE.}\\
-\multicolumn{5}{l}{\footnotesize ,}\\
-\multicolumn{5}{l}{\footnotesize Standard errors are clustered by ISIC4.}\\
-\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+
+\begin{threeparttable}
+\caption[IV robustness: demand-control checks]{IV robustness: demand-control checks}
+\label{tab:iv_demand_controls}
+
+\begin{tabular}{L{0.30\textwidth}*{4}{c}}
+\toprule
+& (1) & (2) & (3) & (4) \\
+& $\Delta \log \mu$ & $\Delta \log \mu$ & $\Delta \log \mu$ & $\Delta \log \mu$ \\
+\midrule
+Import penetration change
+& -0.462\sym{**} & -0.458\sym{**} & -0.462\sym{**} & -0.459\sym{**} \\
+& (0.226) & (0.226) & (0.224) & (0.227) \\
+
+\addlinespace[0.4em]
+Input-supply shock
+& 0.517 & 0.565 & 0.534 & 0.556 \\
+& (0.470) & (0.478) & (0.471) & (0.476) \\
+
+\addlinespace[0.4em]
+High-income demand growth
+&  & 0.029 &  & 0.018 \\
+&  & (0.022) &  & (0.030) \\
+
+\addlinespace[0.4em]
+Turkish export-demand growth
+&  &  & 0.019 & 0.010 \\
+&  &  & (0.012) & (0.014) \\
+
+\midrule
+Observations
+& 30,551 & 30,542 & 30,542 & 30,542 \\
+\bottomrule
 \end{tabular}
+
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item Standard errors in parentheses, clustered by ISIC4 sector. All regressions instrument import penetration change with the output-competition IV. Controls include lagged firm controls, the input-supply shock, labor-share-by-post-2016 interaction, ISIC4 FE, and year FE.
+\item \sym{*} $p<0.10$, \sym{**} $p<0.05$, \sym{***} $p<0.01$.
+\end{tablenotes}
+
+\end{threeparttable}
 \end{table}

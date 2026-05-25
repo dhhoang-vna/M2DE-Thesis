@@ -1,22 +1,36 @@
 \begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \caption{Main-text outcome validation with residualized output IV}
-\begin{tabular}{l*{8}{c}}
-\hline\hline
-            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}&\multicolumn{1}{c}{(8)}\\
-            &\multicolumn{1}{c}{Markup: main}&\multicolumn{1}{c}{Markup: resid}&\multicolumn{1}{c}{Revenue: main}&\multicolumn{1}{c}{Revenue: resid}&\multicolumn{1}{c}{Domestic: main}&\multicolumn{1}{c}{Domestic: resid}&\multicolumn{1}{c}{Exports: main}&\multicolumn{1}{c}{Exports: resid}\\
-\hline
-change\_IP   &      -0.462\sym{**} &      -0.462\sym{**} &      -1.639\sym{***}&      -1.639\sym{***}&      -1.636\sym{**} &      -1.636\sym{**} &      -1.123         &      -1.123         \\
-            &     (0.226)         &     (0.226)         &     (0.537)         &     (0.537)         &     (0.658)         &     (0.658)         &     (2.452)         &     (2.452)         \\
-[1em]
-Z\_input     &       0.517         &       0.517         &       2.746\sym{*}  &       2.746\sym{*}  &       0.813         &       0.813         &      -7.200         &      -7.200         \\
-            &     (0.470)         &     (0.470)         &     (1.653)         &     (1.653)         &     (1.942)         &     (1.942)         &     (5.215)         &     (5.215)         \\
-\hline
-Observations&       30551         &       30551         &       24345         &       24345         &       30551         &       30551         &       19327         &       19327         \\
-KP rk Wald F&       24.81         &       24.81         &       26.97         &       26.97         &       24.81         &       24.81         &       32.57         &       32.57         \\
-Instrument  &     Main IV         &Residualized IV         &     Main IV         &Residualized IV         &     Main IV         &Residualized IV         &     Main IV         &Residualized IV         \\
-\hline\hline
-\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{9}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
-\end{tabular}
+\label{tab:rob_resid_aux}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{fittabular}{L{0.20\textwidth}L{0.27\textwidth}L{0.15\textwidth}L{0.15\textwidth}cc}
+\toprule
+Outcome & Parameter & Main IV & Residualized IV & Obs. & KP rk Wald F \\
+\midrule
+\multicolumn{6}{l}{\textbf{Panel A. Import-penetration effect}} \\
+Markup adjustment & Import penetration change ($\Delta IP$) & -0.462\sym{**} & -0.462\sym{**} & 30551 & 24.81 \\
+ &  & (0.226) & (0.226) &  &  \\
+Revenue growth & Import penetration change ($\Delta IP$) & -1.639\sym{***} & -1.639\sym{***} & 24345 & 26.97 \\
+ &  & (0.537) & (0.537) &  &  \\
+Domestic-sales growth & Import penetration change ($\Delta IP$) & -1.636\sym{**} & -1.636\sym{**} & 30551 & 24.81 \\
+ &  & (0.658) & (0.658) &  &  \\
+Export growth & Import penetration change ($\Delta IP$) & -1.123 & -1.123 & 19327 & 32.57 \\
+ &  & (2.452) & (2.452) &  &  \\
+\addlinespace
+\multicolumn{6}{l}{\textbf{Panel B. Input-supply shock}} \\
+Markup adjustment & Input-supply shock ($Z^{\text{Input}}$) & 0.517 & 0.517 & 30551 & 24.81 \\
+ &  & (0.470) & (0.470) &  &  \\
+Revenue growth & Input-supply shock ($Z^{\text{Input}}$) & 2.746\sym{*} & 2.746\sym{*} & 24345 & 26.97 \\
+ &  & (1.653) & (1.653) &  &  \\
+Domestic-sales growth & Input-supply shock ($Z^{\text{Input}}$) & 0.813 & 0.813 & 30551 & 24.81 \\
+ &  & (1.942) & (1.942) &  &  \\
+Export growth & Input-supply shock ($Z^{\text{Input}}$) & -7.200 & -7.200 & 19327 & 32.57 \\
+ &  & (5.215) & (5.215) &  &  \\
+\bottomrule
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses.}\\
+\multicolumn{6}{l}{\footnotesize The main and residualized IV columns are numerically identical for all four outcomes.}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}\\
+\end{fittabular}
 \end{table}

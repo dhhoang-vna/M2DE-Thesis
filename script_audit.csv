@@ -1,26 +1,25 @@
-script,stage,called_by_ver24_runner,status,outputs_or_role,notes
+script,stage,called_by_m2de_thesis_runner,status,outputs_or_role,notes
 code/00_setup/config.do,setup,yes,passed,Defines package-local paths and environment overrides,Uses REPLICATION_ROOT and optional data path env vars.
-code/run_all.ps1,wrapper,yes,passed,One-command PowerShell runner,Supports Stata path and focused ver24 run.
-code/run_ver24_results.do,wrapper,yes,passed,Focused thesis-results Stata master,Preferred audit entry point for ver24.
+code/run_all.ps1,wrapper,yes,passed,One-command PowerShell runner,Supports Stata path and focused M2DE thesis run.
+code/run_m2de_thesis_results.do,wrapper,yes,passed,Focused thesis-results Stata master,Preferred audit entry point for M2DE thesis.
 code/run_all.do,wrapper,no,not rerun in final verification,Full raw-data construction and analysis master,Data-gated by restricted and bulky raw inputs.
+code/99_build_paper/check_m2de_thesis_exhibits.ps1,verification,manual,passed,Compares package outputs with submitted M2DE thesis exhibits,Current check is 24 of 24 byte-identical.
 code/03_figures_tables/figures.do,figures/tables,yes,passed,Context figures coverage/audit tables and descriptive figures,Patched for idempotent variable creation.
-code/02_analysis/2 selection_correction.do,analysis,yes,passed,Grouped IV quantile figures selection-correction tables and proxy validation,Patched for lag setup restore safety and output paths.
+code/02_analysis/2 selection_correction.do,analysis,yes,passed,Grouped IV quantile figures selection-correction tables and proxy validation,Patched for lag setup restore safety output paths and graph-label encoding.
 code/02_analysis/3 decomposition (2).do,analysis,yes,passed,Decomposition tables and figures,Patched to rebuild post2016 where needed.
-code/02_analysis/3_manufacturing_wide_fixed.do,analysis,yes,passed,Manufacturing-wide aggregate markup exercises,Writes logs and outputs inside package tree.
 code/02_analysis/4_robustness.do,analysis,yes,passed,Robustness figures and Rotemberg diagnostics,Patched to avoid root intermediates and optional filefilter failure.
 code/02_analysis/4_robustness_id.do,analysis,yes,passed,Rotemberg support and demand-control robustness,Generates thesis appendix tables and figures.
 code/02_analysis/4_robustness_id_pretrend.do,analysis,yes,passed,Pretrend balance table,Generates pretrend_balance_outputIV.tex.
 code/02_analysis/4_robustness_resid.do,analysis,yes,passed,Residualized-IV appendix tables,Generates residual robustness tables.
 code/02_analysis/4_robustness_chn_gran.do,analysis,yes,passed,Chinese product-granularity robustness,Generates granularity appendix tables.
 code/02_analysis/5_mechanism.do,analysis,yes,passed,Mechanism tables,Outputs remain in output/tables.
-code/02_analysis/6_scm.do,analysis,optional,skipped in final verification,Synthetic-control tables and figures,Callable by omitting -SkipSCM; skipped to avoid slow placebo loop.
-code/02_analysis/7_dispersion.do,analysis,yes,passed,Markup and wedge dispersion extensions,Generates dispersion appendix tables.
+code/02_analysis/6_scm.do,analysis,optional,passed smoke test,Synthetic-control tables and figures,Full placebo loop callable by omitting -SkipSCM; smoke mode uses REPLICATION_SCM_SMOKE=1.
 code/02_analysis/kirov.do,analysis,yes,passed,Kirov-style robustness table,Generates kirov_iv.tex.
-code/02_analysis/1 baseline_regressions.do,analysis,no,not in focused ver24 runner,Baseline exploratory regressions,Retained for archive but not required by ver24 external exhibits.
-code/02_analysis/5.2_import_control.do,analysis,no,not in focused ver24 runner,Historical input-control construction,Retained for full reconstruction path; omitted from fast thesis audit.
+code/02_analysis/1 baseline_regressions.do,analysis,no,not in focused M2DE thesis runner,Baseline exploratory regressions,Retained for archive but not required by M2DE thesis external exhibits.
+code/02_analysis/5.2_import_control.do,analysis,no,not in focused M2DE thesis runner,Historical input-control construction,Retained for full reconstruction path; omitted from fast thesis audit.
 code/01_construct/*.do,construction,no,data-gated,Raw and derived data construction,Requires licensed ORBIS/AMADEUS and bulky raw public inputs.
 code/01_construct/*.R,construction,no,not rerun in final verification,HS96-ISIC concordance construction,Requires R and source concordance files.
 code/04_calibration_validation/monte_carlo/monte_carlo_order_stat_bias.py,validation,no,passed smoke test,Grouped-IV quantile order-statistic control-function Monte Carlo,Full run documented in REPLICATION.md.
 code/04_calibration_validation/monte_carlo/selection_monte_carlo.py,validation,no,passed smoke test,Selection/control-function correction Monte Carlo,Compares polynomial spline and uncorrected estimates.
 code/04_calibration_validation/smm_model_consistency/*.py,validation,no,passed smoke tests,Structural/SMM validation and counterfactual module,Both config.yaml and config_causal_core.yaml smoke tests passed; full optimizer run documented separately.
-code/99_build_paper/build_paper.ps1,paper build,manual,passed,Builds tex/M2Thesis_ver24.pdf,Uses pdflatex-biber-pdflatex-pdflatex.
+code/99_build_paper/build_paper.ps1,paper build,manual,passed,Builds tex/m2de_thesis.pdf,Uses pdflatex-biber-pdflatex-pdflatex.

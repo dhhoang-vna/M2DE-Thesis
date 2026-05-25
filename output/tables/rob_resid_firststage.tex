@@ -1,25 +1,27 @@
 \begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \caption{First-stage comparison: original vs residualized output IV}
-\begin{tabular}{l*{2}{c}}
-\hline\hline
-            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}\\
-            &\multicolumn{1}{c}{Main IV}&\multicolumn{1}{c}{Residualized IV}\\
-\hline
-output\_IV   &       0.892\sym{***}&                     \\
-            &     (0.179)         &                     \\
-[1em]
-output\_IV\_resid&                     &       0.892\sym{***}\\
-            &                     &     (0.179)         \\
-[1em]
-Z\_input     &       0.163         &       0.524         \\
-            &     (0.491)         &     (0.490)         \\
-\hline
-Observations&       30551         &       30551         \\
-R-sq.       &       0.149         &       0.149         \\
-Instrument  &Original output IV         &Residualized output IV         \\
-\hline\hline
-\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{3}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
-\end{tabular}
+\label{tab:rob_resid_fs}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.1}
+\begin{fittabular}{L{0.39\textwidth}cc}
+\toprule
+ & \multicolumn{1}{c}{(1) Main IV} & \multicolumn{1}{c}{(2) Residualized IV} \\
+\midrule
+Output-competition IV ($Z^{\text{Output}}$) & 0.892\sym{***} & -- \\
+ & (0.179) & \\
+\addlinespace
+Residualized output IV ($\widetilde{Z}^{\text{Output}}$) & -- & 0.892\sym{***} \\
+ &  & (0.179) \\
+\addlinespace
+Input-supply shock ($Z^{\text{Input}}$) & 0.163 & 0.524 \\
+ & (0.491) & (0.490) \\
+\midrule
+Observations & 30551 & 30551 \\
+$R^2$ & 0.149 & 0.149 \\
+Instrument & Original output IV & Residualized output IV \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Residualized IV is the component of $Z^{\text{Output}}$ orthogonal to $Z^{\text{Input}}$. Standard errors in parentheses. \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\).}\\
+\end{fittabular}
 \end{table}

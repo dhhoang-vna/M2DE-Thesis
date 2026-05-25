@@ -1,26 +1,37 @@
-\begin{table}[htbp]\centering
+\begin{table}[htbp]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{0.95}
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{Pre-trend Balance Checks: Do Future China Shocks Predict Pre-period Outcomes?}
-\begin{tabular}{l*{3}{c}}
-\hline\hline
-            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
-            &\multicolumn{1}{c}{dln\_mu}&\multicolumn{1}{c}{dln\_rev}&\multicolumn{1}{c}{dln\_HHI\_dom}\\
-\hline
-outputIV\_future&      -0.062         &       0.152         &       0.710         \\
-            &     (0.631)         &     (1.967)         &    (12.088)         \\
-[1em]
-Zinput\_future&      -2.839         &     -15.610\sym{***}&      37.522\sym{*}  \\
-            &     (3.011)         &     (3.421)         &    (20.327)         \\
-\hline
-Observations&     275.000         &     279.000         &     185.000         \\
-R-squared   &       0.032         &       0.056         &       0.007         \\
-\hline\hline
-\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
-\multicolumn{4}{l}{\footnotesize Each column is a sector-year pre-period outcome regression.}\\
-\multicolumn{4}{l}{\footnotesize ,}\\
-\multicolumn{4}{l}{\footnotesize The main coefficient tests whether sectors more exposed to later China shocks already had differential pre-period trends.}\\
-\multicolumn{4}{l}{\footnotesize ,}\\
-\multicolumn{4}{l}{\footnotesize Regressions include year fixed effects and cluster standard errors by ISIC4.}\\
-\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+
+\begin{threeparttable}
+\caption[Pre-trend balance checks: do future China shocks predict pre-period outcomes?]{Pre-trend balance checks: do future China shocks predict pre-period outcomes?}
+\label{tab:pretrend_balance_outputIV}
+
+\begin{tabular}{L{0.34\textwidth}*{3}{c}}
+\toprule
+& (1) & (2) & (3) \\
+& $\Delta \log \mu$ & $\Delta \log \text{revenue}$ & $\Delta \log \text{HHI}$ \\
+\midrule
+Future output-competition shock
+& -0.062 & 0.152 & 0.710 \\
+& (0.631) & (1.967) & (12.088) \\
+\addlinespace[0.4em]
+Future input-supply shock
+& -2.839 & -15.610\sym{***} & 37.522\sym{*} \\
+& (3.011) & (3.421) & (20.327) \\
+\midrule
+Observations & 275 & 279 & 185 \\
+R-squared    & 0.032 & 0.056 & 0.007 \\
+\bottomrule
 \end{tabular}
+
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item Standard errors in parentheses, clustered by ISIC4 sector. Each column is a sector-year pre-period outcome regression. The main coefficient tests whether sectors more exposed to later China shocks already had differential pre-period trends. Regressions include year fixed effects.
+\item \sym{*} $p<0.10$, \sym{**} $p<0.05$, \sym{***} $p<0.01$.
+\end{tablenotes}
+
+\end{threeparttable}
 \end{table}

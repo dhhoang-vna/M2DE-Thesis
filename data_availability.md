@@ -32,7 +32,7 @@ they are not committed to GitHub.
 | WIOD national input-output tables | Input-supply exposure and labor-share measures | `data/restricted_placeholder/raw/WIOD/` |
 | NACE/ISIC and HS/ISIC concordances | Firm-sector and trade-sector mapping | `data/restricted_placeholder/derived/Concordance/` |
 
-## Derived Files Needed for the Focused Ver24 Run
+## Derived Files Needed for the Focused M2DE Thesis Run
 
 The focused thesis-results runner starts from derived Stata datasets. These are
 not redistributed when built from restricted firm-level data.

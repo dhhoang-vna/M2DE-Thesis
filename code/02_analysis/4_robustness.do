@@ -21,7 +21,7 @@ log using "$LOGS\4 robustness", replace
 
 global folder "$REPLICATION_ROOT"
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 
 drop if missing(firm_id) | missing(year) | missing(isic4)
 xtset firm_id year
@@ -43,7 +43,7 @@ if _rc gen l_exporter = L.exporter
 
 global X_lag "lleverage lliquidity llnsize l_age l_exporter"
 
-save "$DATA_DERIVED\data_ready.dta", replace
+save "$DATA_DERIVED\data_ready_mec.dta", replace
 
 
 *====================================
@@ -337,7 +337,7 @@ destring isic4, replace
 save "$DATA_DERIVED\rotemberg_drop_lists.dta", replace
 
 **** (3) Merge drop lists back to main data
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 
 merge m:1 isic4 using "$DATA_DERIVED\rotemberg_drop_lists.dta", nogen
 

@@ -3,7 +3,7 @@ param(
     [string]$DataRaw = "",
     [string]$DataDerived = "",
     [string]$DataPublic = "",
-    [switch]$Ver24ResultsOnly,
+    [switch]$M2DEThesisResultsOnly,
     [switch]$SkipR,
     [switch]$SkipStata,
     [switch]$SkipSCM,
@@ -41,7 +41,7 @@ if (-not $SkipStata) {
     if (-not (Test-Command $StataExe)) {
         Write-Warning "$StataExe was not found. Install Stata or pass -StataExe <path>, or rerun with -SkipStata."
     } else {
-        $DoFile = if ($Ver24ResultsOnly) { "code/run_ver24_results.do" } else { "code/run_all.do" }
+        $DoFile = if ($M2DEThesisResultsOnly) { "code/run_m2de_thesis_results.do" } else { "code/run_all.do" }
         if ($IsWindows -or $env:OS -eq "Windows_NT") {
             $DoPath = Join-Path $Repo $DoFile
             Start-Process -FilePath $StataExe -ArgumentList @("/e", "do", "`"$DoPath`"") -Wait -WindowStyle Hidden

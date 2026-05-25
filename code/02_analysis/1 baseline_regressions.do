@@ -20,7 +20,7 @@ log using "$LOGS\1 baseline_regressions", replace
 
 global folder "$REPLICATION_ROOT"
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 
 *----------------------------------
 * 0. Create sector-year controls

@@ -13,7 +13,7 @@ log using "$LOGS\3 decomposition (3)", replace
 
 global folder "$REPLICATION_ROOT"
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 
 drop _merge
 

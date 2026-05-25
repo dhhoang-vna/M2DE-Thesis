@@ -1,6 +1,6 @@
 # Verification Notes
 
-Verification was run on 2026-05-23 from the repository root:
+Verification was updated on 2026-05-25 from the repository root:
 
 ```text
 D:\1. M2 Development Economics\0. Thesis\Thesis\M2DE Thesis
@@ -8,7 +8,9 @@ D:\1. M2 Development Economics\0. Thesis\Thesis\M2DE Thesis
 
 ## Passed
 
-- `powershell -ExecutionPolicy Bypass -File code/run_all.ps1 -StataExe "D:\STATA19\StataMP-64.exe" -Ver24ResultsOnly -SkipSCM -SkipR -SkipPython -SkipPaper`
+- `powershell -ExecutionPolicy Bypass -File code/run_all.ps1 -StataExe "D:\STATA19\StataMP-64.exe" -M2DEThesisResultsOnly -SkipSCM -SkipR -SkipPython -SkipPaper`
+- SCM smoke mode with `REPLICATION_SCM_SMOKE=1` on `code/02_analysis/6_scm.do`
+- `powershell -ExecutionPolicy Bypass -File code/99_build_paper/check_m2de_thesis_exhibits.ps1`
 - `python -m compileall -q code\04_calibration_validation`
 - `python code\04_calibration_validation\monte_carlo\monte_carlo_order_stat_bias.py --R 2 --J 6 --T 3 --min_n 5 --max_n 20 --mode independent --no_plots --no_progress --no_linearmodels --output_dir output\monte_carlo\order_stat_bias_smoke`
 - `python code\04_calibration_validation\monte_carlo\selection_monte_carlo.py --smoke_test --no_progress --output_dir output\monte_carlo\selection_smoke`
@@ -17,12 +19,13 @@ D:\1. M2 Development Economics\0. Thesis\Thesis\M2DE Thesis
 - `powershell -ExecutionPolicy Bypass -File code\99_build_paper\build_paper.ps1`
 
 The Stata run completed with no `r(...)` errors in
-`output/logs/run_ver24_results_batch.log`. SCM was skipped by request to avoid
-the slow placebo loop; the submitted SCM figures remain present in
-`output/figures/`, and `code/02_analysis/6_scm.do` remains callable by omitting
-`-SkipSCM`.
+`output/logs/run_m2de_thesis_results_batch.log`. SCM was skipped to avoid the slow
+placebo loop; the submitted SCM figures are retained in `output/figures/`, and
+`code/02_analysis/6_scm.do` remains callable by omitting `-SkipSCM`.
+The SCM smoke run completed one treated nested SCM with target ISIC4 2790,
+treatment year 2016, and 34 donors.
 
-The LaTeX build produced `tex/M2Thesis_ver24.pdf`. The rebuilt PDF has the same
+The LaTeX build produced `tex/m2de_thesis.pdf`. The rebuilt PDF has the same
 letter page size as the submitted parent-folder PDF, but it is 78 pages versus
 79 pages in the submitted PDF after regenerating outputs.
 
@@ -47,24 +50,16 @@ python code\04_calibration_validation\smm_model_consistency\run_all.py --config 
 
 ## Exhibit Comparison
 
-`output/ver24_exhibit_hash_check.csv` compares the package outputs to the
+`output/m2de_thesis_exhibit_hash_check.csv` compares the package outputs to the
 submitted parent-folder copies for the external tables and figures referenced
-by `tex/M2Thesis_ver24.tex`.
+by `tex/m2de_thesis.tex`.
 
-- 15 of 24 checked exhibits are byte-identical.
-- The 9 regenerated files whose hashes differ from the submitted copies are:
-  - `output/figures/iv_quantile_journal.png`
-  - `output/figures/iv_quantile_cr4_journal.png`
-  - `output/figures/iv_quantile_cr10_journal.png`
-  - `output/tables/iv_demand_controls.tex`
-  - `output/tables/pretrend_balance_outputIV.tex`
-  - `output/tables/rob_resid_firststage.tex`
-  - `output/tables/rob_resid_aux.tex`
-  - `output/tables/rob_chn_gran_mean.tex`
-  - `output/tables/rob_chn_gran_givq_foreign.tex`
-
-The three regenerated PNGs have the same dimensions as the submitted copies,
-2400 by 1745 pixels.
+- 24 of 24 checked exhibits are byte-identical.
+- The checker is `code/99_build_paper/check_m2de_thesis_exhibits.ps1`.
+- Historical manufacturing-wide AE figures/tables were removed because they are
+  not called by `tex/m2de_thesis.tex`.
+- Historical dispersion-extension figures/tables were removed for the same
+  reason.
 
 ## Data-Gated Components
 
@@ -75,7 +70,7 @@ files described in `data_availability.md`.
 
 ## Notes on Cleanup
 
-The ver24 pipeline was normalized to avoid writes outside the repository and to
+The M2DE thesis pipeline was normalized to avoid writes outside the repository and to
 keep Stata batch logs and temporary files out of the repository root. The
 focused run intentionally omits old exploratory specifications that are not
-called by the submitted ver24 thesis exhibits.
+called by the submitted M2DE thesis exhibits.

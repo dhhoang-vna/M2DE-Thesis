@@ -4,7 +4,7 @@ $TexDir = Join-Path $Repo "tex"
 
 Set-Location $TexDir
 
-pdflatex -interaction=nonstopmode -halt-on-error "M2Thesis_ver24.tex"
-biber "M2Thesis_ver24"
-pdflatex -interaction=nonstopmode -halt-on-error "M2Thesis_ver24.tex"
-pdflatex -interaction=nonstopmode -halt-on-error "M2Thesis_ver24.tex"
+pdflatex -interaction=nonstopmode -halt-on-error "m2de_thesis.tex"
+biber "m2de_thesis"
+pdflatex -interaction=nonstopmode -halt-on-error "m2de_thesis.tex"
+pdflatex -interaction=nonstopmode -halt-on-error "m2de_thesis.tex"

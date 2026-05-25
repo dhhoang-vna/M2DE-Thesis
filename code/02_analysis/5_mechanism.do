@@ -230,7 +230,7 @@ use "$DATA_DERIVED\IV\output_IV.dta", clear
 merge m:1 industry_j using "$DATA_DERIVED\IV\H_j_mec2.dta", keep(match master) nogen
 save "$DATA_DERIVED\IV\output_IV_H.dta", replace
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 capture drop _merge
 
 merge m:1 isic4 year using "$DATA_DERIVED\IV\output_IV_H.dta"

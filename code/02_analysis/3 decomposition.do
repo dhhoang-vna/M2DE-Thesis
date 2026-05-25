@@ -13,7 +13,7 @@ log using "$LOGS\1 baseline_regressions", replace
 
 global folder "$REPLICATION_ROOT"
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 
 drop if missing(isic4, year, firm_id)
 drop if missing(share_sales, mu)
@@ -297,10 +297,10 @@ bys isic4 year: egen double between_inv_mu_raw = total(contrib_between)
 *----------------------------
 * 5) Construct the sector-year total change D_jt CONSISTENTLY
 *    IMPORTANT: do NOT rely on a precomputed d_inv_mu_j unless you are
-*    100% sure it equals Î”(mu^{-1}_{jt}) computed from the same aggregation.
+*    100% sure it equals Delta(mu^{-1}_{jt}) computed from the same aggregation.
 *
 *    Here we compute sector inverse markup as a (market-share) weighted mean:
-*       inv_mu_jt = Î£_i s_it * inv_mu_it
+*       inv_mu_jt = sum_i s_it * inv_mu_it
 *    and then take the change across t.
 *----------------------------
 
@@ -508,7 +508,7 @@ restore
 * 3. 
 
 // full sample
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 drop if missing(isic4, year, firm_id)
 drop if missing(share_sales, mu)
 drop if mu<=0
@@ -617,7 +617,7 @@ merge 1:1 isic4 year using `bal', nogen
 
 save "$DATA_DERIVED\balanced_sample.dta", replace
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 drop _merge
 isid isic4 year
 isid firm_id year

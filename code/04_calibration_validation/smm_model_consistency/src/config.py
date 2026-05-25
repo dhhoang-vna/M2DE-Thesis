@@ -23,8 +23,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "figures": "../../../output/struct2/figures",
         "tables": "../../../output/struct2/tables",
         "logs": "../../../output/struct2/logs",
-        "thesis_source": "../../../tex/M2Thesis_ver24.tex",
-        "thesis_struct": "../../../tex/M2Thesis_ver24.tex",
+        "thesis_source": "../../../tex/m2de_thesis.tex",
+        "thesis_struct": "../../../tex/m2de_thesis.tex",
     },
     "sample": {
         "year_min": 2011,

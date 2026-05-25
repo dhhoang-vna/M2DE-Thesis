@@ -1,11 +1,11 @@
 \begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{Grouped IV quantiles: Chinese product granularity interaction}
+\caption{Grouped IV quantiles: Chinese product concentration interaction}
 \label{tab:rob_chn_gran_givq_foreign}
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{l*{4}{c}}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{fittabular}{L{0.42\textwidth}*{4}{c}}
 \toprule
                 &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
                 &\multicolumn{1}{c}{Q25}&\multicolumn{1}{c}{Q50}&\multicolumn{1}{c}{Q75}&\multicolumn{1}{c}{Q90}\\
@@ -21,11 +21,10 @@ Chinese input-supply exposure&   -0.203         &    0.290         &    1.397   
 \midrule
 Sector-year observations&      596         &      596         &      596         &      596         \\
 Kleibergen-Paap rk Wald F&     8.24         &     8.24         &     8.24         &     8.24         \\
-Quantile        &      Q25         &      Q50         &      Q75         &      Q90         \\
 \bottomrule
-\multicolumn{5}{l}{\footnotesize The dependent variable is the indicated sector-year quantile of firm-level markup growth.}\\
-\multicolumn{5}{l}{\footnotesize All specifications include ISIC4 sector fixed effects, year fixed effects, sector-year cell-size polynomial controls, averaged lagged firm controls, the input-supply exposure control, and pre-period size $\times$ post-2016 controls.}\\
-\multicolumn{5}{l}{\footnotesize Chinese import penetration and its interaction with Chinese product granularity are instrumented by the corresponding output-IV terms. Standard errors are clustered by ISIC4 sector.}\\
-\end{tabular}
-\end{adjustbox}
+\end{fittabular}
+\begin{minipage}{0.92\textwidth}
+\footnotesize
+\emph{Notes:} The dependent variable is the indicated sector-year quantile of firm-level markup growth. Product HHI is the concentration of Chinese import value across mapped HS6 products within an ISIC4-year cell. All specifications include ISIC4 sector fixed effects, year fixed effects, sector-year cell-size polynomial controls, averaged lagged firm controls, the input-supply exposure control, and pre-period size $\times$ post-2016 controls. Chinese import penetration and its interaction with product HHI are instrumented by the corresponding output-IV terms. Standard errors are clustered by ISIC4 sector.
+\end{minipage}
 \end{table}

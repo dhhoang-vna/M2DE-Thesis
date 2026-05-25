@@ -176,7 +176,7 @@ esttab PERSIST EXIT_L EXIT_Q MU MARKOV using "$OUTPUT_TABLES/proxy_validation_ta
     mtitles("Persistence" "Exit (lin.)" "Exit (quad.)" "Markup Adjustments" "Markov test") ///
     title("Validation of Lagged EBIT Margin as State Proxy") ///
     addnotes("All specs include firm, sector (isic4), and year fixed effects; SEs clustered at firm level.", ///
-             "Controls: $X_lag and c.ls_pre_filled##i.post2016. Sample: 2011Ã¢â‚¬â€œ2019.")
+             "Controls: $X_lag and c.ls_pre_filled##i.post2016. Sample: 2011–2019.")
 
 
 * Monotonicity diagnostics: survival by deciles of lagged proxy
@@ -209,7 +209,7 @@ eststo iv_main
 
 capture restore
 
-* Residual-based IV (2Ã¢â‚¬â€˜stage)
+* Residual-based IV (2-stage)
 local y dln_mu 
 local x change_IP
 local z output_IV
@@ -234,11 +234,11 @@ capture restore
 * 5. Clean console table (p-value + CI as note)
 capture noisily esttab iv_resid ///
     keep(x_mu) ///
-    coeflabels(x_mu "ÃŽâ€ Chinese import penetration") ///
+    coeflabels(x_mu "Δ Chinese import penetration") ///
     b(3) se(3) ///
     stats(N r2 p_wild, ///
           fmt(0 3 3) ///
-          labels("N" "RÃ‚Â²" "Wild p-val")) ///
+          labels("N" "R²" "Wild p-val")) ///
     mtitles("Residualized 2SLS") ///
     title("IV Results: Markup Change") ///
     note("Wild 95% CI: [-1.131, 0.034]") ///
@@ -558,7 +558,7 @@ gen ci_lo = beta_IP - 1.96*se_IP
 gen ci_hi = beta_IP + 1.96*se_IP
 
 label var p       "Quantile (p)"
-label var beta_IP "2SLS coef on ÃŽâ€IP"
+label var beta_IP "2SLS coef on ΔIP"
 label var ci_lo   "95% CI lower"
 label var ci_hi   "95% CI upper"
 
@@ -669,7 +669,7 @@ gen ci_lo = beta_IP - 1.96*se_IP
 gen ci_hi = beta_IP + 1.96*se_IP
 
 label var p       "Quantile (p)"
-label var beta_IP "2SLS coef on ÃŽâ€IP"
+label var beta_IP "2SLS coef on ΔIP"
 label var ci_lo   "95% CI lower"
 label var ci_hi   "95% CI upper"
 
@@ -687,7 +687,7 @@ twoway ///
     yline(0, lpattern(dash) lcolor(gs7) lwidth(medthin)) ///
     xline(75, lpattern(shortdash) lcolor(gs12) lwidth(thin)) ///
     xtitle("Percentile of sector-year markup-growth distribution", size(medsmall)) ///
-    ytitle("Coefficient on import penetration Ãƒâ€” top-10 shares", size(medsmall)) ///
+    ytitle("Coefficient on import penetration × top-10 shares", size(medsmall)) ///
     xlabel(5(10)95, labsize(small)) ///
     ylabel(, labsize(small) angle(horizontal) grid glcolor(gs14)) ///
     legend(off) ///
@@ -774,7 +774,7 @@ gen ci_lo = beta_IP - 1.96*se_IP
 gen ci_hi = beta_IP + 1.96*se_IP
 
 label var p       "Quantile (p)"
-label var beta_IP "2SLS coef on ÃŽâ€IP"
+label var beta_IP "2SLS coef on ΔIP"
 label var ci_lo   "95% CI lower"
 label var ci_hi   "95% CI upper"
 
@@ -792,7 +792,7 @@ twoway ///
     yline(0, lpattern(dash) lcolor(gs7) lwidth(medthin)) ///
     xline(75, lpattern(shortdash) lcolor(gs12) lwidth(thin)) ///
     xtitle("Percentile of sector-year markup-growth distribution", size(medsmall)) ///
-    ytitle("Coefficient on import penetration Ãƒâ€” top-4 shares", size(medsmall)) ///
+    ytitle("Coefficient on import penetration × top-4 shares", size(medsmall)) ///
     xlabel(5(10)95, labsize(small)) ///
     ylabel(, labsize(small) angle(horizontal) grid glcolor(gs14)) ///
     legend(off) ///
@@ -841,7 +841,7 @@ capture restore
 
 
 
-* Residual-based IV (2Ã¢â‚¬â€˜stage)
+* Residual-based IV (2-stage)
 local y dln_mu 
 local x change_IP
 local z output_IV

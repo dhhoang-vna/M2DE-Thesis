@@ -5,8 +5,8 @@ paths:
   figures: ../../../output/struct2/figures/causal_core_20260514
   tables: ../../../output/struct2/tables/causal_core_20260514
   logs: ../../../output/struct2/logs/causal_core_20260514
-  thesis_source: ../../../tex/M2Thesis_ver24.tex
-  thesis_struct: ../../../tex/M2Thesis_ver24.tex
+  thesis_source: ../../../tex/m2de_thesis.tex
+  thesis_struct: ../../../tex/m2de_thesis.tex
 
 sample:
   year_min: 2011

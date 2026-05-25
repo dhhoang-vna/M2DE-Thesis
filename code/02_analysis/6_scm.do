@@ -69,7 +69,8 @@ local full_predictors "HHI_dom lnSize leverage liquidity_ratio_x_ age exporter l
 local source_data "$DATA_DERIVED\data_ready_mec.dta"
 capture confirm file "`source_data'"
 if _rc {
-    local source_data "$DATA_DERIVED\data_ready.dta"
+    di as error "Missing data_ready_mec.dta; run the data construction steps first."
+    exit 601
 }
 
 capture which synth
@@ -392,6 +393,31 @@ replace donor_base = 0 if unit_id == `treated_unit'
 save "$DATA_DERIVED\scm_sector_panel.dta", replace
 save `sectorpanel', replace
 
+local scm_smoke : environment REPLICATION_SCM_SMOKE
+if "`scm_smoke'" == "1" {
+    display as text "Running SCM smoke mode: one treated nested SCM; no thesis outputs overwritten."
+    tempfile smoke_gapfile smoke_weightfile smoke_summaryfile
+
+    quietly scm_run_one, sectorpanel(`sectorpanel') specid(99) ///
+        specname("smoke_T2016_nested_full") target(`treated_unit') isplacebo(0) ///
+        donorvar(donor_base) treatyear(2016) lastyear(2019) ///
+        gapfile(`smoke_gapfile') weightfile(`smoke_weightfile') summaryfile(`smoke_summaryfile') ///
+        predictors("`full_predictors'") synthopts("nested")
+
+    if (r(rc) != 0) {
+        display as error "SCM smoke run failed with rc = " r(rc)
+        local fail_rc = r(rc)
+        exit `fail_rc'
+    }
+
+    use `smoke_summaryfile', clear
+    list spec_id spec_name target_isic4 treat_year pre_rmspe post_rmspe rmspe_ratio avg_post_gap n_donors, noobs clean
+
+    display as text "SCM smoke exercise complete."
+    log close
+    exit
+}
+
 *==============================*
 * 4. RUN THE TWO FINAL SPECIFICATIONS
 *==============================*
@@ -624,5 +650,4 @@ display as text "Treated weights: $OUTPUT_TABLES\scm_weights_treated.csv"
 display as text "Figures: $OUTPUT_FIGURES\scm_path_spec*.png and scm_gap_spec*.png"
 
 log close
-
 

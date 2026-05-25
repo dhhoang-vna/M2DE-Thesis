@@ -1,9 +1,0 @@
-Manufacturing-wide AE do-file notes
-
-1. mu_M^{-1} = sum_j S_j mu_j^{-1}, where S_j is the sector share in manufacturing domestic sales.
-2. c_BF_AE_mu = - S_{j,t-1} Delta log(mu_jt) is only the direct markup-wedge component.
-3. The IV coefficients are local contribution effects along output_IV-induced import penetration variation.
-4. They are not full GE welfare effects and do not identify spillovers across sectors.
-5. If sector j's shock affects sector k through IO links, wages, prices, or demand substitution, SUTVA fails.
-6. BFS covariance diagnostics test whether activity reallocates toward or away from high-markup firms/sectors.
-7. Positive inverse-markup contributions mean lower aggregate markup wedges; they are not automatically welfare gains.

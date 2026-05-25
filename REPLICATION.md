@@ -1,6 +1,6 @@
 # Replication Instructions
 
-This package is anchored to `tex/M2Thesis_ver24.tex`. The code is organized
+This package is anchored to `tex/m2de_thesis.tex`. The code is organized
 around the tables, figures, robustness checks, mechanism exercises, synthetic
 control figures, and validation material used by the submitted thesis.
 
@@ -23,7 +23,7 @@ data/restricted_placeholder/derived/IV/
 data/restricted_placeholder/derived/UNIDO/
 ```
 
-The focused ver24 replication run starts from derived analysis files such as
+The focused M2DE thesis replication run starts from derived analysis files such as
 `data_ready.dta`, `data_ready_mec.dta`, `data_ready_robust.dta`,
 `data_ready_H.dta`, and the BACI/IV/UNIDO derived inputs listed in
 `data_availability.md`.
@@ -35,7 +35,7 @@ powershell -ExecutionPolicy Bypass -File code/run_all.ps1 `
   -StataExe "D:\STATA19\StataMP-64.exe" `
   -DataRaw "D:\path\to\raw" `
   -DataDerived "D:\path\to\derived" `
-  -Ver24ResultsOnly -SkipR -SkipPython -SkipPaper
+  -M2DEThesisResultsOnly -SkipR -SkipPython -SkipPaper
 ```
 
 ## 2. Software Requirements
@@ -51,21 +51,20 @@ Run the Stata package installer once from Stata if needed:
 do code/00_setup/install_stata_packages.do
 ```
 
-## 3. Main Ver24 Results Pipeline
+## 3. Main M2DE Thesis Results Pipeline
 
 The preferred one-command audit run is:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File code/run_all.ps1 -StataExe "D:\STATA19\StataMP-64.exe" -Ver24ResultsOnly -SkipSCM -SkipR -SkipPython -SkipPaper
+powershell -ExecutionPolicy Bypass -File code/run_all.ps1 -StataExe "D:\STATA19\StataMP-64.exe" -M2DEThesisResultsOnly -SkipSCM -SkipR -SkipPython -SkipPaper
 ```
 
-This calls `code/run_ver24_results.do`, which runs:
+This calls `code/run_m2de_thesis_results.do`, which runs:
 
 ```text
 code/03_figures_tables/figures.do
 code/02_analysis/2 selection_correction.do
 code/02_analysis/3 decomposition (2).do
-code/02_analysis/3_manufacturing_wide_fixed.do
 code/02_analysis/4_robustness.do
 code/02_analysis/4_robustness_id.do
 code/02_analysis/4_robustness_id_pretrend.do
@@ -73,15 +72,26 @@ code/02_analysis/4_robustness_resid.do
 code/02_analysis/4_robustness_chn_gran.do
 code/02_analysis/5_mechanism.do
 code/02_analysis/6_scm.do              optional; skipped by -SkipSCM
-code/02_analysis/7_dispersion.do
 code/02_analysis/kirov.do
 ```
 
 Outputs are written to `output/tables/`, `output/figures/`, and
 `output/logs/`.
 
-To run SCM as part of the focused pipeline, omit `-SkipSCM`. The SCM script is
-slow because it runs placebo synthetic controls.
+To run SCM as part of the focused pipeline, omit `-SkipSCM`. The full SCM script
+is slow because it runs placebo synthetic controls. For a smoke test that builds
+the SCM panel and runs one treated nested synthetic-control optimization without
+overwriting thesis SCM figures/tables, set:
+
+```powershell
+$env:REPLICATION_SCM_SMOKE = "1"
+& "D:\STATA19\StataMP-64.exe" /e do "code\02_analysis\6_scm.do"
+Remove-Item Env:\REPLICATION_SCM_SMOKE
+```
+
+The focused M2DE thesis runner intentionally excludes historical manufacturing-wide
+AE and dispersion-extension scripts/figures because the submitted
+`tex/m2de_thesis.tex` does not input those exhibits.
 
 ## 4. Full Construction Pipeline
 
@@ -89,7 +99,7 @@ slow because it runs placebo synthetic controls.
 with all licensed and raw public inputs. It rebuilds the analysis panels from
 raw firm, trade, industry, concordance, and input-output files before running
 analysis scripts. This path is slower and more data-gated than the focused
-ver24 audit run.
+M2DE thesis audit run.
 
 ## 5. Paper Build
 
@@ -102,7 +112,7 @@ Build with:
 powershell -ExecutionPolicy Bypass -File code/99_build_paper/build_paper.ps1
 ```
 
-The build produces `tex/M2Thesis_ver24.pdf`.
+The build produces `tex/m2de_thesis.pdf`.
 
 ## 6. Python Monte Carlo and SMM Validation
 
@@ -143,7 +153,7 @@ current specification is the causal-core config:
 python code\04_calibration_validation\smm_model_consistency\run_all.py --config code\04_calibration_validation\smm_model_consistency\config_causal_core.yaml
 ```
 
-This full command re-estimates the SMM objective and rewrites the structural
+This full command re-estimates the SMM objective and rewrites the structural 
 outputs. It can be slow. For a quick reproducibility check of the data,
 moments, and starting-vector model plumbing:
 
@@ -151,14 +161,18 @@ moments, and starting-vector model plumbing:
 python code\04_calibration_validation\smm_model_consistency\run_smoke_tests.py --config code\04_calibration_validation\smm_model_consistency\config_causal_core.yaml
 ```
 
-The SMM exercise should be interpreted narrowly: the causal-core objective
+The SMM exercise should be interpreted narrowly: the causal objective
 targets output-competition IV moments. Input, decomposition, and selection/exit
 objects are exported as diagnostics, not as causal target moments.
 
 ## 7. Comparing to Submitted Exhibits
 
-After running the focused pipeline, `output/ver24_exhibit_hash_check.csv`
-compares each external figure/table used by `tex/M2Thesis_ver24.tex` against
-the submitted parent-folder copies. This is a byte-level check, so regenerated
-PNG metadata or rendering changes can appear as mismatches even when the file is
-successfully produced.
+After running the focused pipeline, compare each external figure/table used by
+`tex/m2de_thesis.tex` against the submitted parent-folder copies:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File code/99_build_paper/check_m2de_thesis_exhibits.ps1
+```
+
+The command writes `output/m2de_thesis_exhibit_hash_check.csv`. This is a byte-level
+check; all 24 thesis external exhibits match in the current package.

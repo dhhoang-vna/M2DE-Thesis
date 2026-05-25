@@ -22,7 +22,7 @@ log using "$LOGS\kirov.log", replace text
 global folder "$REPLICATION_ROOT"
 global X_lag "lleverage lliquidity llnsize l_age l_exporter"
 
-use "$DATA_DERIVED\data_ready.dta", clear
+use "$DATA_DERIVED\data_ready_mec.dta", clear
 isid firm_id year, sort
 xtset firm_id year
 

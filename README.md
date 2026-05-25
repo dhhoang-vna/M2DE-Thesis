@@ -1,7 +1,9 @@
 # M2 Development Economics Thesis Replication Package
 
 This repository is the cleaned replication package for
-`tex/M2Thesis_ver24.tex` and the thesis PDF `tex/M2Thesis_ver24.pdf`.
+`tex/m2de_thesis.tex` and the thesis PDF `tex/m2de_thesis.pdf`.
+
+GitHub repository: https://github.com/dhhoang-vna/M2DE-Thesis
 
 The package follows the AEA replication-package convention: code, public-facing
 tables and figures, paper source, data-availability notes, and verification
@@ -25,11 +27,13 @@ data/
 output/
   figures/
   tables/
-  ver24_exhibit_hash_check.csv
-tex/
-  M2Thesis_ver24.tex
-  M2Thesis_ver24.pdf
+  m2de_thesis_exhibit_hash_check.csv
+  tex/
+  m2de_thesis.tex
+  m2de_thesis.pdf
   M2DEThesis.bib
+code/99_build_paper/
+  check_m2de_thesis_exhibits.ps1  submitted-exhibit hash checker
 ```
 
 ## Quick Start
@@ -44,7 +48,7 @@ tex/
 5. From the repository root, run the current thesis-results pipeline:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File code/run_all.ps1 -StataExe "D:\STATA19\StataMP-64.exe" -Ver24ResultsOnly -SkipSCM -SkipR -SkipPython -SkipPaper
+powershell -ExecutionPolicy Bypass -File code/run_all.ps1 -StataExe "D:\STATA19\StataMP-64.exe" -M2DEThesisResultsOnly -SkipSCM -SkipR -SkipPython -SkipPaper
 ```
 
 6. Build the paper:
@@ -54,21 +58,24 @@ powershell -ExecutionPolicy Bypass -File code/99_build_paper/build_paper.ps1
 ```
 
 For a full raw-data rebuild, run `code/run_all.ps1` without
-`-Ver24ResultsOnly` after placing all raw inputs. The focused ver24 run is the
+`-M2DEThesisResultsOnly` after placing all raw inputs. The focused M2DE thesis run is the
 recommended audit target for matching the submitted thesis exhibits.
 
 ## Verification Snapshot
 
-Verified on 2026-05-23 with Stata 19 at `D:\STATA19\StataMP-64.exe` and TeX
+Verified on 2026-05-25 with Stata 19 at `D:\STATA19\StataMP-64.exe` and TeX
 Live 2025.
 
-- Focused Stata ver24 pipeline with SCM skipped: passed.
-- Python compile, control-function Monte Carlo smoke checks, and SMM smoke
-  checks: passed.
-- Paper build for `tex/M2Thesis_ver24.tex`: passed.
-- Thesis-facing exhibit hash check: 15 of 24 external table/figure files match
-  the submitted parent-folder copies exactly. The other 9 are regenerated
-  outputs and are listed in `verification_notes.md`.
+- Focused Stata M2DE thesis pipeline with SCM skipped: passed.
+- SCM smoke mode (`REPLICATION_SCM_SMOKE=1`) passed one treated nested
+  synthetic-control run without overwriting thesis SCM exhibits.
+- Monte Carlo smoke checks and SMM smoke checks passed.
+- Submitted-exhibit hash check: 24 of 24 external table/figure files match
+  the submitted parent-folder copies exactly.
+- Manufacturing-wide AE scripts and output figures/tables were removed from the
+  M2DE thesis workflow because `tex/m2de_thesis.tex` does not call them.
+- Historical dispersion-extension figures/tables were also removed from the
+  M2DE thesis workflow because the TeX source does not call them.
 
 See `manifest.csv` for table/figure provenance and
-`output/ver24_exhibit_hash_check.csv` for the file-level comparison.
+`output/m2de_thesis_exhibit_hash_check.csv` for the file-level comparison.
