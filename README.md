@@ -61,21 +61,5 @@ For a full raw-data rebuild, run `code/run_all.ps1` without
 `-M2DEThesisResultsOnly` after placing all raw inputs. The focused M2DE thesis run is the
 recommended audit target for matching the submitted thesis exhibits.
 
-## Verification Snapshot
-
-Verified on 2026-05-25 with Stata 19 at `D:\STATA19\StataMP-64.exe` and TeX
-Live 2025.
-
-- Focused Stata M2DE thesis pipeline with SCM skipped: passed.
-- SCM smoke mode (`REPLICATION_SCM_SMOKE=1`) passed one treated nested
-  synthetic-control run without overwriting thesis SCM exhibits.
-- Monte Carlo smoke checks and SMM smoke checks passed.
-- Submitted-exhibit hash check: 24 of 24 external table/figure files match
-  the submitted parent-folder copies exactly.
-- Manufacturing-wide AE scripts and output figures/tables were removed from the
-  M2DE thesis workflow because `tex/m2de_thesis.tex` does not call them.
-- Historical dispersion-extension figures/tables were also removed from the
-  M2DE thesis workflow because the TeX source does not call them.
-
 See `manifest.csv` for table/figure provenance and
 `output/m2de_thesis_exhibit_hash_check.csv` for the file-level comparison.
